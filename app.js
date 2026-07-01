@@ -38,14 +38,34 @@ function externalLink(url, label) {
   return `<a class="inline-link" href="${esc(url)}">${esc(label)}</a>`;
 }
 
+function section(id, eyebrow, title, body, note = "") {
+  return `
+    <section class="section section-block" id="${esc(id)}">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">${esc(eyebrow)}</div>
+          <h2>${title}</h2>
+        </div>
+        ${note ? `<p class="section-note">${note}</p>` : ""}
+      </div>
+      ${body}
+    </section>
+  `;
+}
+
+function anchorHref(id) {
+  return `/database/#${id}`;
+}
+
 function shell(content, active = page) {
   const nav = [
-    ["/database/", "Database", "database"],
-    ["/methodology/", "Methodology", "methodology"],
-    ["/reproduce/", "Reproduce", "reproduce"],
-    ["/independence/", "Independence", "independence"],
-    ["/changelog/", "Changelog", "changelog"],
-    ["/about/", "About", "about"],
+    [anchorHref("tldr"), "TL;DR", "tldr"],
+    [anchorHref("abstract"), "Abstract", "abstract"],
+    [anchorHref("findings"), "Findings", "findings"],
+    [anchorHref("results"), "Results", "results"],
+    [anchorHref("methodology"), "Method", "methodology"],
+    [anchorHref("reproduce"), "Reproduce", "reproduce"],
+    [anchorHref("about"), "About", "about"],
   ];
   return `
     <div class="site-shell">
@@ -133,6 +153,9 @@ function renderDatabase() {
       <div class="row"><span class="label">Scope</span><span class="value">${benchmark.summary.vendors} vendors / ${benchmark.summary.tasks} tasks</span></div>
     </aside>
   `;
+  const taskRows = benchmark.tasks.map((task) => `
+    <tr><td><code>${task.label}</code></td><td>${esc(task.title)}</td><td>${esc(task.difficulty)}</td><td>${esc(task.skill)}</td></tr>
+  `).join("");
   const content = `
     <main class="page">
       ${hero(
@@ -142,122 +165,257 @@ function renderDatabase() {
         reportCard,
       )}
 
-      <section class="section twocol">
-        <div class="callout">
-          <div class="eyebrow">Report question</div>
-          <h2>What this benchmark report is trying to answer</h2>
-          <p>${esc(benchmark.homepage.reportQuestion)}</p>
-          <p>${esc(benchmark.homepage.reading)}</p>
-        </div>
-        <div class="panel">
-          <h3>Current note</h3>
-          <p>${esc(benchmark.homepage.note)}</p>
-        </div>
-      </section>
+      ${section(
+        "tldr",
+        "TL;DR",
+        "A benchmark report should tell the reader the claim before it asks them to inspect the machinery.",
+        `
+          <div class="twocol">
+            <div class="callout">
+              ${panelList(benchmark.homepage.tldr)}
+            </div>
+            <div class="panel">
+              <h3>Current note</h3>
+              <p>${esc(benchmark.homepage.note)}</p>
+            </div>
+          </div>
+        `,
+      )}
 
-      <section class="section grid-3">
+      ${section(
+        "abstract",
+        "Abstract",
+        "What this report is about",
+        `
+          <div class="twocol">
+            <div class="callout">
+              <p>${esc(benchmark.homepage.abstract)}</p>
+            </div>
+            <div class="panel">
+              <h3>Report question</h3>
+              <p>${esc(benchmark.homepage.reportQuestion)}</p>
+              <p>${esc(benchmark.homepage.reading)}</p>
+            </div>
+          </div>
+        `,
+      )}
+
+      <section class="section grid-3 summary-strip">
         <div class="metric"><div class="num">${benchmark.summary.vendors}</div><div class="caption">vendors in this report</div></div>
         <div class="metric"><div class="num">${benchmark.summary.tasks}</div><div class="caption">shared canonical tasks</div></div>
         <div class="metric"><div class="num">${benchmark.summary.cells}</div><div class="caption">surface × harness observations</div></div>
       </section>
 
-      <section class="section twocol">
-        <div class="callout">
-          <div class="eyebrow">Executive summary</div>
-          <h2>AXArena is benchmarking operability, not brochure surface area.</h2>
-          <p>${esc(benchmark.framing.mission)}</p>
-          <p>${esc(benchmark.framing.whyNow)}</p>
-        </div>
-        <div class="panel">
-          <h3>Publication standard</h3>
-          <p>${esc(benchmark.framing.publicationStandard)}</p>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Top-line read</div>
-            <h2>What this report wants a reader to notice first</h2>
+      ${section(
+        "findings",
+        "Key findings",
+        "What this report wants the reader to notice first",
+        `
+          <div class="twocol">
+            <div class="callout">
+              <p>${esc(benchmark.framing.mission)}</p>
+              <p>${esc(benchmark.framing.whyNow)}</p>
+            </div>
+            <div class="panel">
+              <h3>Publication standard</h3>
+              <p>${esc(benchmark.framing.publicationStandard)}</p>
+            </div>
           </div>
-          <p class="section-note">These are placeholder editorial findings for launch-shape only. The final site should tie each claim to frozen records and snapshots.</p>
-        </div>
-        <div class="grid-3">
-          ${findingPanels}
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Leaderboard</div>
-            <h2>Then the report drops into the comparative table</h2>
+          <div class="grid-3 section-follow">
+            ${findingPanels}
           </div>
-          <p class="section-note">${esc(benchmark.summary.note)}</p>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>#</th><th>Vendor</th><th class="num">Overall</th><th class="num">API</th><th class="num">SDK</th><th class="num">CLI</th><th class="num">MCP</th><th class="num">N/A</th>
-              </tr>
-            </thead>
-            <tbody>${leaderboardRows()}</tbody>
-          </table>
-        </div>
-      </section>
+        `,
+        "These are placeholder editorial findings for launch-shape only. The final site should tie each claim to frozen records and snapshots.",
+      )}
 
-      <section class="section twocol">
-        <div class="callout">
-          <div class="eyebrow">How to read the numbers</div>
-          <h2>Same benchmark contract, vendor-specific verification.</h2>
-          <p>DAEB-1 starts from <code>${benchmark.suitePath}</code>. Compiled vendor packs exist only so the executor and verifier can use concrete auth, base URLs, read-back checks, N/A mappings, and surface configs.</p>
-          <p>This is the public sentence to keep repeating: vendors do not write their own tests.</p>
-        </div>
-        <div class="panel">
-          <h3>Publication bundle</h3>
-          <p>The website should consume <code>${benchmark.bundlePath}</code> plus normalized records and snapshots.</p>
-          <div class="artifact-list">
-            <span class="pill">manifest.json</span>
-            <span class="pill">suite</span>
-            <span class="pill">oracle extracts</span>
-            <span class="pill">compiled packs</span>
-            <span class="pill">snapshots</span>
-            <span class="pill">normalized records</span>
+      ${section(
+        "results",
+        "Results",
+        "Comparative table",
+        `
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>#</th><th>Vendor</th><th class="num">Overall</th><th class="num">API</th><th class="num">SDK</th><th class="num">CLI</th><th class="num">MCP</th><th class="num">N/A</th>
+                </tr>
+              </thead>
+              <tbody>${leaderboardRows()}</tbody>
+            </table>
           </div>
-        </div>
-      </section>
+        `,
+        esc(benchmark.summary.note),
+      )}
 
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Reading guide</div>
-            <h2>How to read DAEB-1</h2>
+      ${section(
+        "methodology",
+        "Methodology",
+        "How to read the numbers",
+        `
+          <div class="twocol">
+            <div class="callout">
+              <p>DAEB-1 starts from <code>${benchmark.suitePath}</code>. Compiled vendor packs exist only so the executor and verifier can use concrete auth, base URLs, read-back checks, N/A mappings, and surface configs.</p>
+              <p>This is the public sentence to keep repeating: vendors do not write their own tests.</p>
+            </div>
+            <pre>canonical suite
+  -> vendor card
+  -> oracle extract
+  -> compiled TargetPack
+  -> execution
+  -> verification
+  -> normalized records
+  -> leaderboard</pre>
           </div>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>Layer</th><th>What it means</th></tr></thead>
-            <tbody>${scorecardRows}</tbody>
-          </table>
-        </div>
-      </section>
+          <div class="section-follow table-wrap">
+            <table>
+              <thead><tr><th>Layer</th><th>What it means</th></tr></thead>
+              <tbody>${scorecardRows}</tbody>
+            </table>
+          </div>
+          <div class="section-follow twocol">
+            <div class="panel">
+              <div class="eyebrow">Core principles</div>
+              <h3>Methodology commitments</h3>
+              ${panelList(benchmark.methodology.principles)}
+            </div>
+            <div class="panel">
+              <div class="eyebrow">Threats to validity</div>
+              <h3>What this benchmark does not hide</h3>
+              ${panelList(benchmark.methodology.limits)}
+            </div>
+          </div>
+          <div class="section-follow twocol">
+            <div class="panel">
+              <div class="eyebrow">Task suite</div>
+              <h3>DAEB-1 canonical tasks</h3>
+              <div class="table-wrap inset-table"><table><thead><tr><th>ID</th><th>Task</th><th>Level</th><th>Skill</th></tr></thead><tbody>${taskRows}</tbody></table></div>
+            </div>
+            <div class="panel">
+              <div class="eyebrow">Scoring posture</div>
+              <h3>Completed work over transcript fluency</h3>
+              <p>The benchmark should award a cell when the intended product state exists and can be read back. Transcript quality can explain failure, but it should not stand in for verification.</p>
+              <p>When a task does not map fairly to a vendor, AXArena should disclose that explicitly rather than silently treating it as a hidden failure or hidden omission.</p>
+            </div>
+          </div>
+        `,
+      )}
 
-      <section class="section twocol">
-        <div class="panel">
-          <div class="eyebrow">Open materials</div>
-          <h2>Public links already available</h2>
-          <p>This project should feel legible from the outside. That means the operator, the engine repo, and the publication site repo all have to be easy to find.</p>
-          <p><strong>X:</strong> ${externalLink(benchmark.links.xUrl, benchmark.links.xHandle)}</p>
-          <p><strong>Engine repo:</strong> ${externalLink(benchmark.links.engineRepoUrl, benchmark.links.engineRepoLabel)}</p>
-          <p><strong>Site repo:</strong> ${externalLink(benchmark.links.siteRepoUrl, benchmark.links.siteRepoLabel)}</p>
-        </div>
-        <div class="panel">
-          <div class="eyebrow">What comes next</div>
-          <h2>From launch-shape to real publication</h2>
-          <p>Once the frozen artifact bundle is ready, the placeholder leaderboard, findings, and vendor commentary should be swapped for manifest-backed content without changing the report structure.</p>
-        </div>
-      </section>
+      ${section(
+        "reproduce",
+        "Reproduce",
+        "From benchmark source to publication bundle",
+        `
+          <div class="twocol">
+            <div>
+              <pre>npm run ax-eval -- publication-bundle \\
+  --suite targets/suites/daeb-1.yaml \\
+  --vendors supabase,neon,planetscale,mongodb-atlas,turso,convex,insforge,cockroachdb \\
+  --run-dir results/runs/daeb-1 \\
+  --out results/publications/daeb-1</pre>
+            </div>
+            <div class="panel">
+              <h3>Manifest includes</h3>
+              <p>Canonical suite, vendor cards, oracle extracts, compiled packs, approvals, snapshots, normalized records, and competitive report links.</p>
+              <div class="artifact-list">
+                <span class="pill">manifest.json</span>
+                <span class="pill">suite</span>
+                <span class="pill">oracle extracts</span>
+                <span class="pill">compiled packs</span>
+                <span class="pill">snapshots</span>
+                <span class="pill">normalized records</span>
+              </div>
+            </div>
+          </div>
+          <div class="section-follow twocol">
+            <div class="panel">
+              <div class="eyebrow">Prerequisites</div>
+              <h3>What a clean rerun needs</h3>
+              ${panelList(benchmark.reproduce.prerequisites)}
+            </div>
+            <div class="panel">
+              <div class="eyebrow">Reproduction model</div>
+              <h3>Three stages</h3>
+              ${benchmark.reproduce.stages.map((stage) => `<p><strong>${esc(stage.title)}:</strong> ${esc(stage.body)}</p>`).join("")}
+            </div>
+          </div>
+          <div class="section-follow">
+            <pre>npm run ax-eval -- render-generated \\
+  --snapshot results/publications/daeb-1/vendors/supabase/generated-eval.snapshot.json \\
+  --html /tmp/supabase.html
+
+npm run ax-eval -- competitive \\
+  --results results/publications/daeb-1/vendors/*/normalized/*.normalized.json \\
+  --html /tmp/daeb-1.html</pre>
+          </div>
+        `,
+      )}
+
+      ${section(
+        "independence",
+        "Independence",
+        "Why a benchmark needs public trust, not just code",
+        `
+          <div class="grid-3">
+            <div class="panel"><h3>No vendor funding</h3><p>AXArena does not accept funding, sponsorship, or in-kind compensation from listed vendors.</p></div>
+            <div class="panel"><h3>No purchasable rank</h3><p>No score, rank, framing, or correction is purchasable or modifiable by payment.</p></div>
+            <div class="panel"><h3>No veto</h3><p>Vendors receive factual preview, not editorial control.</p></div>
+          </div>
+          <div class="section-follow twocol">
+            ${benchmark.independence.commitments.map((item) => `<div class="panel"><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p></div>`).join("")}
+          </div>
+          <div class="section-follow callout"><h3>Corrections are public.</h3><p>Every factual correction and score-changing rerun belongs in the changelog with links to affected artifacts.</p></div>
+        `,
+      )}
+
+      ${section(
+        "about",
+        "About",
+        "Operator, links, and publication posture",
+        `
+          <div class="twocol">
+            <div class="panel">
+              <h3>Named operator</h3>
+              <p>${esc(benchmark.about.operator)}</p>
+              <p><strong>X:</strong> ${externalLink(benchmark.links.xUrl, benchmark.links.xHandle)}</p>
+            </div>
+            <div class="panel">
+              <h3>Public repos</h3>
+              <p><strong>Engine repo:</strong> ${externalLink(benchmark.links.engineRepoUrl, benchmark.links.engineRepoLabel)}</p>
+              <p><strong>Site repo:</strong> ${externalLink(benchmark.links.siteRepoUrl, benchmark.links.siteRepoLabel)}</p>
+            </div>
+          </div>
+          <div class="section-follow twocol">
+            <div class="panel">
+              <h3>Disclosure</h3>
+              <p>${esc(benchmark.about.disclosure)}</p>
+            </div>
+            <div class="panel">
+              <h3>Project direction</h3>
+              <p>${esc(benchmark.about.positioning)}</p>
+            </div>
+          </div>
+        `,
+      )}
+
+      ${section(
+        "changelog",
+        "Changelog",
+        "Public record of corrections and version changes",
+        `
+          <div class="panel">
+            <p>This log should record every score-affecting rerun, factual correction, and methodology change that matters for public interpretation. The goal is not just transparency at launch, but a durable audit trail after launch.</p>
+          </div>
+          <div class="section-follow">
+            ${benchmark.changelog.map((entry) => `
+              <div class="panel changelog-item">
+                <div class="eyebrow">${esc(entry.date)}</div>
+                <h3>${esc(entry.title)}</h3>
+                <p>${esc(entry.text)}</p>
+              </div>
+            `).join("")}
+          </div>
+        `,
+      )}
     </main>
   `;
   app.innerHTML = shell(content, "database");
@@ -335,206 +493,28 @@ function renderVendor() {
   app.innerHTML = shell(content, "database");
 }
 
-function renderMethodology() {
-  const taskRows = benchmark.tasks.map((task) => `
-    <tr><td><code>${task.label}</code></td><td>${esc(task.title)}</td><td>${esc(task.difficulty)}</td><td>${esc(task.skill)}</td></tr>
-  `).join("");
+function redirectLegacyPage() {
+  const map = {
+    methodology: "methodology",
+    reproduce: "reproduce",
+    independence: "independence",
+    changelog: "changelog",
+    about: "about",
+  };
+  const target = map[page];
+  if (!target) return false;
+  window.location.replace(anchorHref(target));
   app.innerHTML = shell(`
     <main class="page">
-      ${hero(
-        "Methodology",
-        "DAEB-1 is one canonical suite plus vendor-specific oracle adapters. The evaluator does not trust transcripts or LLM judges; it reads live product state back after the agent acts.",
-        "canonical suite · read-back oracle",
-        summaryCard(),
-      )}
-      <section class="section twocol">
-        <div class="callout">
-          <h2>One suite, eight adapters.</h2>
-          <p>The suite fixes task identity and scoring. Vendor adapters define how each task can be verified in that product: SQL query, REST read path, admin API lookup, N/A mapping, and surface configuration.</p>
-          <p>Compiled TargetPacks are executable artifacts, not independent benchmark definitions.</p>
-        </div>
-        <pre>canonical suite
-  -> vendor card
-  -> oracle extract
-  -> compiled TargetPack
-  -> execution
-  -> verification
-  -> normalized records
-  -> leaderboard</pre>
-      </section>
-      <section class="section twocol">
-        <div class="panel">
-          <div class="eyebrow">Core principles</div>
-          <h2>Methodology commitments</h2>
-          ${panelList(benchmark.methodology.principles)}
-        </div>
-        <div class="panel">
-          <div class="eyebrow">Threats to validity</div>
-          <h2>What this benchmark does not hide</h2>
-          ${panelList(benchmark.methodology.limits)}
-        </div>
-      </section>
-      <section class="section">
-        <div class="section-head"><div><div class="eyebrow">Task suite</div><h2>DAEB-1 canonical tasks</h2></div></div>
-        <div class="table-wrap"><table><thead><tr><th>ID</th><th>Task</th><th>Level</th><th>Skill</th></tr></thead><tbody>${taskRows}</tbody></table></div>
-      </section>
-      <section class="section twocol">
-        <div class="panel">
-          <div class="eyebrow">Scoring posture</div>
-          <h2>Scores should describe completed work, not persuasive transcripts.</h2>
-          <p>The site should explain that a benchmark cell is earned when the agent leaves behind the intended product state and the verifier can read it back. Transcript quality can help diagnose why something failed, but it should not substitute for state verification.</p>
-        </div>
-        <div class="panel">
-          <div class="eyebrow">N/A policy</div>
-          <h2>Structural mismatch belongs in the open.</h2>
-          <p>When a canonical task does not map fairly to a vendor, AXArena should disclose that explicitly at the task level, preserve the reasoning in the adapter, and render it on the vendor page instead of burying it in internal notes.</p>
-        </div>
-      </section>
-    </main>
-  `, "methodology");
-}
-
-function renderReproduce() {
-  app.innerHTML = shell(`
-    <main class="page">
-      ${hero(
-        "Reproduce DAEB-1",
-        "AXArena publishes claims on the website, proofs in the repo, and reruns through the tool. The publication bundle is the bridge.",
-        "publication bundle",
-        summaryCard(),
-      )}
-      <section class="section twocol">
-        <div>
-          <h2>Freeze the bundle</h2>
-          <pre>npm run ax-eval -- publication-bundle \\
-  --suite targets/suites/daeb-1.yaml \\
-  --vendors supabase,neon,planetscale,mongodb-atlas,turso,convex,insforge,cockroachdb \\
-  --run-dir results/runs/daeb-1 \\
-  --out results/publications/daeb-1</pre>
-        </div>
-        <div class="panel">
-          <h3>Manifest includes</h3>
-          <p>Canonical suite, vendor cards, oracle extracts, compiled packs, approvals, snapshots, normalized records, and competitive report links.</p>
-        </div>
-      </section>
-      <section class="section twocol">
-        <div class="panel">
-          <div class="eyebrow">Prerequisites</div>
-          <h2>What a clean rerun needs</h2>
-          ${panelList(benchmark.reproduce.prerequisites)}
-        </div>
-        <div class="panel">
-          <div class="eyebrow">Reproduction model</div>
-          <h2>Three stages</h2>
-          ${benchmark.reproduce.stages.map((stage) => `<p><strong>${esc(stage.title)}:</strong> ${esc(stage.body)}</p>`).join("")}
-        </div>
-      </section>
-      <section class="section">
-        <h2>Rerender from frozen artifacts</h2>
-        <pre>npm run ax-eval -- render-generated \\
-  --snapshot results/publications/daeb-1/vendors/supabase/generated-eval.snapshot.json \\
-  --html /tmp/supabase.html
-
-npm run ax-eval -- competitive \\
-  --results results/publications/daeb-1/vendors/*/normalized/*.normalized.json \\
-  --html /tmp/daeb-1.html</pre>
-      </section>
-    </main>
-  `, "reproduce");
-}
-
-function renderIndependence() {
-  app.innerHTML = shell(`
-    <main class="page">
-      ${hero(
-        "Independence Charter",
-        "A benchmark is only as useful as the trust behind it. These commitments are part of the methodology, not footnotes.",
-        "vendor-neutral by design",
-        "",
-      )}
-      <section class="section grid-3">
-        <div class="panel"><h3>No vendor funding</h3><p>AXArena does not accept funding, sponsorship, or in-kind compensation from listed vendors.</p></div>
-        <div class="panel"><h3>No purchasable rank</h3><p>No score, rank, framing, or correction is purchasable or modifiable by payment.</p></div>
-        <div class="panel"><h3>No veto</h3><p>Vendors receive factual preview, not editorial control.</p></div>
-      </section>
-      <section class="section twocol">
-        ${benchmark.independence.commitments.map((item) => `<div class="panel"><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p></div>`).join("")}
-      </section>
-      <section class="section callout"><h2>Corrections are public.</h2><p>Every factual correction and score-changing rerun belongs in the changelog with links to affected artifacts.</p></section>
-    </main>
-  `, "independence");
-}
-
-function renderChangelog() {
-  app.innerHTML = shell(`
-    <main class="page">
-      ${hero("Corrections Changelog", "Public corrections, reruns, and methodology changes for AXArena benchmarks.", "public record", "")}
       <section class="section panel">
-        <h2>Change policy</h2>
-        <p>This log should record every score-affecting rerun, factual correction, and methodology change that matters for public interpretation. The goal is not just transparency at launch, but a durable audit trail after launch.</p>
-      </section>
-      <section class="section">
-        ${benchmark.changelog.map((entry) => `
-          <div class="panel changelog-item">
-            <div class="eyebrow">${esc(entry.date)}</div>
-            <h2>${esc(entry.title)}</h2>
-            <p>${esc(entry.text)}</p>
-          </div>
-        `).join("")}
+        <div class="eyebrow">Redirecting</div>
+        <h2>Opening the report section</h2>
+        <p>If the redirect does not happen automatically, continue to ${externalLink(anchorHref(target), `/${target}`)}.</p>
       </section>
     </main>
-  `, "changelog");
-}
-
-function renderAbout() {
-  app.innerHTML = shell(`
-    <main class="page">
-      ${hero("About AXArena", "AXArena is an independent benchmark publication for Agent Experience: whether software products can actually be operated by AI agents.", "operator transparency", "")}
-      <section class="section twocol">
-        <div class="panel">
-          <h2>Named operator</h2>
-          <p>${esc(benchmark.about.operator)}</p>
-        </div>
-        <div class="panel">
-          <h2>Cadence</h2>
-          <p>DAEB-1 launches first. DAEB-2 and future category benchmarks should publish with the same suite/adapters/artifacts model.</p>
-        </div>
-      </section>
-      <section class="section twocol">
-        <div class="panel">
-          <h2>Disclosure</h2>
-          <p>${esc(benchmark.about.disclosure)}</p>
-        </div>
-        <div class="panel">
-          <h2>Project direction</h2>
-          <p>${esc(benchmark.about.positioning)}</p>
-        </div>
-      </section>
-      <section class="section twocol">
-        <div class="panel">
-          <h2>Public links</h2>
-          <p><strong>X:</strong> ${externalLink(benchmark.links.xUrl, benchmark.links.xHandle)}</p>
-          <p><strong>Engine repo:</strong> ${externalLink(benchmark.links.engineRepoUrl, benchmark.links.engineRepoLabel)}</p>
-          <p><strong>Site repo:</strong> ${externalLink(benchmark.links.siteRepoUrl, benchmark.links.siteRepoLabel)}</p>
-        </div>
-        <div class="panel">
-          <h2>Why publish this way</h2>
-          <p>For AXArena to be credible, the public site needs to behave like the readable front-end of a benchmark archive: clear framing up top, explicit methodology in the middle, and reproducible artifacts underneath.</p>
-        </div>
-      </section>
-      <section class="section callout">
-        <div class="eyebrow">What this site should become</div>
-        <h2>A public benchmark record, not just a homepage.</h2>
-        <p>The long-term shape is a website that renders frozen artifacts, explains the methodology in plain language, discloses uncertainty, and makes reruns legible to outsiders who were not in the room when the benchmark was built.</p>
-      </section>
-    </main>
-  `, "about");
+  `, target);
+  return true;
 }
 
 if (page === "database-vendor") renderVendor();
-else if (page === "methodology") renderMethodology();
-else if (page === "reproduce") renderReproduce();
-else if (page === "independence") renderIndependence();
-else if (page === "changelog") renderChangelog();
-else if (page === "about") renderAbout();
-else renderDatabase();
+else if (!redirectLegacyPage()) renderDatabase();

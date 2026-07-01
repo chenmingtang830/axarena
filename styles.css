@@ -16,7 +16,11 @@
 }
 
 * { box-sizing: border-box; }
-html { background: var(--paper); color: var(--ink); }
+html {
+  background: var(--paper);
+  color: var(--ink);
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
@@ -160,6 +164,9 @@ p { margin: 0 0 13px; }
 .value { font-family: "SFMono-Regular", "Cascadia Mono", Consolas, monospace; font-weight: 700; }
 
 .section { margin-top: 42px; }
+.section-block { scroll-margin-top: 88px; }
+.section-follow { margin-top: 18px; }
+.summary-strip { margin-top: 26px; }
 .section-head {
   display: flex;
   align-items: end;
@@ -256,6 +263,10 @@ tr:last-child td { border-bottom: 0; }
   background: var(--panel);
   border: 1px solid var(--rule);
   padding: 20px;
+}
+.inset-table {
+  margin-top: 12px;
+  box-shadow: none;
 }
 .changelog-item + .changelog-item {
   margin-top: 14px;

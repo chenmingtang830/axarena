@@ -37,6 +37,13 @@ export const benchmark = {
     title: "Can AI agents actually use modern software products?",
     lede:
       "AXArena publishes benchmark reports about Agent Experience: not whether a product looks agent-ready on paper, but whether an agent can complete real tasks and leave behind verifiable state.",
+    tldr: [
+      "AXArena is a benchmark publication about whether software products are actually usable by AI agents.",
+      "DAEB-1 uses one canonical database suite across eight vendor adapters instead of letting each vendor define its own benchmark flow.",
+      "The current site is still placeholder content, but the publication structure is meant to match the eventual artifact-backed release.",
+    ],
+    abstract:
+      "This report prototype is the public-facing shape for DAEB-1, AXArena's first benchmark release. The central claim is that Agent Experience should be measured through completed work and read-back verification, not through product marketing breadth or transcript eloquence. DAEB-1 freezes one database benchmark suite, adapts it to eight vendors through vendor-specific oracle extraction, and intends to publish the resulting artifacts, methods, and corrections as a reproducible benchmark record.",
     reportQuestion:
       "DAEB-1 asks a simple question in the database category: if eight vendors are given the same benchmark contract, where do agents reliably succeed, where do they stall, and which gaps come from product surfaces rather than prompt cleverness?",
     reading:
