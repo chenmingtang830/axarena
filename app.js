@@ -21,6 +21,19 @@ function heat(value) {
   return `<span class="heat ${scoreClass(value)}">${value}%</span>`;
 }
 
+function panelList(items) {
+  return `<ul class="body-list">${items.map((item) => `<li>${esc(item)}</li>`).join("")}</ul>`;
+}
+
+function quotePanel(title, text) {
+  return `
+    <div class="panel">
+      <div class="eyebrow">${esc(title)}</div>
+      <p class="tight">${esc(text)}</p>
+    </div>
+  `;
+}
+
 function shell(content, active = page) {
   const nav = [
     ["/database/", "Database", "database"],
@@ -46,8 +59,8 @@ function shell(content, active = page) {
       ${content}
       <footer class="footer">
         <div class="footer-inner">
-          <div>© 2026 AXArena. Independent benchmark. Placeholder prototype.</div>
-          <div>canonical suite · vendor adapters · read-back oracles</div>
+          <div>© 2026 AXArena. Independent benchmark publication. Placeholder content until DAEB-1 artifacts are frozen.</div>
+          <div>canonical suite · vendor adapters · read-back oracles · public corrections</div>
         </div>
       </footer>
     </div>
@@ -98,6 +111,12 @@ function leaderboardRows() {
 }
 
 function renderDatabase() {
+  const findingPanels = benchmark.findings
+    .map((item) => `<div class="panel"><h3>${esc(item.title)}</h3><p>${esc(item.body)}</p></div>`)
+    .join("");
+  const scorecardRows = benchmark.scorecard
+    .map((item) => `<tr><td>${esc(item.label)}</td><td>${esc(item.text)}</td></tr>`)
+    .join("");
   const content = `
     <main class="page">
       ${hero(
@@ -111,6 +130,19 @@ function renderDatabase() {
         <div class="metric"><div class="num">${benchmark.summary.vendors}</div><div class="caption">database vendors</div></div>
         <div class="metric"><div class="num">${benchmark.summary.tasks}</div><div class="caption">canonical task intents</div></div>
         <div class="metric"><div class="num">${benchmark.summary.cells}</div><div class="caption">surface × harness cells</div></div>
+      </section>
+
+      <section class="section twocol">
+        <div class="callout">
+          <div class="eyebrow">Why this exists</div>
+          <h2>AXArena is benchmarking operability, not brochure surface area.</h2>
+          <p>${esc(benchmark.framing.mission)}</p>
+          <p>${esc(benchmark.framing.whyNow)}</p>
+        </div>
+        <div class="panel">
+          <h3>Publication standard</h3>
+          <p>${esc(benchmark.framing.publicationStandard)}</p>
+        </div>
       </section>
 
       <section class="section">
@@ -130,6 +162,19 @@ function renderDatabase() {
             </thead>
             <tbody>${leaderboardRows()}</tbody>
           </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Early read</div>
+            <h2>What the benchmark is designed to make visible</h2>
+          </div>
+          <p class="section-note">These are placeholder editorial findings for launch-shape only. The final site should tie each claim to frozen records and snapshots.</p>
+        </div>
+        <div class="grid-3">
+          ${findingPanels}
         </div>
       </section>
 
@@ -153,6 +198,21 @@ function renderDatabase() {
           </div>
         </div>
       </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Reading guide</div>
+            <h2>How to read DAEB-1</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Layer</th><th>What it means</th></tr></thead>
+            <tbody>${scorecardRows}</tbody>
+          </table>
+        </div>
+      </section>
     </main>
   `;
   app.innerHTML = shell(content, "database");
@@ -166,6 +226,7 @@ function vendorFromPath() {
 function renderVendor() {
   const slug = vendorFromPath();
   const vendor = benchmark.vendors.find((item) => item.slug === slug) || benchmark.vendors[0];
+  const strongestSurface = Object.entries(vendor.surfaces).sort((a, b) => b[1] - a[1])[0][0].toUpperCase();
   const matrixRows = benchmark.tasks.map((task, index) => `
     <div class="task-name">${task.label} · ${esc(task.title)}</div>
     <div>${heat(vendor.taskScores[index])}</div>
@@ -183,7 +244,7 @@ function renderVendor() {
           <div class="row"><span class="label">Overall</span><span class="value">${vendor.overall}%</span></div>
           <div class="row"><span class="label">Rank</span><span class="value">#${vendor.rank}</span></div>
           <div class="row"><span class="label">N/A tasks</span><span class="value">${vendor.na}</span></div>
-          <div class="row"><span class="label">Strongest surface</span><span class="value">${Object.entries(vendor.surfaces).sort((a, b) => b[1] - a[1])[0][0].toUpperCase()}</span></div>
+          <div class="row"><span class="label">Strongest surface</span><span class="value">${strongestSurface}</span></div>
         </aside>`,
       )}
 
@@ -206,6 +267,12 @@ function renderVendor() {
           <div class="artifact-list">${vendor.artifacts.map((a) => `<span class="pill">${esc(a)}</span>`).join("")}</div>
           <p style="margin-top:14px">N/A tasks: ${vendor.naTasks.length ? vendor.naTasks.map(esc).join(", ") : "none"}</p>
         </div>
+      </section>
+
+      <section class="section grid-3">
+        ${quotePanel("Operator read", `In the placeholder set, ${vendor.name} looks strongest when agents can stay inside the ${strongestSurface} path and avoid ambiguous console hops.`)}
+        ${quotePanel("What to verify later", "Replace this paragraph with evidence-linked claims backed by snapshot fragments, normalized records, and any public N/A disclosures.")}
+        ${quotePanel("Why the page exists", "Vendor pages should not just restate the score. They should explain where the product is agent-friendly, where it breaks, and what concrete fix would improve the benchmark outcome.")}
       </section>
 
       <section class="section">
@@ -250,9 +317,33 @@ function renderMethodology() {
   -> normalized records
   -> leaderboard</pre>
       </section>
+      <section class="section twocol">
+        <div class="panel">
+          <div class="eyebrow">Core principles</div>
+          <h2>Methodology commitments</h2>
+          ${panelList(benchmark.methodology.principles)}
+        </div>
+        <div class="panel">
+          <div class="eyebrow">Threats to validity</div>
+          <h2>What this benchmark does not hide</h2>
+          ${panelList(benchmark.methodology.limits)}
+        </div>
+      </section>
       <section class="section">
         <div class="section-head"><div><div class="eyebrow">Task suite</div><h2>DAEB-1 canonical tasks</h2></div></div>
         <div class="table-wrap"><table><thead><tr><th>ID</th><th>Task</th><th>Level</th><th>Skill</th></tr></thead><tbody>${taskRows}</tbody></table></div>
+      </section>
+      <section class="section twocol">
+        <div class="panel">
+          <div class="eyebrow">Scoring posture</div>
+          <h2>Scores should describe completed work, not persuasive transcripts.</h2>
+          <p>The site should explain that a benchmark cell is earned when the agent leaves behind the intended product state and the verifier can read it back. Transcript quality can help diagnose why something failed, but it should not substitute for state verification.</p>
+        </div>
+        <div class="panel">
+          <div class="eyebrow">N/A policy</div>
+          <h2>Structural mismatch belongs in the open.</h2>
+          <p>When a canonical task does not map fairly to a vendor, AXArena should disclose that explicitly at the task level, preserve the reasoning in the adapter, and render it on the vendor page instead of burying it in internal notes.</p>
+        </div>
       </section>
     </main>
   `, "methodology");
@@ -279,6 +370,18 @@ function renderReproduce() {
         <div class="panel">
           <h3>Manifest includes</h3>
           <p>Canonical suite, vendor cards, oracle extracts, compiled packs, approvals, snapshots, normalized records, and competitive report links.</p>
+        </div>
+      </section>
+      <section class="section twocol">
+        <div class="panel">
+          <div class="eyebrow">Prerequisites</div>
+          <h2>What a clean rerun needs</h2>
+          ${panelList(benchmark.reproduce.prerequisites)}
+        </div>
+        <div class="panel">
+          <div class="eyebrow">Reproduction model</div>
+          <h2>Three stages</h2>
+          ${benchmark.reproduce.stages.map((stage) => `<p><strong>${esc(stage.title)}:</strong> ${esc(stage.body)}</p>`).join("")}
         </div>
       </section>
       <section class="section">
@@ -309,6 +412,9 @@ function renderIndependence() {
         <div class="panel"><h3>No purchasable rank</h3><p>No score, rank, framing, or correction is purchasable or modifiable by payment.</p></div>
         <div class="panel"><h3>No veto</h3><p>Vendors receive factual preview, not editorial control.</p></div>
       </section>
+      <section class="section twocol">
+        ${benchmark.independence.commitments.map((item) => `<div class="panel"><h3>${esc(item.title)}</h3><p>${esc(item.text)}</p></div>`).join("")}
+      </section>
       <section class="section callout"><h2>Corrections are public.</h2><p>Every factual correction and score-changing rerun belongs in the changelog with links to affected artifacts.</p></section>
     </main>
   `, "independence");
@@ -319,9 +425,17 @@ function renderChangelog() {
     <main class="page">
       ${hero("Corrections Changelog", "Public corrections, reruns, and methodology changes for AXArena benchmarks.", "public record", "")}
       <section class="section panel">
-        <div class="eyebrow">2026-07-XX</div>
-        <h2>DAEB-1 launch candidate</h2>
-        <p>No post-publication corrections yet. Vendor preview feedback and reruns will be recorded here with links to manifest, pack, snapshot, and normalized records.</p>
+        <h2>Change policy</h2>
+        <p>This log should record every score-affecting rerun, factual correction, and methodology change that matters for public interpretation. The goal is not just transparency at launch, but a durable audit trail after launch.</p>
+      </section>
+      <section class="section">
+        ${benchmark.changelog.map((entry) => `
+          <div class="panel changelog-item">
+            <div class="eyebrow">${esc(entry.date)}</div>
+            <h2>${esc(entry.title)}</h2>
+            <p>${esc(entry.text)}</p>
+          </div>
+        `).join("")}
       </section>
     </main>
   `, "changelog");
@@ -334,12 +448,27 @@ function renderAbout() {
       <section class="section twocol">
         <div class="panel">
           <h2>Named operator</h2>
-          <p>AXArena is operated by Richard Tang as an independent personal project. It is not affiliated with, endorsed by, or related to his employer.</p>
+          <p>${esc(benchmark.about.operator)}</p>
         </div>
         <div class="panel">
           <h2>Cadence</h2>
           <p>DAEB-1 launches first. DAEB-2 and future category benchmarks should publish with the same suite/adapters/artifacts model.</p>
         </div>
+      </section>
+      <section class="section twocol">
+        <div class="panel">
+          <h2>Disclosure</h2>
+          <p>${esc(benchmark.about.disclosure)}</p>
+        </div>
+        <div class="panel">
+          <h2>Project direction</h2>
+          <p>${esc(benchmark.about.positioning)}</p>
+        </div>
+      </section>
+      <section class="section callout">
+        <div class="eyebrow">What this site should become</div>
+        <h2>A public benchmark record, not just a homepage.</h2>
+        <p>The long-term shape is a website that renders frozen artifacts, explains the methodology in plain language, discloses uncertainty, and makes reruns legible to outsiders who were not in the room when the benchmark was built.</p>
       </section>
     </main>
   `, "about");

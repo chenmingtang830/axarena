@@ -121,6 +121,14 @@ h1 {
 h2 { font-size: 31px; line-height: 1.08; margin: 0 0 12px; font-weight: 500; }
 h3 { font-size: 20px; margin: 0 0 8px; font-weight: 500; }
 p { margin: 0 0 13px; }
+.tight { margin-bottom: 0; }
+.body-list {
+  margin: 0;
+  padding-left: 18px;
+}
+.body-list li {
+  margin-bottom: 8px;
+}
 .lede {
   max-width: 760px;
   font-size: 20px;
@@ -240,6 +248,9 @@ tr:last-child td { border-bottom: 0; }
   background: var(--panel);
   border: 1px solid var(--rule);
   padding: 20px;
+}
+.changelog-item + .changelog-item {
+  margin-top: 14px;
 }
 .artifact-list {
   display: flex;

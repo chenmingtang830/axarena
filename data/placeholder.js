@@ -16,6 +16,126 @@ export const benchmark = {
     headline: "One canonical suite. Eight vendor adapters. Live-state verification.",
     note: "Numbers below are placeholder values for design only. Replace with normalized records from the frozen DAEB-1 publication bundle."
   },
+  framing: {
+    mission:
+      "AXArena is trying to measure something narrower and more actionable than product marketing breadth: can an agent actually complete real work against a product's published surfaces and leave the product in a verifiable state?",
+    whyNow:
+      "Many products now publish APIs, SDKs, CLIs, and MCP servers, but publication is not the same thing as operability. DAEB-1 treats agent usability as a benchmarkable property.",
+    publicationStandard:
+      "The benchmark is intended to read more like a research release than a marketing site: frozen suite, explicit adapters, public methodology, immutable artifacts, and a corrections log."
+  },
+  findings: [
+    {
+      title: "Surface breadth is not the same thing as agent reliability.",
+      body:
+        "Products with many surfaces can still be hard for agents if key workflows are undocumented, split across consoles, or missing stable read-back paths.",
+    },
+    {
+      title: "Oracle quality determines whether a benchmark is credible.",
+      body:
+        "DAEB-1 treats read-back verification as the load-bearing layer. Scores should come from live state, not transcript fluency or judge-model impressions.",
+    },
+    {
+      title: "N/A disclosure is part of fairness, not a loophole.",
+      body:
+        "A canonical suite only works across heterogeneous vendors if structural mismatches are disclosed explicitly and rendered publicly instead of being silently scored as failure or silently excluded.",
+    },
+  ],
+  scorecard: [
+    {
+      label: "Canonical benchmark definition",
+      text: "One suite fixes task identity, difficulty, intent, and scoring notes across all vendors.",
+    },
+    {
+      label: "Vendor-specific adaptation layer",
+      text: "Only oracle extraction, auth, base URLs, surface availability, and N/A mapping vary by vendor.",
+    },
+    {
+      label: "Publication artifact model",
+      text: "The public release should ship suite, adapters, compiled packs, snapshots, normalized records, and a manifest tying them together.",
+    },
+  ],
+  methodology: {
+    principles: [
+      "Freeze the benchmark before competitive execution.",
+      "Use one canonical suite and many vendor adapters, not one benchmark per vendor.",
+      "Verify outcomes from product state whenever possible.",
+      "Render N/A policy publicly and consistently.",
+      "Treat reruns and corrections as part of the publication record.",
+    ],
+    limits: [
+      "Results can drift as vendors change APIs, auth, docs, and MCP tools.",
+      "Harness versions and sandbox setup influence execution behavior.",
+      "The suite captures a meaningful slice of database agent work, not the entirety of product quality.",
+      "Vendor adapters introduce judgment, so they need review and public disclosure.",
+    ],
+  },
+  reproduce: {
+    prerequisites: [
+      "A clean checkout of the engine repo and the frozen DAEB-1 publication bundle.",
+      "The reviewed canonical suite at targets/suites/daeb-1.yaml.",
+      "Approved compiled packs for each vendor adapter.",
+      "Sandbox credentials and scopes that match the pack declarations.",
+    ],
+    stages: [
+      {
+        title: "Compile from canonical source",
+        body:
+          "The suite is vendor-neutral. Each executable pack is compiled from the suite plus public vendor metadata and a vendor-specific oracle extraction.",
+      },
+      {
+        title: "Execute with the same benchmark contract",
+        body:
+          "Every vendor receives the same task IDs, task wording, difficulty structure, and harness matrix. What changes is only the adapter layer.",
+      },
+      {
+        title: "Verify, normalize, and publish",
+        body:
+          "Snapshots and normalized records become the input to the public website and the competitive report. The site should be a rendering layer over frozen artifacts, not a hand-maintained spreadsheet.",
+      },
+    ],
+  },
+  independence: {
+    commitments: [
+      {
+        title: "No vendor-paid rankings",
+        text:
+          "AXArena should not accept payment in exchange for inclusion, positioning, suppression, favorable framing, or faster correction handling.",
+      },
+      {
+        title: "Preview is factual, not editorial",
+        text:
+          "Vendors may flag factual errors in their adapter, docs links, or N/A mapping, but they do not get approval power over conclusions or score presentation.",
+      },
+      {
+        title: "Corrections should be traceable",
+        text:
+          "If a score changes, the site should link the reason: artifact bug, oracle bug, auth mistake, benchmark bug, or product change followed by rerun.",
+      },
+    ],
+  },
+  about: {
+    operator:
+      "AXArena is operated by Richard Tang as an independent project focused on Agent Experience evaluation.",
+    disclosure:
+      "Employment or professional affiliations should be disclosed plainly, but they should not imply institutional sponsorship, review rights, or editorial involvement.",
+    positioning:
+      "The project is trying to become a durable public benchmark publication, not just a one-off leaderboard screenshot.",
+  },
+  changelog: [
+    {
+      date: "2026-07-01",
+      title: "Launch candidate website goes live",
+      text:
+        "Initial public prototype for DAEB-1 publication layout, methodology framing, vendor detail pages, and placeholder leaderboard data.",
+    },
+    {
+      date: "2026-07-01",
+      title: "Placeholder scope explicitly labeled",
+      text:
+        "All scores, findings, and task matrices remain illustrative until frozen publication artifacts are wired into the site.",
+    },
+  ],
   tasks: [
     { id: "db-T01-create-table", label: "T01", title: "Create a table", difficulty: "L1", skill: "schema-ddl" },
     { id: "db-T02-insert-rows", label: "T02", title: "Bulk-insert rows", difficulty: "L1", skill: "bulk-write" },
