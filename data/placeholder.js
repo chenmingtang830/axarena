@@ -24,6 +24,26 @@ export const benchmark = {
     publicationStandard:
       "The benchmark is intended to read more like a research release than a marketing site: frozen suite, explicit adapters, public methodology, immutable artifacts, and a corrections log."
   },
+  links: {
+    xHandle: "@richardt830",
+    xUrl: "https://x.com/richardt830",
+    engineRepoLabel: "chenmingtang830/ax-eval",
+    engineRepoUrl: "https://github.com/chenmingtang830/ax-eval",
+    siteRepoLabel: "chenmingtang830/axarena",
+    siteRepoUrl: "https://github.com/chenmingtang830/axarena",
+  },
+  homepage: {
+    eyebrow: "Independent benchmark report",
+    title: "Can AI agents actually use modern software products?",
+    lede:
+      "AXArena publishes benchmark reports about Agent Experience: not whether a product looks agent-ready on paper, but whether an agent can complete real tasks and leave behind verifiable state.",
+    reportQuestion:
+      "DAEB-1 asks a simple question in the database category: if eight vendors are given the same benchmark contract, where do agents reliably succeed, where do they stall, and which gaps come from product surfaces rather than prompt cleverness?",
+    reading:
+      "The website should read top-down like a report: first the claim, then the findings, then the evidence model, and finally the exact artifacts needed to reproduce the result.",
+    note:
+      "Everything on this version of the site is still placeholder analysis and placeholder scoring. The goal right now is to establish the public shape of the publication before the frozen artifact bundle is wired in.",
+  },
   findings: [
     {
       title: "Surface breadth is not the same thing as agent reliability.",

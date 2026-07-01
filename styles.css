@@ -32,6 +32,14 @@ body {
 }
 
 a { color: inherit; }
+.inline-link {
+  text-decoration: underline;
+  text-decoration-color: rgba(163, 61, 22, 0.35);
+  text-underline-offset: 0.16em;
+}
+.inline-link:hover {
+  text-decoration-color: currentColor;
+}
 .site-shell { min-height: 100vh; }
 .topbar {
   position: sticky;

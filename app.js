@@ -34,6 +34,10 @@ function quotePanel(title, text) {
   `;
 }
 
+function externalLink(url, label) {
+  return `<a class="inline-link" href="${esc(url)}">${esc(label)}</a>`;
+}
+
 function shell(content, active = page) {
   const nav = [
     ["/database/", "Database", "database"],
@@ -60,7 +64,11 @@ function shell(content, active = page) {
       <footer class="footer">
         <div class="footer-inner">
           <div>© 2026 AXArena. Independent benchmark publication. Placeholder content until DAEB-1 artifacts are frozen.</div>
-          <div>canonical suite · vendor adapters · read-back oracles · public corrections</div>
+          <div>
+            canonical suite · vendor adapters · read-back oracles · public corrections ·
+            ${externalLink(benchmark.links.engineRepoUrl, benchmark.links.engineRepoLabel)} ·
+            ${externalLink(benchmark.links.xUrl, benchmark.links.xHandle)}
+          </div>
         </div>
       </footer>
     </div>
@@ -117,24 +125,45 @@ function renderDatabase() {
   const scorecardRows = benchmark.scorecard
     .map((item) => `<tr><td>${esc(item.label)}</td><td>${esc(item.text)}</td></tr>`)
     .join("");
+  const reportCard = `
+    <aside class="hero-card">
+      <div class="row"><span class="label">Report</span><span class="value">${esc(benchmark.name)}</span></div>
+      <div class="row"><span class="label">Category</span><span class="value">Database</span></div>
+      <div class="row"><span class="label">Status</span><span class="value">${esc(benchmark.status)}</span></div>
+      <div class="row"><span class="label">Scope</span><span class="value">${benchmark.summary.vendors} vendors / ${benchmark.summary.tasks} tasks</span></div>
+    </aside>
+  `;
   const content = `
     <main class="page">
       ${hero(
-        "Database AX Benchmark V1",
-        "AXArena evaluates one canonical database suite across eight vendor adapters. We run real agent harnesses, verify live state with read-back oracles, and publish the gaps.",
-        `${benchmark.name} · one suite, eight adapters`,
-        summaryCard(),
+        esc(benchmark.homepage.title),
+        esc(benchmark.homepage.lede),
+        benchmark.homepage.eyebrow,
+        reportCard,
       )}
 
+      <section class="section twocol">
+        <div class="callout">
+          <div class="eyebrow">Report question</div>
+          <h2>What this benchmark report is trying to answer</h2>
+          <p>${esc(benchmark.homepage.reportQuestion)}</p>
+          <p>${esc(benchmark.homepage.reading)}</p>
+        </div>
+        <div class="panel">
+          <h3>Current note</h3>
+          <p>${esc(benchmark.homepage.note)}</p>
+        </div>
+      </section>
+
       <section class="section grid-3">
-        <div class="metric"><div class="num">${benchmark.summary.vendors}</div><div class="caption">database vendors</div></div>
-        <div class="metric"><div class="num">${benchmark.summary.tasks}</div><div class="caption">canonical task intents</div></div>
-        <div class="metric"><div class="num">${benchmark.summary.cells}</div><div class="caption">surface × harness cells</div></div>
+        <div class="metric"><div class="num">${benchmark.summary.vendors}</div><div class="caption">vendors in this report</div></div>
+        <div class="metric"><div class="num">${benchmark.summary.tasks}</div><div class="caption">shared canonical tasks</div></div>
+        <div class="metric"><div class="num">${benchmark.summary.cells}</div><div class="caption">surface × harness observations</div></div>
       </section>
 
       <section class="section twocol">
         <div class="callout">
-          <div class="eyebrow">Why this exists</div>
+          <div class="eyebrow">Executive summary</div>
           <h2>AXArena is benchmarking operability, not brochure surface area.</h2>
           <p>${esc(benchmark.framing.mission)}</p>
           <p>${esc(benchmark.framing.whyNow)}</p>
@@ -148,8 +177,21 @@ function renderDatabase() {
       <section class="section">
         <div class="section-head">
           <div>
+            <div class="eyebrow">Top-line read</div>
+            <h2>What this report wants a reader to notice first</h2>
+          </div>
+          <p class="section-note">These are placeholder editorial findings for launch-shape only. The final site should tie each claim to frozen records and snapshots.</p>
+        </div>
+        <div class="grid-3">
+          ${findingPanels}
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <div>
             <div class="eyebrow">Leaderboard</div>
-            <h2>Placeholder DAEB-1 ranking</h2>
+            <h2>Then the report drops into the comparative table</h2>
           </div>
           <p class="section-note">${esc(benchmark.summary.note)}</p>
         </div>
@@ -165,22 +207,9 @@ function renderDatabase() {
         </div>
       </section>
 
-      <section class="section">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Early read</div>
-            <h2>What the benchmark is designed to make visible</h2>
-          </div>
-          <p class="section-note">These are placeholder editorial findings for launch-shape only. The final site should tie each claim to frozen records and snapshots.</p>
-        </div>
-        <div class="grid-3">
-          ${findingPanels}
-        </div>
-      </section>
-
       <section class="section twocol">
         <div class="callout">
-          <div class="eyebrow">Methodology claim</div>
+          <div class="eyebrow">How to read the numbers</div>
           <h2>Same benchmark contract, vendor-specific verification.</h2>
           <p>DAEB-1 starts from <code>${benchmark.suitePath}</code>. Compiled vendor packs exist only so the executor and verifier can use concrete auth, base URLs, read-back checks, N/A mappings, and surface configs.</p>
           <p>This is the public sentence to keep repeating: vendors do not write their own tests.</p>
@@ -211,6 +240,22 @@ function renderDatabase() {
             <thead><tr><th>Layer</th><th>What it means</th></tr></thead>
             <tbody>${scorecardRows}</tbody>
           </table>
+        </div>
+      </section>
+
+      <section class="section twocol">
+        <div class="panel">
+          <div class="eyebrow">Open materials</div>
+          <h2>Public links already available</h2>
+          <p>This project should feel legible from the outside. That means the operator, the engine repo, and the publication site repo all have to be easy to find.</p>
+          <p><strong>X:</strong> ${externalLink(benchmark.links.xUrl, benchmark.links.xHandle)}</p>
+          <p><strong>Engine repo:</strong> ${externalLink(benchmark.links.engineRepoUrl, benchmark.links.engineRepoLabel)}</p>
+          <p><strong>Site repo:</strong> ${externalLink(benchmark.links.siteRepoUrl, benchmark.links.siteRepoLabel)}</p>
+        </div>
+        <div class="panel">
+          <div class="eyebrow">What comes next</div>
+          <h2>From launch-shape to real publication</h2>
+          <p>Once the frozen artifact bundle is ready, the placeholder leaderboard, findings, and vendor commentary should be swapped for manifest-backed content without changing the report structure.</p>
         </div>
       </section>
     </main>
@@ -463,6 +508,18 @@ function renderAbout() {
         <div class="panel">
           <h2>Project direction</h2>
           <p>${esc(benchmark.about.positioning)}</p>
+        </div>
+      </section>
+      <section class="section twocol">
+        <div class="panel">
+          <h2>Public links</h2>
+          <p><strong>X:</strong> ${externalLink(benchmark.links.xUrl, benchmark.links.xHandle)}</p>
+          <p><strong>Engine repo:</strong> ${externalLink(benchmark.links.engineRepoUrl, benchmark.links.engineRepoLabel)}</p>
+          <p><strong>Site repo:</strong> ${externalLink(benchmark.links.siteRepoUrl, benchmark.links.siteRepoLabel)}</p>
+        </div>
+        <div class="panel">
+          <h2>Why publish this way</h2>
+          <p>For AXArena to be credible, the public site needs to behave like the readable front-end of a benchmark archive: clear framing up top, explicit methodology in the middle, and reproducible artifacts underneath.</p>
         </div>
       </section>
       <section class="section callout">
