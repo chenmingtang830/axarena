@@ -4,16 +4,16 @@ export const benchmark = {
   category: "database",
   status: "Placeholder data",
   publishedAt: "Launch candidate",
-  suitePath: "targets/suites/daeb-1.yaml",
-  bundlePath: "results/publications/daeb-1/manifest.json",
+  suitePath: "benchmarks/daeb/v1/suite.yaml",
+  bundlePath: "examples/daeb-1/publication-bundle/manifest.json",
   harnesses: ["Claude Code", "Codex"],
-  surfaces: ["API", "SDK", "CLI", "MCP"],
+  surfaces: ["API", "CLI"],
   summary: {
-    vendors: 8,
+    vendors: 7,
     tasks: 10,
-    adapters: 8,
-    cells: 64,
-    headline: "One canonical suite. Eight vendor adapters. Live-state verification.",
+    adapters: 7,
+    cells: 28,
+    headline: "One canonical suite. Seven vendor adapters. Live-state verification.",
     note: "Numbers below are placeholder values for design only. Replace with normalized records from the frozen DAEB-1 publication bundle."
   },
   framing: {
@@ -39,7 +39,7 @@ export const benchmark = {
       "AXArena publishes benchmark reports about Agent Experience: not whether a product looks agent-ready on paper, but whether an agent can complete real tasks and leave behind verifiable state.",
     tldr: [
       "AXArena is a benchmark publication about whether software products are actually usable by AI agents.",
-      "DAEB-1 uses one canonical database suite across eight vendor adapters instead of letting each vendor define its own benchmark flow.",
+      "DAEB-1 uses one canonical database suite across seven vendor adapters instead of letting each vendor define its own benchmark flow.",
       "The current site is still placeholder content, but the publication structure is meant to match the eventual artifact-backed release.",
     ],
     abstract:
