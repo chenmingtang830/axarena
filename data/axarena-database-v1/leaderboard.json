@@ -1,0 +1,21 @@
+{
+  "schema": "ax.axarena-leaderboard/v2",
+  "benchmark": "axarena-database",
+  "generated_at": "2026-07-13T00:00:00.000Z",
+  "ranking_method": {
+    "primary": "verified success across shared core task×surface×harness×trial outcomes",
+    "tie_breaker": "share of shared core task×surface×harness units passing every required trial",
+    "required_trial_count": 3,
+    "intersection_pairs": ["db-T01-access-control::api", "db-T03-inspect-schema::api", "db-T04-query-records::api", "db-T04-query-records::cli", "db-T06-write-records::api", "db-T06-write-records::cli"],
+    "surfaces_without_intersection": [],
+    "discovery_affects_rank": false
+  },
+  "rows": [
+    { "rank": 1, "status": "ranked", "vendor": "neon", "expected_surfaces": ["api", "cli"], "cell_count": 4, "intersection_score": 0.86, "intersection_consistency_at_3": 0.79, "applicability_coverage": 0.93, "applicable_success_rate": 0.81, "surface_success_rates": { "api": 0.84, "cli": 0.78 }, "discovery_score": 0.5, "incomplete_reasons": [], "cells": ["neon/api/codex", "neon/api/claude-code", "neon/cli/codex", "neon/cli/claude-code"] },
+    { "rank": 2, "status": "ranked", "vendor": "cockroachdb", "expected_surfaces": ["api", "cli"], "cell_count": 4, "intersection_score": 0.82, "intersection_consistency_at_3": 0.75, "applicability_coverage": 1, "applicable_success_rate": 0.79, "surface_success_rates": { "api": 0.76, "cli": 0.82 }, "discovery_score": 0.75, "incomplete_reasons": [], "cells": ["cockroachdb/api/codex", "cockroachdb/api/claude-code", "cockroachdb/cli/codex", "cockroachdb/cli/claude-code"] },
+    { "rank": 3, "status": "ranked", "vendor": "turso", "expected_surfaces": ["api", "cli"], "cell_count": 4, "intersection_score": 0.78, "intersection_consistency_at_3": 0.71, "applicability_coverage": 0.86, "applicable_success_rate": 0.77, "surface_success_rates": { "api": 0.8, "cli": 0.74 }, "discovery_score": 1, "incomplete_reasons": [], "cells": ["turso/api/codex", "turso/api/claude-code", "turso/cli/codex", "turso/cli/claude-code"] },
+    { "rank": 4, "status": "ranked", "vendor": "supabase", "expected_surfaces": ["api", "cli"], "cell_count": 4, "intersection_score": 0.74, "intersection_consistency_at_3": 0.68, "applicability_coverage": 0.93, "applicable_success_rate": 0.72, "surface_success_rates": { "api": 0.69, "cli": 0.75 }, "discovery_score": 0.75, "incomplete_reasons": [], "cells": ["supabase/api/codex", "supabase/api/claude-code", "supabase/cli/codex", "supabase/cli/claude-code"] },
+    { "rank": 5, "status": "ranked", "vendor": "nile", "expected_surfaces": ["api", "cli"], "cell_count": 4, "intersection_score": 0.69, "intersection_consistency_at_3": 0.61, "applicability_coverage": 0.79, "applicable_success_rate": 0.67, "surface_success_rates": { "api": 0.7, "cli": 0.64 }, "discovery_score": 0.75, "incomplete_reasons": [], "cells": ["nile/api/codex", "nile/api/claude-code", "nile/cli/codex", "nile/cli/claude-code"] },
+    { "rank": 6, "status": "ranked", "vendor": "insforge", "expected_surfaces": ["api", "cli"], "cell_count": 4, "intersection_score": 0.63, "intersection_consistency_at_3": 0.54, "applicability_coverage": 0.71, "applicable_success_rate": 0.61, "surface_success_rates": { "api": 0.66, "cli": 0.56 }, "discovery_score": 0.5, "incomplete_reasons": [], "cells": ["insforge/api/codex", "insforge/api/claude-code", "insforge/cli/codex", "insforge/cli/claude-code"] }
+  ]
+}

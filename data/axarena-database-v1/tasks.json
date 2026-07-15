@@ -1,0 +1,94 @@
+{
+  "schema": "ax.axarena-tasks/v2",
+  "benchmark": "axarena-database",
+  "generated_at": "2026-07-13T00:00:00.000Z",
+  "tasks": [
+    {
+      "task_id": "db-T01-access-control", "title": "Configure an idiomatic access-control mechanism", "difficulty": "L2", "skill": "access-control", "kind": "core", "allowed_surfaces": ["api", "cli"],
+      "applicability": { "neon": ["api", "cli"], "cockroachdb": ["api", "cli"], "turso": ["api", "cli"], "supabase": ["api", "cli"], "insforge": ["api"], "nile": ["api", "cli"] },
+      "results": [
+        { "vendor": "neon", "task_id": "db-T01-access-control", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/neon/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "cockroachdb", "task_id": "db-T01-access-control", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/cockroachdb/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "turso", "task_id": "db-T01-access-control", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/turso/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "supabase", "task_id": "db-T01-access-control", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/supabase/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "insforge", "task_id": "db-T01-access-control", "success": false, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/insforge/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "nile", "task_id": "db-T01-access-control", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/nile/reports/trial-1/generated-eval.snapshot.json" } }
+      ]
+    },
+    {
+      "task_id": "db-T02-evolve-schema", "title": "Apply a schema evolution", "difficulty": "L3", "skill": "evolve-schema", "kind": "core", "allowed_surfaces": ["api", "cli"],
+      "applicability": { "neon": ["api", "cli"], "cockroachdb": ["api", "cli"], "turso": ["api"], "supabase": ["api", "cli"], "insforge": ["api"], "nile": ["api"] },
+      "results": [
+        { "vendor": "neon", "task_id": "db-T02-evolve-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/neon/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "cockroachdb", "task_id": "db-T02-evolve-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/cockroachdb/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "turso", "task_id": "db-T02-evolve-schema", "success": false, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/turso/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "supabase", "task_id": "db-T02-evolve-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/supabase/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "insforge", "task_id": "db-T02-evolve-schema", "success": false, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/insforge/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "nile", "task_id": "db-T02-evolve-schema", "success": false, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/nile/reports/trial-1/generated-eval.snapshot.json" } }
+      ]
+    },
+    {
+      "task_id": "db-T03-inspect-schema", "title": "Inspect container metadata", "difficulty": "L1", "skill": "inspect-schema", "kind": "core", "allowed_surfaces": ["api", "cli"],
+      "applicability": { "neon": ["api", "cli"], "cockroachdb": ["api", "cli"], "turso": ["api", "cli"], "supabase": ["api", "cli"], "insforge": ["api", "cli"], "nile": ["api", "cli"] },
+      "results": [
+        { "vendor": "neon", "task_id": "db-T03-inspect-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/neon/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "cockroachdb", "task_id": "db-T03-inspect-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/cockroachdb/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "turso", "task_id": "db-T03-inspect-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/turso/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "supabase", "task_id": "db-T03-inspect-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/supabase/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "insforge", "task_id": "db-T03-inspect-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/insforge/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "nile", "task_id": "db-T03-inspect-schema", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/nile/reports/trial-1/generated-eval.snapshot.json" } }
+      ]
+    },
+    {
+      "task_id": "db-T04-query-records", "title": "Filter and read matching records", "difficulty": "L2", "skill": "query-records", "kind": "core", "allowed_surfaces": ["api", "cli"],
+      "applicability": { "neon": ["api", "cli"], "cockroachdb": ["api", "cli"], "turso": ["api", "cli"], "supabase": ["api", "cli"], "insforge": ["api", "cli"], "nile": ["api", "cli"] },
+      "results": [
+        { "vendor": "neon", "task_id": "db-T04-query-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/neon/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "cockroachdb", "task_id": "db-T04-query-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/cockroachdb/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "turso", "task_id": "db-T04-query-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/turso/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "supabase", "task_id": "db-T04-query-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/supabase/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "insforge", "task_id": "db-T04-query-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/insforge/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "nile", "task_id": "db-T04-query-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/nile/reports/trial-1/generated-eval.snapshot.json" } }
+      ]
+    },
+    {
+      "task_id": "db-T05-vector-search", "title": "Create a vector-enabled dataset and query it", "difficulty": "L2", "skill": "vector-search", "kind": "core", "allowed_surfaces": ["api", "cli"],
+      "applicability": { "neon": ["api"], "cockroachdb": ["api", "cli"], "turso": ["api"], "supabase": ["api"], "insforge": ["api"], "nile": ["api"] },
+      "results": [
+        { "vendor": "neon", "task_id": "db-T05-vector-search", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/neon/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "cockroachdb", "task_id": "db-T05-vector-search", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/cockroachdb/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "turso", "task_id": "db-T05-vector-search", "success": false, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/turso/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "supabase", "task_id": "db-T05-vector-search", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/supabase/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "insforge", "task_id": "db-T05-vector-search", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/insforge/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "nile", "task_id": "db-T05-vector-search", "success": false, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/nile/reports/trial-1/generated-eval.snapshot.json" } }
+      ]
+    },
+    {
+      "task_id": "db-T06-write-records", "title": "Create, update, and delete one record lifecycle", "difficulty": "L2", "skill": "write-records", "kind": "core", "allowed_surfaces": ["api", "cli"],
+      "applicability": { "neon": ["api", "cli"], "cockroachdb": ["api", "cli"], "turso": ["api", "cli"], "supabase": ["api", "cli"], "insforge": ["api", "cli"], "nile": ["api", "cli"] },
+      "results": [
+        { "vendor": "neon", "task_id": "db-T06-write-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/neon/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "cockroachdb", "task_id": "db-T06-write-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/cockroachdb/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "turso", "task_id": "db-T06-write-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/turso/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "supabase", "task_id": "db-T06-write-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/supabase/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "insforge", "task_id": "db-T06-write-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/insforge/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "nile", "task_id": "db-T06-write-records", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/nile/reports/trial-1/generated-eval.snapshot.json" } }
+      ]
+    },
+    {
+      "task_id": "db-T07-full-text-search", "title": "Create a searchable text dataset and query it", "difficulty": "L2", "skill": "full-text-search", "kind": "core", "allowed_surfaces": ["api", "cli"],
+      "applicability": { "neon": ["api", "cli"], "cockroachdb": ["api", "cli"], "turso": ["api"], "supabase": ["api", "cli"], "insforge": [], "nile": ["api"] },
+      "results": [
+        { "vendor": "neon", "task_id": "db-T07-full-text-search", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/neon/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "cockroachdb", "task_id": "db-T07-full-text-search", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/cockroachdb/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "turso", "task_id": "db-T07-full-text-search", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/turso/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "supabase", "task_id": "db-T07-full-text-search", "success": true, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/supabase/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "insforge", "task_id": "db-T07-full-text-search", "success": false, "na": true, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/insforge/reports/trial-1/generated-eval.snapshot.json" } },
+        { "vendor": "nile", "task_id": "db-T07-full-text-search", "success": false, "na": false, "trial": 1, "profile": "medium", "harness": "codex", "surface": "api", "evidence": { "snapshot": "vendors/nile/reports/trial-1/generated-eval.snapshot.json" } }
+      ]
+    },
+    { "task_id": "research-backup", "title": "Backup and restore", "difficulty": "L4", "skill": "backup-and-restore", "kind": "research", "allowed_surfaces": [], "applicability": {}, "results": [] },
+    { "task_id": "research-cdc", "title": "Change data capture", "difficulty": "L4", "skill": "change-data-capture", "kind": "research", "allowed_surfaces": [], "applicability": {}, "results": [] },
+    { "task_id": "research-integrity", "title": "Integrity constraints", "difficulty": "L4", "skill": "integrity", "kind": "research", "allowed_surfaces": [], "applicability": {}, "results": [] }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "ax.axarena-evidence-index/v1",
+  "benchmark": "axarena-database",
+  "generated_at": "2026-07-13T00:00:00.000Z",
+  "evidence": [
+    { "id": "leaderboard:neon", "kind": "leaderboard_row", "vendor": "neon", "path": "leaderboard.json#neon" },
+    { "id": "leaderboard:turso", "kind": "leaderboard_row", "vendor": "turso", "path": "leaderboard.json#turso" },
+    { "id": "task:db-T03-inspect-schema", "kind": "task", "path": "tasks.json#db-T03-inspect-schema" },
+    { "id": "cell:turso/api/codex", "kind": "cell", "vendor": "turso", "path": "cells.json#turso/api/codex" }
+  ]
+}
