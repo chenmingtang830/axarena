@@ -62,9 +62,12 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   assert.match(methodologyHtml, /data-page="methodology"/);
   assert.match(blogHtml, /data-page="blog"/);
   assert.match(blogHtml, /Introducing AXArena: Benchmarking Agent Experience/);
-  for (const id of ["results", "task-matrix", "findings", "methodology-preview", "about", "evidence", "reproduce", "independence", "changelog"]) {
+  for (const id of ["one-minute", "results", "task-matrix", "findings", "methodology-preview", "about", "contribute", "evidence", "reproduce", "independence", "changelog"]) {
     assert.ok(app.includes(`"${id}"`), `missing ${id} section`);
   }
+  assert.match(app, /data-metric-switch/);
+  assert.match(app, /class="fairness-strip"/);
+  assert.match(app, /class="vendor-chip /);
   for (const id of ["category", "canonical-tasks", "adapters", "execution", "verification", "scoring", "database-v1", "open-source"]) {
     assert.ok(app.includes(`id="${id}"`), `missing methodology ${id} section`);
   }

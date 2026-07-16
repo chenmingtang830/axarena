@@ -53,19 +53,34 @@ the blue brand accent.
 - **Hero:** large serif question, short definition, three actions, benchmark
   scope card, and the restrained original blue radial light. Hero copy and the
   scope card rise gently on load.
-- **Section heading:** monospace eyebrow + serif title + optional explanatory
-  note aligned on a 1200px frame.
+- **Section heading:** monospace eyebrow with a two-digit report number + serif
+  title + optional explanatory note aligned on a 1200px frame.
+- **One-minute brief:** four quotable fact cards (what, how, rank basis, what
+  it is not) plus the anatomy diagram of one evaluation cell: agent harness →
+  product sandbox → independent read-back, with the dashed three-trial loop.
+  Draft copy covers scope and method only, never ranking conclusions.
+- **Fairness strip:** one pill row above the leaderboard — canonical tasks →
+  reviewed adapters → harnesses → trials per cell → live read-back.
+- **Vendor monograms:** two-letter rounded chips keyed by vendor slug
+  (`--<vendor>-fg/bg` tokens). Identity markers only; they must never reuse
+  the green/amber/red status hues. Used in the leaderboard, charts, matrix
+  headers, and evidence accordion.
 - **Leaderboard:** horizontally scrollable rounded table with plain-language
   metrics, tooltips, tabular numbers, pill score badges, and a visible Draft
   watermark.
 - **Task matrix:** labeled percentage tiles on a 6px-gap grid, legend, N/A
   (outlined) and missing states, and evidence links.
 - **Charts:** blue-gradient bars with rounded caps that grow into place row by
-  row.
+  row. A segmented metric switch swaps the chart between Shared-core score,
+  All-3 reliability, and Applicability; it never re-sorts the official rank,
+  and Discoverability always stays a separate chart. Print shows all panels.
 - **Research cards:** thin borders, rounded corners, white-to-pale-blue
   gradient, limited use; they lift slightly on hover.
 - **Vendor evidence:** accordion rows with pill scores and a rotating chevron;
   the open state fills the pill with the accent color.
+- **Participation:** a five-step flow (target pack → adapter review →
+  maintainer-run trials → read-back → frozen export). No self-reported scores
+  or purchasable placement, ever.
 - **Motion:** small `transform`/`opacity` transitions and entrance animations
   using `--ease`, always guarded by `prefers-reduced-motion: no-preference`
   and disabled in print.
