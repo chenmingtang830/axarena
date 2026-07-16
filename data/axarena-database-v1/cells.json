@@ -1,0 +1,31 @@
+{
+  "schema": "ax.axarena-cells/v2",
+  "benchmark": "axarena-database",
+  "generated_at": "2026-07-13T00:00:00.000Z",
+  "cells": [
+    { "id": "neon/api/codex", "vendor": "neon", "surface": "api", "harness": "codex", "mean_success_rate": 0.86, "task_consistency_at_3": 0.81, "discovery_score": 0.5, "trial_count": 3, "blocked": null },
+    { "id": "neon/api/claude-code", "vendor": "neon", "surface": "api", "harness": "claude-code", "mean_success_rate": 0.82, "task_consistency_at_3": 0.76, "discovery_score": 0.5, "trial_count": 3, "blocked": null },
+    { "id": "neon/cli/codex", "vendor": "neon", "surface": "cli", "harness": "codex", "mean_success_rate": 0.8, "task_consistency_at_3": 0.75, "discovery_score": 0.5, "trial_count": 3, "blocked": null },
+    { "id": "neon/cli/claude-code", "vendor": "neon", "surface": "cli", "harness": "claude-code", "mean_success_rate": 0.76, "task_consistency_at_3": 0.72, "discovery_score": 0.5, "trial_count": 3, "blocked": null },
+    { "id": "cockroachdb/api/codex", "vendor": "cockroachdb", "surface": "api", "harness": "codex", "mean_success_rate": 0.78, "task_consistency_at_3": 0.72, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "cockroachdb/api/claude-code", "vendor": "cockroachdb", "surface": "api", "harness": "claude-code", "mean_success_rate": 0.74, "task_consistency_at_3": 0.69, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "cockroachdb/cli/codex", "vendor": "cockroachdb", "surface": "cli", "harness": "codex", "mean_success_rate": 0.84, "task_consistency_at_3": 0.78, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "cockroachdb/cli/claude-code", "vendor": "cockroachdb", "surface": "cli", "harness": "claude-code", "mean_success_rate": 0.8, "task_consistency_at_3": 0.75, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "turso/api/codex", "vendor": "turso", "surface": "api", "harness": "codex", "mean_success_rate": 0.82, "task_consistency_at_3": 0.75, "discovery_score": 1, "trial_count": 3, "blocked": null },
+    { "id": "turso/api/claude-code", "vendor": "turso", "surface": "api", "harness": "claude-code", "mean_success_rate": 0.78, "task_consistency_at_3": 0.7, "discovery_score": 1, "trial_count": 3, "blocked": null },
+    { "id": "turso/cli/codex", "vendor": "turso", "surface": "cli", "harness": "codex", "mean_success_rate": 0.76, "task_consistency_at_3": 0.69, "discovery_score": 1, "trial_count": 3, "blocked": null },
+    { "id": "turso/cli/claude-code", "vendor": "turso", "surface": "cli", "harness": "claude-code", "mean_success_rate": 0.72, "task_consistency_at_3": 0.64, "discovery_score": 1, "trial_count": 3, "blocked": null },
+    { "id": "supabase/api/codex", "vendor": "supabase", "surface": "api", "harness": "codex", "mean_success_rate": 0.71, "task_consistency_at_3": 0.65, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "supabase/api/claude-code", "vendor": "supabase", "surface": "api", "harness": "claude-code", "mean_success_rate": 0.67, "task_consistency_at_3": 0.6, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "supabase/cli/codex", "vendor": "supabase", "surface": "cli", "harness": "codex", "mean_success_rate": 0.77, "task_consistency_at_3": 0.7, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "supabase/cli/claude-code", "vendor": "supabase", "surface": "cli", "harness": "claude-code", "mean_success_rate": 0.73, "task_consistency_at_3": 0.67, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "nile/api/codex", "vendor": "nile", "surface": "api", "harness": "codex", "mean_success_rate": 0.72, "task_consistency_at_3": 0.64, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "nile/api/claude-code", "vendor": "nile", "surface": "api", "harness": "claude-code", "mean_success_rate": 0.68, "task_consistency_at_3": 0.59, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "nile/cli/codex", "vendor": "nile", "surface": "cli", "harness": "codex", "mean_success_rate": 0.66, "task_consistency_at_3": 0.58, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "nile/cli/claude-code", "vendor": "nile", "surface": "cli", "harness": "claude-code", "mean_success_rate": 0.62, "task_consistency_at_3": 0.54, "discovery_score": 0.75, "trial_count": 3, "blocked": null },
+    { "id": "insforge/api/codex", "vendor": "insforge", "surface": "api", "harness": "codex", "mean_success_rate": 0.68, "task_consistency_at_3": 0.58, "discovery_score": 0.5, "trial_count": 3, "blocked": null },
+    { "id": "insforge/api/claude-code", "vendor": "insforge", "surface": "api", "harness": "claude-code", "mean_success_rate": 0.64, "task_consistency_at_3": 0.53, "discovery_score": 0.5, "trial_count": 3, "blocked": null },
+    { "id": "insforge/cli/codex", "vendor": "insforge", "surface": "cli", "harness": "codex", "mean_success_rate": 0.58, "task_consistency_at_3": 0.5, "discovery_score": 0.5, "trial_count": 3, "blocked": null },
+    { "id": "insforge/cli/claude-code", "vendor": "insforge", "surface": "cli", "harness": "claude-code", "mean_success_rate": 0.54, "task_consistency_at_3": 0.46, "discovery_score": 0.5, "trial_count": 3, "blocked": null }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "schema": "ax.axarena-publication/v1",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena Database",
+  "category": "database",
+  "suite_version": 1,
+  "generated_at": "2026-07-13T00:00:00.000Z",
+  "source_readiness": "draft",
+  "publication_readiness": "draft",
+  "cohort": ["neon", "cockroachdb", "turso", "supabase", "insforge", "nile"],
+  "scope": {
+    "core_task_count": 7,
+    "research_task_count": 3,
+    "surfaces": ["api", "cli"],
+    "harnesses": ["codex", "claude-code"],
+    "effort_profiles": ["medium"],
+    "trial_count": 3
+  },
+  "quality_gates": [
+    { "id": "required-artifacts", "label": "Required publication artifacts are present", "status": "fail", "detail": "Draft fixture: production artifacts have not been injected." },
+    { "id": "website-rankability", "label": "Website ranking has complete trial-level evidence", "status": "fail", "detail": "Preview values are illustrative and not citable." }
+  ]
+}
