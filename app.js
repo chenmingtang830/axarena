@@ -74,6 +74,7 @@ function rankChart(rows, metric, label) {
   const left = 170;
   const chartWidth = 820;
   const height = rows.length * rowHeight + 58;
+  const gradientId = `bar-gradient-${metric}`;
   const bars = rows.map((row, index) => {
     const value = row[metric] ?? 0;
     const y = 42 + index * rowHeight;
@@ -81,12 +82,13 @@ function rankChart(rows, metric, label) {
     return `<g>
       <text x="0" y="${y + 18}" class="chart-label">${esc(vendorName(row.vendor))}</text>
       <rect x="${left}" y="${y}" width="${chartWidth}" height="24" rx="4" class="chart-track" />
-      <rect x="${left}" y="${y}" width="${barWidth}" height="24" rx="4" class="chart-bar" />
+      <rect x="${left}" y="${y}" width="${barWidth}" height="24" rx="4" class="chart-bar" style="animation-delay:${index * 80}ms" />
       <text x="${Math.min(left + barWidth + 10, width - 42)}" y="${y + 18}" class="chart-value">${pct(value)}</text>
     </g>`;
   }).join("");
   return `<figure class="wide-figure"><figcaption>${esc(label)}</figcaption>
-    <svg class="bar-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}">${bars}</svg>
+    <svg class="bar-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}" style="--bar-fill:url(#${gradientId})">
+      <defs><linearGradient id="${gradientId}" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="var(--accent-blue)"/><stop offset="1" stop-color="var(--accent-blue-light)"/></linearGradient></defs>${bars}</svg>
   </figure>`;
 }
 
@@ -148,7 +150,7 @@ function vendorEvidence(rows, cells, tasks) {
   return `<div class="vendor-evidence">${rows.map((row) => {
     const vendorCells = cells.filter((cell) => cell.vendor === row.vendor);
     const applicableTasks = tasks.filter((task) => task.kind === "core" && (task.applicability?.[row.vendor] ?? []).length > 0);
-    return `<details id="vendor-${esc(row.vendor)}"><summary><span>${esc(vendorName(row.vendor))}</span><strong>${pct(row.intersection_score)} AX Score</strong></summary>
+    return `<details id="vendor-${esc(row.vendor)}"><summary><span>${esc(vendorName(row.vendor))}</span><span class="summary-meta"><strong class="vendor-score">${pct(row.intersection_score)} AX Score</strong><i class="chevron" aria-hidden="true"></i></span></summary>
       <div class="vendor-detail">
         <p>${esc(vendorName(row.vendor))} is applicable to ${applicableTasks.length}/${tasks.filter((task) => task.kind === "core").length} core tasks in this draft view. Official rank uses only the comparable cohort-wide task and surface set.</p>
         <dl><div><dt>Reliability</dt><dd>${pct(row.intersection_consistency_at_3)}</dd></div><div><dt>Coverage</dt><dd>${pct(row.applicability_coverage)}</dd></div><div><dt>Discoverability</dt><dd>${pct(row.discovery_score)}</dd></div></dl>

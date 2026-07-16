@@ -36,6 +36,13 @@ All palette changes belong in the `:root` block of `styles.css`:
 | `--accent-blue-light` | `#7892ef` | Light end of blue diagrams |
 | `--accent-soft` | `#dce4ff` | Stronger blue highlight |
 | `--accent-pale` | `#f3f5ff` | Hover and card gradients |
+| `--code-bg` | `#17181e` | Dark command-block background |
+| `--code-line` | `#262833` | Dark command-block border |
+| `--radius` | `14px` | Card, table, and panel corner radius |
+| `--radius-sm` | `8px` | Cell and chip corner radius |
+| `--shadow-sm` | small layered shadow | Resting elevation for interactive surfaces |
+| `--shadow-md` | larger layered shadow | Raised elevation for cards and code blocks |
+| `--ease` | `cubic-bezier(.2,.6,.2,1)` | Standard motion curve |
 
 Green, amber, and red status tokens remain semantic and must not be replaced by
 the blue brand accent.
@@ -44,14 +51,24 @@ the blue brand accent.
 
 - **Logo:** a 3×3 evidence-grid mark with three blue cells on the main diagonal.
 - **Hero:** large serif question, short definition, three actions, benchmark
-  scope card, and the restrained original blue radial light.
+  scope card, and the restrained original blue radial light. Hero copy and the
+  scope card rise gently on load.
 - **Section heading:** monospace eyebrow + serif title + optional explanatory
   note aligned on a 1200px frame.
-- **Leaderboard:** horizontally scrollable table with plain-language metrics,
-  tooltips, numbers, and a visible Draft watermark.
-- **Task matrix:** labeled percentage cells, legend, N/A/missing states, and
-  evidence links.
-- **Research cards:** thin borders, white-to-pale-blue gradient, limited use.
+- **Leaderboard:** horizontally scrollable rounded table with plain-language
+  metrics, tooltips, tabular numbers, pill score badges, and a visible Draft
+  watermark.
+- **Task matrix:** labeled percentage tiles on a 6px-gap grid, legend, N/A
+  (outlined) and missing states, and evidence links.
+- **Charts:** blue-gradient bars with rounded caps that grow into place row by
+  row.
+- **Research cards:** thin borders, rounded corners, white-to-pale-blue
+  gradient, limited use; they lift slightly on hover.
+- **Vendor evidence:** accordion rows with pill scores and a rotating chevron;
+  the open state fills the pill with the accent color.
+- **Motion:** small `transform`/`opacity` transitions and entrance animations
+  using `--ease`, always guarded by `prefers-reduced-motion: no-preference`
+  and disabled in print.
 - **Methodology article:** wide introduction, complete SVG pipeline overview,
   sticky table of contents, and a roughly 720px reading column for detail.
 - **Launch article:** a narrative 760px column that reuses the canonical SVG
