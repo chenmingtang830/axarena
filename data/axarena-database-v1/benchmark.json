@@ -1,5 +1,5 @@
 {
-  "schema": "ax.axarena-leaderboard/v2",
+  "schema": "ax.axarena-benchmark/v2",
   "benchmark": "axarena-database",
   "generated_at": "2026-07-13T00:00:00.000Z",
   "ranking_method": {

@@ -4,14 +4,14 @@
   "question": "Can AI agents actually use your product?",
   "lede": "AXArena is a neutral, open-source agent usability benchmark that helps developers understand which products are genuinely agent-friendly—especially across APIs, CLIs, and discoverability. We quantify agent experience; we do not judge whether a product is good or bad.",
   "findings": [
-    { "title": "Reliability changes the ordering.", "body": "The shared-task score tells us whether a vendor can succeed; three-trial consistency shows whether that success is dependable.", "evidence_refs": ["leaderboard:neon"] },
-    { "title": "Discoverability is a separate product property.", "body": "A vendor can expose strong execution paths while agents still struggle to find the canonical endpoint or auth scheme. Discovery is published beside usability and never changes rank.", "evidence_refs": ["leaderboard:turso", "cell:turso/api/codex"] },
+    { "title": "Reliability changes the ordering.", "body": "The shared-task score tells us whether a vendor can succeed; three-trial consistency shows whether that success is dependable.", "evidence_refs": ["benchmark:neon"] },
+    { "title": "Discoverability is a separate product property.", "body": "A vendor can expose strong execution paths while agents still struggle to find the canonical endpoint or auth scheme. Discovery is published beside usability and never changes rank.", "evidence_refs": ["benchmark:turso", "cell:turso/api/codex"] },
     { "title": "Simple read-back tasks form the common floor.", "body": "Metadata inspection and record lifecycle tasks provide a comparable core while product-specific capabilities remain visible through applicability coverage.", "evidence_refs": ["task:db-T03-inspect-schema"] }
   ],
   "limitations": [
     "The checked-in values are illustrative until the frozen production export replaces this draft fixture.",
     "AXArena Database v1 scores API and CLI only; SDK and MCP remain outside the benchmark-of-record.",
-    "Backup, CDC, and integrity are research tasks and do not enter the leaderboard.",
+    "Backup, CDC, and integrity are research tasks and do not enter the benchmark.",
     "Sandbox plans, product changes, harness versions, and documentation changes can affect future reruns."
   ],
   "independence": [

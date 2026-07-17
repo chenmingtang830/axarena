@@ -15,7 +15,7 @@ async function json(name) {
 async function dataset() {
   return {
     publication: await json("publication"),
-    leaderboard: await json("leaderboard"),
+    benchmark: await json("benchmark"),
     cells: await json("cells"),
     tasks: await json("tasks"),
     evidence: await json("evidence-index"),
@@ -37,8 +37,8 @@ test("draft export schemas, ranks, cells, and evidence references validate", asy
   assert.equal(data.tasks.tasks.filter((task) => task.kind === "core").length, 7);
   assert.equal(data.tasks.tasks.filter((task) => task.kind === "research").length, 3);
   assert.equal(data.cells.cells.length, 24);
-  assert.deepEqual(data.leaderboard.rows.map((row) => row.rank), [1, 2, 3, 4, 5, 6]);
-  assert.equal(data.leaderboard.ranking_method.discovery_affects_rank, false);
+  assert.deepEqual(data.benchmark.rows.map((row) => row.rank), [1, 2, 3, 4, 5, 6]);
+  assert.equal(data.benchmark.ranking_method.discovery_affects_rank, false);
 });
 
 test("publication-ready mode rejects draft language or failing gates", async () => {
@@ -62,7 +62,7 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   assert.match(methodologyHtml, /data-page="methodology"/);
   assert.match(blogHtml, /data-page="blog"/);
   assert.match(blogHtml, /Introducing AXArena: Benchmarking Agent Experience/);
-  for (const id of ["one-minute", "results", "task-matrix", "findings", "methodology-preview", "about", "contribute", "evidence", "reproduce", "independence", "changelog"]) {
+  for (const id of ["one-minute", "results", "task-matrix", "findings", "methodology-preview", "about", "contribute", "evidence", "changelog"]) {
     assert.ok(app.includes(`"${id}"`), `missing ${id} section`);
   }
   assert.match(app, /data-metric-switch/);
@@ -72,7 +72,7 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   for (const vendor of ["neon", "cockroachdb", "turso", "supabase", "insforge", "nile"]) {
     await readFile(resolve(root, "assets/logos", `${vendor}.svg`), "utf8");
   }
-  for (const id of ["category", "canonical-tasks", "adapters", "execution", "verification", "scoring", "database-v1", "open-source"]) {
+  for (const id of ["category", "canonical-tasks", "adapters", "execution", "verification", "failure-path", "scoring", "reproduce", "database-v1", "independence", "open-source"]) {
     assert.ok(app.includes(`id="${id}"`), `missing methodology ${id} section`);
   }
   assert.match(app, /<svg class="bar-chart"/);
@@ -100,6 +100,7 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
 test("legacy routes redirect into the single report", async () => {
   const app = await readFile(resolve(root, "app.js"), "utf8");
   assert.match(app, /location\.replace\(`\/database\/#vendor-/);
-  assert.match(app, /location\.replace\(`\/database\/#\$\{section\}`/);
+  assert.match(app, /const target = legacySections\.get\(document\.body\.dataset\.page\)/);
+  assert.match(app, /location\.replace\(target\)/);
   assert.match(app, /document\.body\.dataset\.page === "methodology"/);
 });
