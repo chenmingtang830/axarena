@@ -17,12 +17,6 @@
   --low-bg: #fde5e2;
   --code-bg: #17181e;
   --code-line: #262833;
-  --neon-fg: #2f6fed; --neon-bg: #e8f0ff;
-  --cockroachdb-fg: #6b4fd8; --cockroachdb-bg: #efeafe;
-  --turso-fg: #0e7490; --turso-bg: #e1f2f7;
-  --supabase-fg: #475569; --supabase-bg: #edf1f6;
-  --insforge-fg: #b04a8c; --insforge-bg: #fbe9f4;
-  --nile-fg: #5c6572; --nile-bg: #eceff3;
   --serif: Georgia, "Times New Roman", serif;
   --sans: "Avenir Next", "Segoe UI", Arial, sans-serif;
   --mono: "SFMono-Regular", Consolas, monospace;
@@ -292,22 +286,24 @@ pre code { background: transparent; padding: 0; border-radius: 0; font-size: inh
 .error-state h1 { font-size: 56px; }
 footer { max-width: 1200px; margin: auto; padding: 34px 24px 60px; border-top: 1px solid var(--faint); display: flex; justify-content: space-between; gap: 24px; color: var(--muted); font-size: 13px; }
 
-/* Vendor identity monograms — identity markers only, never status */
-.v-neon { --v-fg: var(--neon-fg); --v-bg: var(--neon-bg); }
-.v-cockroachdb { --v-fg: var(--cockroachdb-fg); --v-bg: var(--cockroachdb-bg); }
-.v-turso { --v-fg: var(--turso-fg); --v-bg: var(--turso-bg); }
-.v-supabase { --v-fg: var(--supabase-fg); --v-bg: var(--supabase-bg); }
-.v-insforge { --v-fg: var(--insforge-fg); --v-bg: var(--insforge-bg); }
-.v-nile { --v-fg: var(--nile-fg); --v-bg: var(--nile-bg); }
-.vendor-chip { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 7px; background: var(--v-bg, var(--accent-pale)); color: var(--v-fg, var(--accent)); font: 800 10px/1 var(--mono); letter-spacing: .02em; flex: 0 0 auto; }
+/* Vendor logos — official brand marks, identity only, never status */
+.vendor-logo { width: 22px; height: 22px; object-fit: contain; flex: 0 0 auto; }
 .product-link { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; }
 .product-link:hover { color: var(--accent); }
 .vendor-name { display: inline-flex; align-items: center; gap: 12px; }
-.vendor-name .vendor-chip { width: 26px; height: 26px; border-radius: 8px; }
+.vendor-name .vendor-logo { width: 26px; height: 26px; }
 .heat-head-vendor { flex-direction: column; gap: 7px; }
-.heat-head-vendor .vendor-chip { width: 22px; height: 22px; }
-.chart-chip { fill: var(--v-bg, var(--accent-pale)); }
-.chart-chip-initial { fill: var(--v-fg, var(--accent)); font: 800 10px var(--mono); }
+
+/* On-this-page rail (wide screens only) */
+.page-toc { display: none; }
+@media (min-width: 1560px) {
+  .page-toc { position: fixed; top: 148px; left: max(14px, calc((100vw - 1200px)/2 - 196px)); z-index: 10; width: 172px; display: flex; flex-direction: column; gap: 2px; }
+  .page-toc .eyebrow { margin-bottom: 8px; }
+  .page-toc a { display: flex; align-items: baseline; gap: 8px; padding: 4px 8px; border-radius: 6px; color: var(--muted); font-size: 12px; text-decoration: none; transition: color .15s var(--ease), background-color .15s var(--ease); }
+  .page-toc a span { color: var(--accent); font: 700 10px/1.6 var(--mono); }
+  .page-toc a:hover { color: var(--ink); background: var(--soft); }
+  .page-toc a[aria-current] { color: var(--ink); background: var(--accent-pale); font-weight: 650; }
+}
 
 /* One-minute brief + anatomy of one evaluation cell */
 .fact-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 14px; }
@@ -421,7 +417,7 @@ footer { max-width: 1200px; margin: auto; padding: 34px 24px 60px; border-top: 1
 
 @media print {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .draft-banner, .topbar, .hero-actions, .metric-switch { display: none !important; }
+  .draft-banner, .topbar, .hero-actions, .metric-switch, .page-toc { display: none !important; }
   [data-metric-panel] { display: block !important; }
   .chart-lab .wide-figure { margin-top: 12px; }
   .hero { min-height: 0; padding: 40px 0; }

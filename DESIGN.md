@@ -61,10 +61,15 @@ the blue brand accent.
   Draft copy covers scope and method only, never ranking conclusions.
 - **Fairness strip:** one pill row above the leaderboard — canonical tasks →
   reviewed adapters → harnesses → trials per cell → live read-back.
-- **Vendor monograms:** two-letter rounded chips keyed by vendor slug
-  (`--<vendor>-fg/bg` tokens). Identity markers only; they must never reuse
-  the green/amber/red status hues. Used in the leaderboard, charts, matrix
-  headers, and evidence accordion.
+- **Vendor logos:** official brand SVG marks in `assets/logos/<vendor>.svg`
+  (simple-icons where available; vendor-site marks otherwise, with
+  light-theme variants rebuilt for dark-mode-only assets). Identity markers
+  only; never recolor them into status hues. Used in the leaderboard,
+  charts, matrix headers, and evidence accordion. Unknown vendors degrade
+  to name-only.
+- **On-this-page rail:** fixed section index with scroll-spy, shown only on
+  viewports ≥1560px where the 1200px frame leaves a usable margin; hidden
+  in print.
 - **Leaderboard:** horizontally scrollable rounded table with plain-language
   metrics, tooltips, tabular numbers, pill score badges, and a visible Draft
   watermark.

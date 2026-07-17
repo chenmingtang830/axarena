@@ -25,8 +25,8 @@ const esc = (value) => String(value ?? "")
   .replaceAll("'", "&#39;");
 const pct = (value) => value === null || value === undefined ? "—" : `${Math.round(value * 100)}%`;
 const vendorName = (slug) => displayNames[slug] ?? slug;
-const vendorChip = (slug) =>
-  `<span class="vendor-chip v-${esc(slug)}" aria-hidden="true">${esc(vendorName(slug).slice(0, 2))}</span>`;
+const vendorLogo = (slug) =>
+  `<img class="vendor-logo" src="/assets/logos/${esc(slug)}.svg" alt="" loading="lazy" onerror="this.style.visibility='hidden'">`;
 
 function githubIcon() {
   return `<svg class="github-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .7C5.7.7.6 5.8.6 12.1c0 5 3.2 9.3 7.7 10.8.6.1.8-.3.8-.6v-2.1c-3.1.7-3.8-1.3-3.8-1.3-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.8-1.5-2.5-.3-5.2-1.3-5.2-5.6 0-1.2.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.9 5 19 5.3 19 5.3c.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.1 0 4.3-2.6 5.2-5.2 5.5.4.4.8 1.1.8 2.2V22c0 .3.2.7.8.6a11.5 11.5 0 0 0 7.7-10.8C23.4 5.8 18.3.7 12 .7Z"/></svg>`;
@@ -82,8 +82,7 @@ function rankChart(rows, metric, label) {
     const y = 42 + index * rowHeight;
     const barWidth = Math.max(2, value * chartWidth);
     return `<g>
-      <rect x="0" y="${y + 1}" width="21" height="21" rx="6" class="chart-chip v-${esc(row.vendor)}" />
-      <text x="10.5" y="${y + 16}" class="chart-chip-initial v-${esc(row.vendor)}" text-anchor="middle">${esc(vendorName(row.vendor).slice(0, 2))}</text>
+      <image href="/assets/logos/${esc(row.vendor)}.svg" x="0" y="${y + 1}" width="21" height="21" />
       <text x="29" y="${y + 18}" class="chart-label">${esc(vendorName(row.vendor))}</text>
       <rect x="${left}" y="${y}" width="${chartWidth}" height="24" rx="4" class="chart-track" />
       <rect x="${left}" y="${y}" width="${barWidth}" height="24" rx="4" class="chart-bar" style="animation-delay:${index * 80}ms" />
@@ -108,7 +107,7 @@ function leaderboardTable(rows, draft) {
     </tr></thead>
     <tbody>${rows.map((row) => `<tr id="rank-${esc(row.vendor)}">
       <td class="rank">${row.rank ?? "—"}</td>
-      <td><a class="product-link" href="#vendor-${esc(row.vendor)}">${vendorChip(row.vendor)}${esc(vendorName(row.vendor))}</a>${row.status !== "ranked" ? `<span class="incomplete">${esc(row.status)}</span>` : ""}</td>
+      <td><a class="product-link" href="#vendor-${esc(row.vendor)}">${vendorLogo(row.vendor)}${esc(vendorName(row.vendor))}</a>${row.status !== "ranked" ? `<span class="incomplete">${esc(row.status)}</span>` : ""}</td>
       <td>${scoreBadge(row.intersection_score)}</td>
       <td>${scoreBadge(row.intersection_consistency_at_3)}</td>
       <td>${pct(row.applicability_coverage)}</td>
@@ -122,7 +121,7 @@ function leaderboardTable(rows, draft) {
 
 function taskHeatmap(tasks, vendors) {
   const core = tasks.filter((task) => task.kind === "core");
-  const header = `<div class="heat-head">Core task</div>${vendors.map((vendor) => `<div class="heat-head heat-head-vendor">${vendorChip(vendor)}<span>${esc(vendorName(vendor))}</span></div>`).join("")}`;
+  const header = `<div class="heat-head">Core task</div>${vendors.map((vendor) => `<div class="heat-head heat-head-vendor">${vendorLogo(vendor)}<span>${esc(vendorName(vendor))}</span></div>`).join("")}`;
   const rows = core.map((task) => {
     const cells = vendors.map((vendor) => {
       const applicable = (task.applicability?.[vendor] ?? []).length > 0;
@@ -154,7 +153,7 @@ function vendorEvidence(rows, cells, tasks) {
   return `<div class="vendor-evidence">${rows.map((row) => {
     const vendorCells = cells.filter((cell) => cell.vendor === row.vendor);
     const applicableTasks = tasks.filter((task) => task.kind === "core" && (task.applicability?.[row.vendor] ?? []).length > 0);
-    return `<details id="vendor-${esc(row.vendor)}"><summary><span class="vendor-name">${vendorChip(row.vendor)}${esc(vendorName(row.vendor))}</span><span class="summary-meta"><strong class="vendor-score">${pct(row.intersection_score)} AX Score</strong><i class="chevron" aria-hidden="true"></i></span></summary>
+    return `<details id="vendor-${esc(row.vendor)}"><summary><span class="vendor-name">${vendorLogo(row.vendor)}${esc(vendorName(row.vendor))}</span><span class="summary-meta"><strong class="vendor-score">${pct(row.intersection_score)} AX Score</strong><i class="chevron" aria-hidden="true"></i></span></summary>
       <div class="vendor-detail">
         <p>${esc(vendorName(row.vendor))} is applicable to ${applicableTasks.length}/${tasks.filter((task) => task.kind === "core").length} core tasks in this draft view. Official rank uses only the comparable cohort-wide task and surface set.</p>
         <dl><div><dt>Reliability</dt><dd>${pct(row.intersection_consistency_at_3)}</dd></div><div><dt>Coverage</dt><dd>${pct(row.applicability_coverage)}</dd></div><div><dt>Discoverability</dt><dd>${pct(row.discovery_score)}</dd></div></dl>
@@ -216,8 +215,40 @@ function fairnessStrip(publication) {
   return `<div class="fairness-strip" aria-label="Why this comparison is fair">
     <span class="fairness-label">Why this comparison is fair</span>
     <ol>${chips.map((chip) => `<li>${esc(chip)}</li>`).join("")}</ol>
-    <a class="text-link" href="/methodology/">Full methodology →</a>
   </div>`;
+}
+
+function pageToc() {
+  const items = [
+    ["one-minute", "The brief"],
+    ["results", "Leaderboard"],
+    ["task-matrix", "Task matrix"],
+    ["findings", "Findings"],
+    ["failure-path", "Failure path"],
+    ["methodology-preview", "Methodology"],
+    ["about", "Open source"],
+    ["contribute", "Participate"],
+    ["evidence", "Evidence"],
+    ["reproduce", "Reproduce"],
+    ["independence", "Independence"],
+    ["changelog", "Corrections"],
+  ];
+  return `<aside class="page-toc" aria-label="On this page"><span class="eyebrow">On this page</span>${items.map(([id, label], index) => `<a href="#${esc(id)}" data-toc-link="${esc(id)}"><span>${String(index + 1).padStart(2, "0")}</span>${esc(label)}</a>`).join("")}</aside>`;
+}
+
+function wirePageToc() {
+  const links = [...document.querySelectorAll("[data-toc-link]")];
+  if (!links.length || !("IntersectionObserver" in window)) return;
+  const observer = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      for (const link of links) link.toggleAttribute("aria-current", link.dataset.tocLink === entry.target.id);
+    }
+  }, { rootMargin: "-25% 0px -65% 0px" });
+  for (const link of links) {
+    const target = document.getElementById(link.dataset.tocLink);
+    if (target) observer.observe(target);
+  }
 }
 
 function metricLab(rows) {
@@ -334,11 +365,12 @@ function renderDatabase(data, ready, validationErrors) {
     return section(id, `${String(reportStep).padStart(2, "0")} · ${eyebrow}`, title, body, note, className);
   };
   const content = `<main>
+    ${pageToc()}
     <section class="hero" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy"><span class="eyebrow">AXArena · Agent experience benchmarks</span>
         <h1>${esc(editorial.question)}</h1><p>${esc(editorial.lede)}</p>
-        <div class="hero-actions"><a class="primary" href="#results">View Database leaderboard</a>${githubLink("View ax-eval on GitHub")}<a href="/methodology/">Read methodology</a></div>
+        <div class="hero-actions"><a class="primary" href="#results">View Database leaderboard</a>${githubLink("View ax-eval on GitHub")}</div>
       </div>
       <aside class="benchmark-card" aria-label="First public benchmark">
         <span class="eyebrow">Our first public benchmark</span><h2>${esc(benchmarkName)}</h2><p>Verified database work across real product interfaces—not marketing breadth or agent self-report.</p>
@@ -351,9 +383,9 @@ function renderDatabase(data, ready, validationErrors) {
     ${reportSection("task-matrix", "Task performance", "See where products differ", `<p class="prose lead">Every cell shows verified task success. N/A represents a structural product difference, not a hidden failure. Select a score to inspect the product evidence.</p>${taskHeatmap(tasks.tasks, vendors)}`, `${coreTasks.length} scored core tasks · ${researchTasks.length} research tasks outside the official ranking`)}
     ${reportSection("findings", "What the evidence says", "Three findings from the current matrix", findings(editorial, evidence.evidence), "Every claim links to a public leaderboard row, task, or execution cell.")}
     ${reportSection("failure-path", "Agent experience", "Where agent experience breaks", `<p class="prose lead">Every trial must pass five gates in order. A product can execute well and still fail the journey earlier; each blocked or incomplete cell belongs to exactly one gate. Stage-level failure evidence ships with the frozen production export.</p><ol class="funnel"><li><span>01</span><strong>Discovery</strong><p>Find the authoritative surface.</p></li><li><span>02</span><strong>Authentication</strong><p>Identify the correct credential and scope.</p></li><li><span>03</span><strong>Surface choice</strong><p>Choose the appropriate product interface.</p></li><li><span>04</span><strong>Execution</strong><p>Complete the canonical task.</p></li><li><span>05</span><strong>Read-back</strong><p>Verify live product state independently.</p></li></ol>`)}
-    ${reportSection("methodology-preview", "Methodology", "From a product category to public evidence", `<p class="prose lead">AXArena defines product-neutral outcomes, adapts them without changing their intent, runs controlled agent trials, and verifies results against live sandbox state.</p>${pipeline()}<div class="section-actions"><a class="button primary" href="/methodology/">Read the full methodology</a><a class="button" href="/methodology/#database-v1">AXArena Database v1 details</a></div>`, "A reusable evaluation pipeline for Database and future AXArena verticals.")}
-    ${reportSection("about", "Open source", "Measure agent experience, not product quality", `<div class="open-source-card"><div><span class="eyebrow">Neutral by design · Powered by ax-eval</span><h3>Which products are genuinely agent-friendly?</h3><p>AXArena is a neutral, open-source agent usability benchmark for developers. It measures how successfully agents discover and operate product interfaces—especially APIs and CLIs—without making a broader judgment about whether a product is good or bad.</p><p><code>ax-eval</code> is the open-source CLI and evaluation engine behind the benchmark. It creates reviewed task packs, runs real agents, and verifies outcomes by reading live product state back.</p></div><div class="open-source-actions">${githubLink("View GitHub repository", "button primary")}<a class="button" href="/methodology/#open-source">How the tool fits</a><a class="button" href="${DATA_ROOT}/publication.json">Download benchmark data</a></div></div>`, "AXArena quantifies agent experience; ax-eval generates and verifies the evidence.")}
-    ${reportSection("contribute", "Participate", "Bring a product into AXArena", `<p class="prose lead">Community submissions follow the same evidence rules as our own runs: no self-reported scores, no purchasable placement, and no vendor-authored tasks. Adapters, tasks, and evidence stay public.</p>${pipeline("method-flow five", ["Propose a target pack", "Review the adapter", "Maintainers run sandbox trials", "Read-back verifies outcomes", "Publish the frozen export"])}<div class="section-actions"><a class="button primary" href="${GITHUB_URL}/issues">Start with a GitHub issue</a><a class="button" href="/methodology/#open-source">How ax-eval fits</a></div>`, "A maintainer verifies every submitted run before it can land on the board.")}
+    ${reportSection("methodology-preview", "Methodology", "From a product category to public evidence", `<p class="prose lead">AXArena defines product-neutral outcomes, adapts them without changing their intent, runs controlled agent trials, and verifies results against live sandbox state.</p>${pipeline()}<div class="section-actions"><a class="button primary" href="/methodology/">Read the full methodology</a></div>`, "A reusable evaluation pipeline for Database and future AXArena verticals.")}
+    ${reportSection("about", "Open source", "Measure agent experience, not product quality", `<div class="open-source-card"><div><span class="eyebrow">Neutral by design · Powered by ax-eval</span><h3>Which products are genuinely agent-friendly?</h3><p>AXArena is a neutral, open-source agent usability benchmark for developers. It measures how successfully agents discover and operate product interfaces—especially APIs and CLIs—without making a broader judgment about whether a product is good or bad.</p><p><code>ax-eval</code> is the open-source CLI and evaluation engine behind the benchmark. It creates reviewed task packs, runs real agents, and verifies outcomes by reading live product state back.</p></div><div class="open-source-actions">${githubLink("View GitHub repository", "button primary")}<a class="button" href="${DATA_ROOT}/publication.json">Download benchmark data</a></div></div>`, "AXArena quantifies agent experience; ax-eval generates and verifies the evidence.")}
+    ${reportSection("contribute", "Participate", "Bring a product into AXArena", `<p class="prose lead">Community submissions follow the same evidence rules as our own runs: no self-reported scores, no purchasable placement, and no vendor-authored tasks. Adapters, tasks, and evidence stay public.</p>${pipeline("method-flow five", ["Propose a target pack", "Review the adapter", "Maintainers run sandbox trials", "Read-back verifies outcomes", "Publish the frozen export"])}<div class="section-actions"><a class="button primary" href="${GITHUB_URL}/issues">Start with a GitHub issue</a></div>`, "A maintainer verifies every submitted run before it can land on the board.")}
     ${reportSection("evidence", "Evidence", "Drill from a rank to the underlying cells", `${vendorEvidence(rows, cells.cells, tasks.tasks)}<div class="download-grid"><a href="${DATA_ROOT}/leaderboard.json"><span class="file-tag" aria-hidden="true">↓ JSON</span><strong>Leaderboard</strong><span>ranking method and rows</span></a><a href="${DATA_ROOT}/cells.json"><span class="file-tag" aria-hidden="true">↓ JSON</span><strong>Cells</strong><span>surface × harness aggregates</span></a><a href="${DATA_ROOT}/tasks.json"><span class="file-tag" aria-hidden="true">↓ JSON</span><strong>Tasks</strong><span>applicability and trial evidence</span></a><a href="${DATA_ROOT}/evidence-index.json"><span class="file-tag" aria-hidden="true">↓ JSON</span><strong>Evidence index</strong><span>stable artifact references</span></a></div>`)}
     ${reportSection("reproduce", "Reproduce", "From frozen bundle to website data", reproductionCommands())}
     ${reportSection("independence", "Independence", "Trust requires visible constraints", `<div class="principles">${editorial.independence.map((item) => `<p>${esc(item)}</p>`).join("")}</div>`)}
@@ -361,6 +393,7 @@ function renderDatabase(data, ready, validationErrors) {
   </main>`;
   app.innerHTML = shell(content, ready, "database");
   wireMetricSwitch();
+  wirePageToc();
   revealHashTarget();
   document.title = `${benchmarkName} · AXArena`;
 }

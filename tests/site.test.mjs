@@ -67,7 +67,11 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   }
   assert.match(app, /data-metric-switch/);
   assert.match(app, /class="fairness-strip"/);
-  assert.match(app, /class="vendor-chip /);
+  assert.match(app, /class="page-toc"/);
+  assert.match(app, /\/assets\/logos\//);
+  for (const vendor of ["neon", "cockroachdb", "turso", "supabase", "insforge", "nile"]) {
+    await readFile(resolve(root, "assets/logos", `${vendor}.svg`), "utf8");
+  }
   for (const id of ["category", "canonical-tasks", "adapters", "execution", "verification", "scoring", "database-v1", "open-source"]) {
     assert.ok(app.includes(`id="${id}"`), `missing methodology ${id} section`);
   }
