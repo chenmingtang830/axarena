@@ -13,7 +13,7 @@
     "research_task_count": 3,
     "surfaces": ["api", "cli"],
     "harnesses": ["codex", "claude-code"],
-    "effort_profiles": ["medium"],
+    "effort_profiles": ["high"],
     "trial_count": 3
   },
   "quality_gates": [

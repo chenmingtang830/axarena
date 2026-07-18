@@ -1,9 +1,9 @@
 export const DATA_ROOT = "/data/axarena-database-v1";
 
-const FILES = ["publication", "leaderboard", "cells", "tasks", "evidence-index", "editorial"];
+const FILES = ["publication", "benchmark", "cells", "tasks", "evidence-index", "editorial"];
 const SCHEMAS = {
   publication: "ax.axarena-publication/v1",
-  leaderboard: "ax.axarena-leaderboard/v2",
+  benchmark: "ax.axarena-benchmark/v2",
   cells: "ax.axarena-cells/v2",
   tasks: "ax.axarena-tasks/v2",
   evidence: "ax.axarena-evidence-index/v1",
@@ -18,7 +18,7 @@ export async function loadDataset(fetchImpl = fetch) {
   }));
   return {
     publication: values[0],
-    leaderboard: values[1],
+    benchmark: values[1],
     cells: values[2],
     tasks: values[3],
     evidence: values[4],
@@ -34,11 +34,11 @@ export function validateDataset(data) {
   const benchmark = data.publication?.benchmark;
   if (benchmark !== "axarena-database") errors.push("publication benchmark must be axarena-database");
   if (data.publication?.display_name !== "AXArena Database") errors.push("publication display name must be AXArena Database");
-  for (const key of ["leaderboard", "cells", "tasks", "editorial"]) {
+  for (const key of ["benchmark", "cells", "tasks", "editorial"]) {
     if (benchmark && data[key]?.benchmark !== benchmark) errors.push(`${key} benchmark does not match ${benchmark}`);
   }
 
-  const rows = data.leaderboard?.rows ?? [];
+  const rows = data.benchmark?.rows ?? [];
   const ranked = rows.filter((row) => row.status === "ranked");
   for (let index = 1; index < ranked.length; index++) {
     const previous = ranked[index - 1];
@@ -46,15 +46,15 @@ export function validateDataset(data) {
     const ordered = previous.intersection_score > current.intersection_score ||
       (previous.intersection_score === current.intersection_score &&
         previous.intersection_consistency_at_3 >= current.intersection_consistency_at_3);
-    if (!ordered) errors.push("leaderboard rows are not sorted by score and reliability");
+    if (!ordered) errors.push("benchmark rows are not sorted by score and reliability");
   }
-  if (data.leaderboard?.ranking_method?.discovery_affects_rank !== false) {
+  if (data.benchmark?.ranking_method?.discovery_affects_rank !== false) {
     errors.push("Agent Discovery Score must not affect rank");
   }
 
   const cohort = new Set(data.publication?.cohort ?? []);
   const rowVendors = new Set(rows.map((row) => row.vendor));
-  for (const vendor of cohort) if (!rowVendors.has(vendor)) errors.push(`missing leaderboard row for ${vendor}`);
+  for (const vendor of cohort) if (!rowVendors.has(vendor)) errors.push(`missing benchmark row for ${vendor}`);
   const cellIds = new Set((data.cells?.cells ?? []).map((cell) => cell.id));
   for (const row of rows) {
     for (const cell of row.cells ?? []) if (!cellIds.has(cell)) errors.push(`missing cell ${cell}`);

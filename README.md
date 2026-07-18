@@ -5,7 +5,7 @@ developers understand which products are genuinely agent-friendly—especially
 across APIs, CLIs, and discoverability—without judging overall product quality.
 
 Static, dependency-free publication site for `axarena.ai`. The primary
-leaderboard is `/database/`; the reusable AXArena evaluation methodology lives
+benchmark results are at `/database/`; the reusable AXArena evaluation methodology lives
 at `/methodology/`. The launch article lives at
 `/blog/introducing-axarena/`. Legacy vendor and report URLs remain compatible.
 
