@@ -17,6 +17,51 @@ const displayNames = {
   nile: "Nile",
 };
 
+// Draft-only interaction fixture. The frozen normalized-result export will
+// replace these illustrative trials before publication readiness can pass.
+const agentResultsPreview = {
+  tasks: [
+    "Access control", "Evolve schema", "Inspect schema", "Query records",
+    "Vector search", "Write records", "Full-text search",
+  ],
+  agents: {
+    codex: { label: "Codex", model: "GPT-5.6 Terra · high", harness: "codex 0.121.0", latency: "96 s", tokens: "48.2k", cost: "—" },
+    claude: { label: "Claude Code", model: "Claude Sonnet 5 · high", harness: "claude 2.1.5", latency: "82 s", tokens: "44.7k", cost: "$0.38" },
+  },
+  vendors: [
+    {
+      id: "supabase",
+      api: { codex: ["111","111","111","111","110","111","110"], claude: ["111","111","111","111","110","110","110"] },
+      cli: { codex: ["110","111",null,null,null,null,null], claude: ["111","110",null,null,null,null,null] },
+    },
+    {
+      id: "turso",
+      api: { codex: ["111","111",null,"111","110","110","000"], claude: ["111","111",null,"111","111","100","100"] },
+      cli: { codex: ["110","111","111","110","111","101","110"], claude: ["111","110","111","111","110","111","101"] },
+    },
+    {
+      id: "neon",
+      api: { codex: [null,null,"110","110",null,null,null], claude: [null,null,"111","110",null,null,null] },
+      cli: { codex: ["111","111","101","111","110","110","110"], claude: ["111","111","110","111","110","110","110"] },
+    },
+    {
+      id: "cockroachdb",
+      api: { codex: [null,null,null,null,null,null,null], claude: [null,null,null,null,null,null,null] },
+      cli: { codex: ["111","111","111","110","111","110","100"], claude: ["111","111","111","111","111","110","100"] },
+    },
+    {
+      id: "insforge",
+      api: { codex: [null,"111","111",null,null,null,null], claude: [null,"111","111",null,null,null,null] },
+      cli: { codex: ["111","101",null,"110","110","100",null], claude: ["111","110",null,"111","110","100",null] },
+    },
+    {
+      id: "nile",
+      api: { codex: [null,null,null,null,null,null,null], claude: [null,null,null,null,null,null,null] },
+      cli: { codex: [null,"111","111","111","110","100","100"], claude: [null,"111","111","111","110","110","100"] },
+    },
+  ],
+};
+
 const esc = (value) => String(value ?? "")
   .replaceAll("&", "&amp;")
   .replaceAll("<", "&lt;")
@@ -68,6 +113,155 @@ function scoreBadge(value, label = "") {
   if (value === null || value === undefined) return `<span class="score-badge na">—${label ? ` ${esc(label)}` : ""}</span>`;
   const tone = value >= 0.8 ? "good" : value >= 0.6 ? "mid" : "low";
   return `<span class="score-badge ${tone}">${pct(value)}${label ? ` <small>${esc(label)}</small>` : ""}</span>`;
+}
+
+function previewSurfaceMetric(vendor, agent, surface) {
+  const trials = vendor[surface]?.[agent]?.filter(Boolean) ?? [];
+  if (!trials.length) return null;
+  const successes = trials.reduce((sum, bits) => sum + [...bits].filter((bit) => bit === "1").length, 0);
+  const pass3 = trials.filter((bits) => bits === "111").length;
+  return {
+    score: successes / (trials.length * 3),
+    pass3,
+    eligible: trials.length,
+    pass3Rate: pass3 / trials.length,
+  };
+}
+
+function previewAgentMetric(vendor, agent, scope) {
+  const surfaces = scope === "overall" ? ["api", "cli"] : [scope];
+  const metrics = surfaces.map((surface) => previewSurfaceMetric(vendor, agent, surface)).filter(Boolean);
+  if (!metrics.length) return null;
+  const pass3 = metrics.reduce((sum, metric) => sum + metric.pass3, 0);
+  const eligible = metrics.reduce((sum, metric) => sum + metric.eligible, 0);
+  return {
+    // Macro-average: every participating surface gets equal weight, even when
+    // its number of eligible tasks differs.
+    score: metrics.reduce((sum, metric) => sum + metric.score, 0) / metrics.length,
+    pass3,
+    eligible,
+    pass3Rate: pass3 / eligible,
+    surfaceCount: metrics.length,
+  };
+}
+
+function previewPass3(metric) {
+  return metric ? `${(metric.pass3Rate * 100).toFixed(1)}% (${metric.pass3}/${metric.eligible})` : "N/A";
+}
+
+function previewScoreBar(value) {
+  const display = (value * 100).toFixed(1);
+  return `<div class="agent-score"><span class="agent-score-track" aria-hidden="true"><i style="width:${display}%"></i></span><strong>${display}%</strong></div>`;
+}
+
+function previewRanking(agent, scope) {
+  return agentResultsPreview.vendors
+    .map((vendor) => ({ vendor, metric: previewAgentMetric(vendor, agent, scope) }))
+    .filter((row) => row.metric)
+    .sort((a, b) => b.metric.score - a.metric.score || b.metric.pass3Rate - a.metric.pass3Rate || b.metric.pass3 - a.metric.pass3 || vendorName(a.vendor.id).localeCompare(vendorName(b.vendor.id)));
+}
+
+function previewLeaderboard(agent, scope, selectedVendor) {
+  const info = agentResultsPreview.agents[agent];
+  const rows = previewRanking(agent, scope).map(({ vendor, metric }, index) => `<tr>
+    <td class="rank">${index + 1}</td>
+    <td><button type="button" class="agent-vendor-button" data-preview-vendor="${esc(vendor.id)}" aria-pressed="${vendor.id === selectedVendor}">${vendorLogo(vendor.id)}<span>${esc(vendorName(vendor.id))}</span></button></td>
+    <td>${previewScoreBar(metric.score)}</td>
+    <td class="numeric">${previewPass3(metric)}</td>
+  </tr>`).join("");
+  return `<article class="agent-board">
+    <header><span class="agent-dot ${agent === "claude" ? "claude" : ""}" aria-hidden="true"></span><div><h3>${esc(info.label)}</h3><p>${esc(info.model)}</p></div></header>
+    <div class="agent-table-scroll"><table><thead><tr><th>Rank</th><th>Vendor</th><th>Avg pass@1</th><th>pass³</th></tr></thead><tbody>${rows}</tbody></table></div>
+  </article>`;
+}
+
+function agentLeaderboardPreview() {
+  return `<div class="agent-results" data-agent-results>
+    <div class="agent-scope-row">
+      <div class="agent-scope-switch" role="group" aria-label="Leaderboard surface scope">
+        <span>Surface view</span>
+        <button type="button" data-preview-scope="overall" aria-pressed="true">Overall</button>
+        <button type="button" data-preview-scope="api" aria-pressed="false">API</button>
+        <button type="button" data-preview-scope="cli" aria-pressed="false">CLI</button>
+      </div>
+      <span class="preview-chip">Illustrative data</span>
+    </div>
+    <p class="agent-method-note" data-preview-method>Overall is the equal-weight average of each participating surface score. Within each surface, eligible tasks are equally weighted; N/A is excluded.</p>
+    <div class="agent-board-grid" data-preview-boards></div>
+  </div>`;
+}
+
+function previewTrials(bits) {
+  if (!bits) return `<span class="trial-na">N/A</span>`;
+  const label = [...bits].map((bit) => bit === "1" ? "pass" : "fail").join(", ");
+  return `<span class="trial-marks" aria-label="${label}">${[...bits].map((bit) => `<i class="${bit === "1" ? "pass" : "fail"}" aria-hidden="true">${bit === "1" ? "✓" : "×"}</i>`).join("")}</span>`;
+}
+
+function previewTaskScore(bits) {
+  return bits ? `${[...bits].filter((bit) => bit === "1").length}/3` : "N/A";
+}
+
+function agentTaskDetailPreview() {
+  return `<div class="agent-task-detail" data-agent-task-detail>
+    <div data-preview-summary></div>
+    <div class="agent-detail-heading"><h3>Task × surface trials</h3><p data-preview-task-caption></p></div>
+    <div class="agent-table-scroll"><table class="agent-task-table"><thead><tr><th>Task</th><th>Surface</th><th>Codex trials</th><th>pass@1</th><th>Claude trials</th><th>pass@1</th></tr></thead><tbody data-preview-task-rows></tbody></table></div>
+    <div class="agent-detail-heading operational-heading"><h3 data-preview-operational-heading>Operational context</h3><p>Reported for context · never used for rank</p></div>
+    <div class="agent-table-scroll"><table class="agent-operational-table"><thead><tr><th>Agent</th><th>Model</th><th>Harness</th><th>Median latency</th><th>Tokens</th><th>Cost</th></tr></thead><tbody data-preview-operational-rows></tbody></table></div>
+  </div>`;
+}
+
+function wireAgentResults() {
+  const resultsRoot = document.querySelector("[data-agent-results]");
+  const detailRoot = document.querySelector("[data-agent-task-detail]");
+  if (!resultsRoot || !detailRoot) return;
+  let scope = "overall";
+  let selectedVendor = "supabase";
+
+  const render = () => {
+    resultsRoot.querySelector("[data-preview-boards]").innerHTML = previewLeaderboard("codex", scope, selectedVendor) + previewLeaderboard("claude", scope, selectedVendor);
+    resultsRoot.querySelector("[data-preview-method]").textContent = scope === "overall"
+      ? "Overall is the equal-weight average of each participating surface score. Within each surface, eligible tasks are equally weighted; N/A is excluded."
+      : `${scope.toUpperCase()} includes only eligible tasks on that surface; N/A is excluded.`;
+    for (const button of resultsRoot.querySelectorAll("[data-preview-scope]")) {
+      button.setAttribute("aria-pressed", String(button.dataset.previewScope === scope));
+    }
+
+    const vendor = agentResultsPreview.vendors.find((item) => item.id === selectedVendor) ?? agentResultsPreview.vendors[0];
+    const codex = previewAgentMetric(vendor, "codex", scope);
+    const claude = previewAgentMetric(vendor, "claude", scope);
+    const scopeLabel = scope === "overall" ? "Overall" : scope.toUpperCase();
+    detailRoot.querySelector("[data-preview-summary]").innerHTML = `<div class="agent-summary-card"><div class="agent-summary-title">${vendorLogo(vendor.id)}<div><span>${esc(scopeLabel)} drill-down</span><h3>${esc(vendorName(vendor.id))}</h3></div></div><div class="agent-summary-stats">
+      <div><span>Codex avg pass@1</span><strong>${codex ? `${(codex.score * 100).toFixed(1)}%` : "N/A"}</strong><small>pass³ ${previewPass3(codex)}</small></div>
+      <div><span>Claude avg pass@1</span><strong>${claude ? `${(claude.score * 100).toFixed(1)}%` : "N/A"}</strong><small>pass³ ${previewPass3(claude)}</small></div>
+      <div><span>Surfaces averaged</span><strong>${Math.max(codex?.surfaceCount ?? 0, claude?.surfaceCount ?? 0)}</strong><small>${scope === "overall" ? "Equal weight per surface" : `${scope.toUpperCase()} only`}</small></div>
+    </div></div>`;
+
+    const surfaces = scope === "overall" ? ["api", "cli"] : [scope];
+    const taskRows = agentResultsPreview.tasks.flatMap((task, taskIndex) => surfaces.map((surface) => {
+      const codexBits = vendor[surface]?.codex?.[taskIndex] ?? null;
+      const claudeBits = vendor[surface]?.claude?.[taskIndex] ?? null;
+      if (!codexBits && !claudeBits) return "";
+      return `<tr><td>${esc(task)}</td><td><span class="surface-chip">${surface.toUpperCase()}</span></td><td>${previewTrials(codexBits)}</td><td class="numeric">${previewTaskScore(codexBits)}</td><td>${previewTrials(claudeBits)}</td><td class="numeric">${previewTaskScore(claudeBits)}</td></tr>`;
+    })).join("");
+    detailRoot.querySelector("[data-preview-task-rows]").innerHTML = taskRows || `<tr><td colspan="6" class="trial-na">No eligible tasks on this surface.</td></tr>`;
+    detailRoot.querySelector("[data-preview-task-caption]").textContent = scope === "overall" ? "Both participating surfaces are shown; each feeds its surface score before the macro-average." : `${scope.toUpperCase()}-eligible tasks only.`;
+    detailRoot.querySelector("[data-preview-operational-heading]").textContent = `${vendorName(vendor.id)} · ${scopeLabel} operational context`;
+    detailRoot.querySelector("[data-preview-operational-rows]").innerHTML = Object.values(agentResultsPreview.agents).map((info) => `<tr><td>${esc(info.label)}</td><td>${esc(info.model)}</td><td>${esc(info.harness)}</td><td class="numeric">${esc(info.latency)}</td><td class="numeric">${esc(info.tokens)}</td><td class="numeric">${esc(info.cost)}</td></tr>`).join("");
+  };
+
+  resultsRoot.addEventListener("click", (event) => {
+    const scopeButton = event.target.closest("[data-preview-scope]");
+    const vendorButton = event.target.closest("[data-preview-vendor]");
+    if (scopeButton) scope = scopeButton.dataset.previewScope;
+    if (vendorButton) selectedVendor = vendorButton.dataset.previewVendor;
+    if (scopeButton || vendorButton) render();
+    if (vendorButton) {
+      const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+      document.querySelector("#task-matrix")?.scrollIntoView({ behavior, block: "start" });
+    }
+  });
+  render();
 }
 
 function rankChart(rows, metric, label) {
@@ -173,7 +367,7 @@ function oneMinuteBrief(publication) {
   const facts = [
     { label: "WHAT IT MEASURES", text: `Whether AI agents can complete ${scope.core_task_count} canonical database tasks through each product's real ${scope.surfaces.map((s) => s.toUpperCase()).join(" and ")} — ${cohort.length} products, one shared contract.` },
     { label: "HOW SUCCESS IS DECIDED", text: `Every required cell runs ${scope.trial_count} isolated trials on ${scope.harnesses.length} agent harnesses (${harnesses}). Independent read-back of live state decides pass or fail — the agent's own transcript never counts.` },
-    { label: "WHAT THE RANK USES", text: "Only the task × surface set shared by every product. Reliability breaks ties; coverage and discoverability are reported separately and never mixed in." },
+    { label: "WHAT THE RANK USES", text: "Each agent gets its own ranking. We average eligible tasks within each surface, then average the product's participating surfaces equally. All-3 reliability breaks ties." },
     { label: "WHAT IT IS NOT", text: "Not a verdict on product quality. A higher AX Score means a more agent-operable surface under this contract — nothing broader." },
   ];
   return `<div class="fact-grid">${facts.map((fact, index) => `<article class="fact-card"><span class="finding-number">0${index + 1} · ${esc(fact.label)}</span><p>${esc(fact.text)}</p></article>`).join("")}</div>
@@ -376,8 +570,8 @@ function renderDatabase(data, ready, validationErrors) {
     </section>
     ${!ready && validationErrors.length ? `<aside class="validation-note"><strong>Draft validation:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
     ${reportSection("one-minute", "The brief", "AXArena Database in one minute", oneMinuteBrief(publication), "Scope and method up front; official conclusions publish with the frozen export.")}
-    ${reportSection("results", "AXArena Database · Benchmark results", "Agent experience, ranked by verified work", `<div class="results-intro"><p class="prose lead">AX Score measures verified success on the core task and surface combinations shared across every product. Reliability breaks ties; coverage and discoverability remain visible without changing official rank.</p><a class="text-link" href="/methodology/#scoring">How scoring works →</a></div>${fairnessStrip(publication)}${benchmarkTable(rows, !ready)}${metricLab(rows)}${rankChart(rows, "discovery_score", "Discoverability — reported separately, never ranked")}`, `${benchmark.ranking_method.intersection_pairs.length} comparable task × surface pairs · ${benchmark.ranking_method.required_trial_count} trials per required cell`)}
-    ${reportSection("task-matrix", "Task performance", "See where products differ", `<p class="prose lead">Every cell shows verified task success. N/A represents a structural product difference, not a hidden failure. Select a score to inspect the product evidence.</p>${taskHeatmap(tasks.tasks, vendors)}`, `${coreTasks.length} scored core tasks · ${researchTasks.length} research tasks outside the official ranking`)}
+    ${reportSection("results", "AXArena Database · Benchmark results", "Two agents, two independent rankings", `<div class="results-intro"><p class="prose lead">For each agent, Overall is the equal-weight average of the product's participating surface scores. Switch to API or CLI for the granular view; pass³ breaks ties and always shows its exact numerator and denominator.</p><a class="text-link" href="/methodology/#scoring">How scoring works →</a></div>${fairnessStrip(publication)}${agentLeaderboardPreview()}`, `${publication.scope.trial_count} trials per eligible task × surface cell · agents are never averaged together`)}
+    ${reportSection("task-matrix", "Task performance", "From a rank to every trial", `<p class="prose lead">Select a vendor in either leaderboard, then inspect its task × surface trials here. N/A represents a structural product difference, not a hidden failure. Latency, tokens, and cost remain operational context and never affect rank.</p>${agentTaskDetailPreview()}`, `${coreTasks.length} scored core tasks · ${researchTasks.length} research tasks remain outside the official ranking`)}
     ${reportSection("findings", "What the evidence says", "Three findings from the current matrix", findings(editorial, evidence.evidence), "Every claim links to a public benchmark row, task, or execution cell.")}
     ${reportSection("methodology-preview", "Methodology", "From a product category to public evidence", `<p class="prose lead">AXArena defines product-neutral outcomes, adapts them without changing their intent, runs controlled agent trials, and verifies results against live sandbox state.</p>${pipeline("method-flow", ["Define canonical outcomes", "Run controlled agent trials", "Verify live product state"])}<div class="section-actions"><a class="button primary" href="/methodology/">Read the full methodology</a></div>`, "A reusable evaluation pipeline for Database and future AXArena verticals.")}
     ${reportSection("about", "Open source", "Measure agent experience, not product quality", `<div class="open-source-card"><div><span class="eyebrow">Neutral by design · Powered by ax-eval</span><h3>Which products are genuinely agent-friendly?</h3><p>AXArena is a neutral, open-source agent usability benchmark for developers. It measures how successfully agents discover and operate product interfaces—especially APIs and CLIs—without making a broader judgment about whether a product is good or bad.</p><p><code>ax-eval</code> is the open-source CLI and evaluation engine behind the benchmark. It creates reviewed task packs, runs real agents, and verifies outcomes by reading live product state back.</p></div><div class="open-source-actions">${githubLink("View GitHub repository", "button primary")}<a class="button" href="${DATA_ROOT}/publication.json">Download benchmark data</a></div></div>`, "AXArena quantifies agent experience; ax-eval generates and verifies the evidence.")}
@@ -386,7 +580,7 @@ function renderDatabase(data, ready, validationErrors) {
     ${reportSection("changelog", "Corrections", "A benchmark is a versioned public record", `<div class="prose"><p><strong>2026-07-14 · Product and methodology update.</strong> Renamed the first vertical AXArena Database, clarified AX Score, and separated the reusable methodology from the benchmark results.</p><p>Every future score-changing correction must identify the affected benchmark version, artifact, reason, and rerun.</p></div>`)}
   </main>`;
   app.innerHTML = shell(content, ready, "database");
-  wireMetricSwitch();
+  wireAgentResults();
   wirePageToc();
   revealHashTarget();
   document.title = `${benchmarkName} · AXArena`;
@@ -403,7 +597,7 @@ function methodologyArticle(publication, editorial) {
       <section id="execution"><span class="step-number">05</span><h2>Run controlled agent trials</h2><p>Agents begin from a cold start with goal-level prompts. They must discover the correct interface and execute inside an isolated sandbox. AXArena records the product, surface, harness, model, effort profile, and trial number for every cell.</p><p>Repeated trials reveal whether success is dependable rather than accidental. Missing trials, blocked authentication, or incomplete cells remain visible and prevent a draft from becoming a citable publication.</p></section>
       <section id="verification"><span class="step-number">06</span><h2>Verify live product state</h2><p>An agent saying “done” is not evidence of success. Independent read-back checks inspect the live sandbox and confirm that the requested outcome exists with the expected properties.</p><p>Execution traces explain how the agent behaved; read-back oracles decide whether the task passed.</p></section>
       <section id="failure-path"><span class="step-number">07</span><h2>Where agent experience breaks</h2><p>Every trial must pass five gates in order. A product can execute well and still fail the journey earlier; each blocked or incomplete cell belongs to exactly one gate. Stage-level failure evidence ships with the frozen production export.</p><ol class="funnel"><li><span>01</span><strong>Discovery</strong><p>Find the authoritative surface.</p></li><li><span>02</span><strong>Authentication</strong><p>Identify the correct credential and scope.</p></li><li><span>03</span><strong>Surface choice</strong><p>Choose the appropriate product interface.</p></li><li><span>04</span><strong>Execution</strong><p>Complete the canonical task.</p></li><li><span>05</span><strong>Read-back</strong><p>Verify live product state independently.</p></li></ol></section>
-      <section id="scoring"><span class="step-number">08</span><h2>Normalize, score, and publish</h2><p><strong>AX Score</strong> is verified success over the core task and surface combinations comparable across the full cohort. Each task, surface, harness, and trial outcome is equally weighted. The first tie-break is <strong>Reliability</strong>: the share of comparable task, surface, and harness units passing every required trial.</p><p>Coverage, product-specific task success, API and CLI performance, and Discoverability are disclosed separately. Discoverability and research tasks never alter official rank. Unrounded values determine order; percentages are rounded only for display.</p><p>The website consumes a frozen, sanitized publication export. It never reads raw run directories or recomputes benchmark truth.</p></section>
+      <section id="scoring"><span class="step-number">08</span><h2>Normalize, score, and publish</h2><p>Codex and Claude Code receive separate rankings; their scores are never averaged together. For each agent, we first average the three verified trials for every eligible task, average those tasks within each surface, then calculate <strong>Overall</strong> as the equal-weight average of the product's participating surfaces. A product with both API and CLI therefore contributes one API score and one CLI score to Overall.</p><p>The first tie-break is <strong>pass³ reliability</strong>: the share of eligible task × surface cells that passed all three trials, displayed as both a percentage and an exact count. Structural N/A cells are excluded with the denominator shown. Discoverability, latency, tokens, cost, and research tasks never alter rank. Unrounded values determine order.</p><p>The website consumes a frozen, sanitized publication export. It never reads raw run directories or recomputes benchmark truth.</p></section>
       <section id="reproduce"><span class="step-number">09</span><h2>Reproduce the website data</h2><p>A benchmark is only as credible as its ability to be rerun. The publication export is generated from a frozen run bundle; the website renders it without recomputation.</p>${reproductionCommands()}<p>Replace the placeholder paths with the frozen bundle and run directory from a verified execution. The exported <code>data/axarena-database-v1</code> directory is what the static site consumes.</p></section>
       <section id="database-v1"><span class="eyebrow">Applied methodology</span><h2>AXArena Database v${publication.suite_version}</h2><p>The first public vertical evaluates ${publication.cohort.length} database products on ${publication.scope.core_task_count} core tasks across ${publication.scope.surfaces.map((item) => item.toUpperCase()).join(" and ")}. ${publication.scope.harnesses.length} agent harnesses run ${publication.scope.trial_count} isolated trials for every required product, surface, and harness cell.</p><p>${esc(editorial.limitations.join(" "))}</p><a class="text-link" href="/database/#results">View the Database benchmark →</a></section>
       <section id="independence"><span class="eyebrow">Trust and constraints</span><h2>Independence requires visible rules</h2><div class="principles">${editorial.independence.map((item) => `<p>${esc(item)}</p>`).join("")}</div></section>
@@ -443,7 +637,7 @@ function renderBlog(data, ready, validationErrors) {
 
       <section class="blog-diagram"><span class="eyebrow">How it works</span><h2>One contract, product-specific paths</h2><p>We define product-neutral outcomes before execution, then compile the vendor-specific details needed to run and verify the same intent fairly. Missing evidence, blocked cells, and incomplete trials remain visible.</p><p class="blog-method-link"><a class="text-link" href="/methodology/">Read the complete methodology →</a></p></section>
 
-      <section><span class="eyebrow">The public record</span><h2>Scores should lead back to evidence</h2><p>AX Score summarizes verified success only on comparable core work shared across the cohort. Reliability captures whether that success repeats across all required trials. Coverage, product-specific task success, surface breakdowns, and discoverability remain separate so one number does not erase important product differences.</p><p>The first website experience includes benchmark results, a task matrix, product evidence drill-downs, downloadable JSON, limitations, and a public corrections log. In the current draft, ${rankedProducts} products have illustrative rows; those values are not citable until the frozen production export passes every quality gate.</p></section>
+      <section><span class="eyebrow">The public record</span><h2>Scores should lead back to evidence</h2><p>Each agent receives its own ranking. Overall averages the product's participating surface scores equally; API and CLI views remain available for comparison. pass³ reliability captures how many eligible task × surface cells passed all three trials, while discoverability and operational metrics remain non-ranking context.</p><p>The first website experience includes benchmark results, a task-and-surface drill-down, product evidence, downloadable JSON, limitations, and a public corrections log. In the current draft, ${rankedProducts} products have illustrative rows; those values are not citable until the frozen production export passes every quality gate.</p></section>
 
       <section><span class="eyebrow">Open source</span><h2>The evaluation engine is available to everyone</h2><p>AXArena is powered by <code>ax-eval</code>, our open-source, CLI-first evaluation engine. It turns product specifications and documentation into reviewed task packs, executes real agent harnesses across API, CLI, SDK, and MCP surfaces, verifies live state, and exports normalized evidence.</p><p>Open infrastructure matters because benchmark trust should not depend on a private scoring script. Developers should be able to inspect the contract, reproduce the pipeline, challenge assumptions, and contribute improvements.</p>${githubLink("Explore ax-eval on GitHub", "button primary")}</section>
 

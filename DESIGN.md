@@ -70,15 +70,14 @@ the blue brand accent.
 - **On-this-page rail:** fixed section index with scroll-spy, shown only on
   viewports ≥1560px where the 1200px frame leaves a usable margin; hidden
   in print.
-- **Benchmark table:** horizontally scrollable rounded table with plain-language
-  metrics, tooltips, tabular numbers, pill score badges, and a visible Draft
-  watermark.
-- **Task matrix:** labeled percentage tiles on a 6px-gap grid, legend, N/A
-  (outlined) and missing states, and evidence links.
-- **Charts:** blue-gradient bars with rounded caps that grow into place row by
-  row. A segmented metric switch swaps the chart between Shared-core score,
-  All-3 reliability, and Applicability; it never re-sorts the official rank,
-  and Discoverability always stays a separate chart. Print shows all panels.
+- **Agent leaderboards (Section 02):** Codex and Claude Code remain separate,
+  side-by-side rankings. A segmented control switches Overall / API / CLI;
+  Overall macro-averages the product's participating surface scores. Every row
+  shows average pass@1 and pass³ as `x% (y/z)`.
+- **Task drill-down (Section 03):** selecting a vendor in either leaderboard
+  reveals task × surface × three-trial evidence for both agents, plus
+  operational context that is explicitly excluded from rank. Tables remain
+  horizontally scrollable on narrow screens and N/A is always textual.
 - **Research cards:** thin borders, rounded corners, white-to-pale-blue
   gradient, limited use; they lift slightly on hover.
 - **Vendor evidence:** accordion rows with pill scores and a rotating chevron;
@@ -118,7 +117,9 @@ are reading:
   one-off hex values inside components.
 - Change content hierarchy and reusable markup helpers in `app.js`.
 - Keep public benchmark values in the versioned JSON dataset. The website must
-  not calculate new benchmark truth.
+  not calculate new benchmark truth. The in-code agent trial fixture is a
+  draft interaction prototype only and must be replaced by the frozen
+  normalized-result export before publication readiness can pass.
 - Preserve Draft behavior, keyboard focus, text labels, table scrolling, and
   print styles.
 - Run `npm test` and `node --check app.js site-data.js` after every design edit.

@@ -31,6 +31,7 @@ test("draft export schemas, ranks, cells, and evidence references validate", asy
   assert.equal(data.publication.cohort.length, 6);
   assert.equal(data.publication.benchmark, "axarena-database");
   assert.equal(data.publication.display_name, "AXArena Database");
+  assert.deepEqual(data.publication.scope.effort_profiles, ["high"]);
   assert.equal(data.editorial.question, "Can AI agents actually use your product?");
   assert.match(data.editorial.lede, /neutral, open-source agent usability benchmark/);
   assert.match(data.editorial.lede, /do not judge whether a product is good or bad/);
@@ -66,6 +67,14 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
     assert.ok(app.includes(`"${id}"`), `missing ${id} section`);
   }
   assert.match(app, /data-metric-switch/);
+  assert.match(app, /data-agent-results/);
+  assert.match(app, /data-preview-scope="overall"/);
+  assert.match(app, /data-agent-task-detail/);
+  assert.match(app, /GPT-5\.6 Terra · high/);
+  assert.match(app, /Claude Sonnet 5 · high/);
+  assert.match(app, /function previewAgentMetric/);
+  assert.match(app, /pass³ \$\{previewPass3/);
+  assert.match(app, /equal-weight average of each participating surface score/);
   assert.match(app, /class="fairness-strip"/);
   assert.match(app, /class="page-toc"/);
   assert.match(app, /\/assets\/logos\//);
