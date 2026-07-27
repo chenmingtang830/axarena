@@ -1,6 +1,7 @@
 {
   "schema": "ax.axarena-tasks/v2",
-  "benchmark": "axarena-database",
+  "benchmark": "axeval-database",
+  "display_name": "AXeval-Database",
   "generated_at": "2026-07-13T00:00:00.000Z",
   "tasks": [
     {

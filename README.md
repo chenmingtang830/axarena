@@ -1,4 +1,4 @@
-# AXArena Database Publication Site
+# AXeval-Database Publication Site
 
 AXArena is a neutral, open-source agent usability benchmark. It helps
 developers understand which products are genuinely agent-friendly—especially
@@ -12,7 +12,7 @@ at `/methodology/`. The launch article lives at
 Visual language, palette tokens, reusable components, and modification rules
 are documented in [`DESIGN.md`](./DESIGN.md).
 
-The benchmark JSON files under `data/axarena-database-v1/` use the same
+The benchmark JSON files under `data/axeval-database-v1/` use the same
 versioned schemas as `ax-eval export-publication`. They are an explicitly
 watermarked draft fixture. After every publication gate passes, replace the
 schema-produced JSON files with a sanitized frozen export and retain
