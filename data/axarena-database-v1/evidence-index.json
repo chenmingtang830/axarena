@@ -1,6 +1,7 @@
 {
   "schema": "ax.axarena-evidence-index/v1",
   "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
   "generated_at": "2026-07-13T00:00:00.000Z",
   "evidence": [
     { "id": "leaderboard:neon", "kind": "leaderboard_row", "vendor": "neon", "path": "leaderboard.json#neon" },

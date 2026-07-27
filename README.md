@@ -1,4 +1,4 @@
-# AXArena Database Publication Site
+# AXArena-Database Publication Site
 
 AXArena is a neutral, open-source agent usability benchmark. It helps
 developers understand which products are genuinely agent-friendly—especially

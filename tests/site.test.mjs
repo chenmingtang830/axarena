@@ -30,7 +30,7 @@ test("draft export schemas, ranks, cells, and evidence references validate", asy
   assert.equal(validation.ready, false);
   assert.equal(data.publication.cohort.length, 6);
   assert.equal(data.publication.benchmark, "axarena-database");
-  assert.equal(data.publication.display_name, "AXArena Database");
+  assert.equal(data.publication.display_name, "AXArena-Database");
   assert.equal(data.editorial.question, "Can AI agents actually use your product?");
   assert.match(data.editorial.lede, /neutral, open-source agent usability benchmark/);
   assert.match(data.editorial.lede, /do not judge whether a product is good or bad/);
