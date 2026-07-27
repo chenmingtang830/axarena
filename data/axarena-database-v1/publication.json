@@ -1,7 +1,7 @@
 {
   "schema": "ax.axarena-publication/v1",
-  "benchmark": "axeval-database",
-  "display_name": "AXeval-Database",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
   "category": "database",
   "suite_version": 1,
   "generated_at": "2026-07-13T00:00:00.000Z",

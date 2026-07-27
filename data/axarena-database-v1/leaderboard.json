@@ -1,7 +1,7 @@
 {
   "schema": "ax.axarena-leaderboard/v2",
-  "benchmark": "axeval-database",
-  "display_name": "AXeval-Database",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
   "generated_at": "2026-07-13T00:00:00.000Z",
   "ranking_method": {
     "primary": "verified success across shared core task×surface×harness×trial outcomes",

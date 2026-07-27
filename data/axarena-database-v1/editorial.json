@@ -1,7 +1,7 @@
 {
   "schema": "ax.axarena-editorial/v1",
-  "benchmark": "axeval-database",
-  "display_name": "AXeval-Database",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
   "question": "Can AI agents actually use your product?",
   "lede": "AXArena is a neutral, open-source agent usability benchmark that helps developers understand which products are genuinely agent-friendly—especially across APIs, CLIs, and discoverability. We quantify agent experience; we do not judge whether a product is good or bad.",
   "findings": [
@@ -11,7 +11,7 @@
   ],
   "limitations": [
     "The checked-in values are illustrative until the frozen production export replaces this draft fixture.",
-    "AXeval-Database v1 scores API and CLI only; SDK and MCP remain outside the benchmark-of-record.",
+    "AXArena-Database v1 scores API and CLI only; SDK and MCP remain outside the benchmark-of-record.",
     "Backup, CDC, and integrity are research tasks and do not enter the leaderboard.",
     "Sandbox plans, product changes, harness versions, and documentation changes can affect future reruns."
   ],

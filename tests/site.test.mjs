@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 import { validateDataset } from "../site-data.js";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const dataRoot = resolve(root, "data/axeval-database-v1");
+const dataRoot = resolve(root, "data/axarena-database-v1");
 
 async function json(name) {
   return JSON.parse(await readFile(resolve(dataRoot, `${name}.json`), "utf8"));
@@ -29,8 +29,8 @@ test("draft export schemas, ranks, cells, and evidence references validate", asy
   assert.deepEqual(validation.errors, []);
   assert.equal(validation.ready, false);
   assert.equal(data.publication.cohort.length, 6);
-  assert.equal(data.publication.benchmark, "axeval-database");
-  assert.equal(data.publication.display_name, "AXeval-Database");
+  assert.equal(data.publication.benchmark, "axarena-database");
+  assert.equal(data.publication.display_name, "AXArena-Database");
   assert.equal(data.editorial.question, "Can AI agents actually use your product?");
   assert.match(data.editorial.lede, /neutral, open-source agent usability benchmark/);
   assert.match(data.editorial.lede, /do not judge whether a product is good or bad/);

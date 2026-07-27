@@ -1,4 +1,4 @@
-export const DATA_ROOT = "/data/axeval-database-v1";
+export const DATA_ROOT = "/data/axarena-database-v1";
 
 const FILES = ["publication", "leaderboard", "cells", "tasks", "evidence-index", "editorial"];
 const SCHEMAS = {
@@ -32,8 +32,8 @@ export function validateDataset(data) {
     if (data[key]?.schema !== schema) errors.push(`${key} must use ${schema}`);
   }
   const benchmark = data.publication?.benchmark;
-  if (benchmark !== "axeval-database") errors.push("publication benchmark must be axeval-database");
-  if (data.publication?.display_name !== "AXeval-Database") errors.push("publication display name must be AXeval-Database");
+  if (benchmark !== "axarena-database") errors.push("publication benchmark must be axarena-database");
+  if (data.publication?.display_name !== "AXArena-Database") errors.push("publication display name must be AXArena-Database");
   for (const key of ["leaderboard", "cells", "tasks", "evidence", "editorial"]) {
     if (benchmark && data[key]?.benchmark !== benchmark) errors.push(`${key} benchmark does not match ${benchmark}`);
     if (data.publication?.display_name && data[key]?.display_name !== data.publication.display_name) {

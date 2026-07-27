@@ -1,7 +1,7 @@
 {
   "schema": "ax.axarena-cells/v2",
-  "benchmark": "axeval-database",
-  "display_name": "AXeval-Database",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
   "generated_at": "2026-07-13T00:00:00.000Z",
   "cells": [
     { "id": "neon/api/codex", "vendor": "neon", "surface": "api", "harness": "codex", "mean_success_rate": 0.86, "task_consistency_at_3": 0.81, "discovery_score": 0.5, "trial_count": 3, "blocked": null },
