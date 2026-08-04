@@ -1,0 +1,5243 @@
+{
+  "schema": "ax.axarena-failures/v2",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
+  "generated_at": "2026-08-02T12:00:00.000Z",
+  "failures": [
+    {
+      "trial_id": "neon-api-opencode-open-a-db-T01-access-control-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d308da5bcf4157ab"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-a-db-T01-access-control-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b4d90bcf7ddf88bf"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-a-db-T01-access-control-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0d170efbd742da59"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-a-db-T01-access-control-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-37909e8ec2ca3ff1"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-a-db-T01-access-control-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5df266c763c41654"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-b-db-T01-access-control-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4a784eedf143a309"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-codex-gpt-db-T01-access-control-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d4c589f1f3ea0394"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-codex-gpt-db-T01-access-control-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9f121844eef00ba5"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-codex-gpt-db-T01-access-control-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-cc81fcc97a653075"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-codex-gpt-db-T01-access-control-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-db5afe8803187b4a"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-claude-code-claude-db-T01-access-control-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2d885831d91861cb"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-b-db-T01-access-control-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e6ccbc3fbf5f1068"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-b-db-T01-access-control-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-83bfbf0b5484f8f8"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-b-db-T01-access-control-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8b0a6411661a8354"
+      ]
+    },
+    {
+      "trial_id": "turso-api-claude-code-claude-db-T01-access-control-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-bce1f1ac6d6f97de"
+      ]
+    },
+    {
+      "trial_id": "turso-api-claude-code-claude-db-T01-access-control-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a230a693dd786622"
+      ]
+    },
+    {
+      "trial_id": "turso-api-opencode-open-a-db-T01-access-control-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d2b5818e7b8d4da5"
+      ]
+    },
+    {
+      "trial_id": "turso-api-opencode-open-a-db-T01-access-control-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-bef56aa057717e43"
+      ]
+    },
+    {
+      "trial_id": "turso-api-opencode-open-a-db-T01-access-control-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8cb091644e4c0148"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T01-access-control-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7fed3c7c0fea097f"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T01-access-control-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3ef5176dc863fca1"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T01-access-control-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d65197533d602f10"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T01-access-control-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a2305d5b5a309ae7"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-b-db-T01-access-control-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-48863ad53e4f30be"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-codex-gpt-db-T01-access-control-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-77e775ae0b0b7bcc"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-codex-gpt-db-T01-access-control-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6d5f3f173788c688"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-codex-gpt-db-T01-access-control-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ea4aa143ccf85fb2"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-claude-code-claude-db-T01-access-control-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7fadeb502be5b566"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-claude-code-claude-db-T01-access-control-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6456374d812b099a"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-pi-open-b-db-T01-access-control-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a1ada7d3c53db08d"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-pi-open-b-db-T01-access-control-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b09acded55da61d6"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-b-db-T01-access-control-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0f69095324688ec5"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-claude-code-claude-db-T01-access-control-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b62e1c45183d89cc"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-claude-code-claude-db-T01-access-control-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0e79248e210e7559"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T01-access-control-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-02ceb82bcf903409"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T01-access-control-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f26c15b509e8e067"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T01-access-control-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a7ae78ec87410b6d"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-opencode-open-a-db-T01-access-control-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8012ebd7300664b2"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T01-access-control-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-689db23a75761d88"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-a-db-T01-access-control-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-75fa3acd837b0f87"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-a-db-T01-access-control-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8e58480043f6aaca"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-a-db-T01-access-control-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4c5c65e22600c016"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-b-db-T01-access-control-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ad37f46a6c722712"
+      ]
+    },
+    {
+      "trial_id": "nile-api-codex-gpt-db-T01-access-control-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-824ea6d882393508"
+      ]
+    },
+    {
+      "trial_id": "nile-api-codex-gpt-db-T01-access-control-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d796ad4875b69288"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-codex-gpt-db-T01-access-control-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d59028b306b4c4e4"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-codex-gpt-db-T01-access-control-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-152dcbea0bc8175d"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-claude-code-claude-db-T01-access-control-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c758b9cbc8c67622"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-claude-code-claude-db-T01-access-control-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-014c7ac0c012a56f"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T01-access-control-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7a408d1c1548356c"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T01-access-control-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7a000bc86abb7ae5"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T01-access-control-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0e7097f79fe6c73d"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T01-access-control-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2df839233a45c8df"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T01-access-control-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3302a49c566848a9"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T01-access-control-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T01-access-control",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4aae23d3c40ec711"
+      ]
+    },
+    {
+      "trial_id": "neon-api-claude-code-claude-db-T02-evolve-schema-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-33eee8492dccd446"
+      ]
+    },
+    {
+      "trial_id": "neon-api-claude-code-claude-db-T02-evolve-schema-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-678caa5835e4de87"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-claude-code-claude-db-T02-evolve-schema-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-98aff7febb52a5fb"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-claude-code-claude-db-T02-evolve-schema-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8017e5086f44485d"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-opencode-open-a-db-T02-evolve-schema-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-479b48529be43b70"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-opencode-open-a-db-T02-evolve-schema-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-292dbb4983f7a47e"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-codex-gpt-db-T02-evolve-schema-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-458531cf8db8e742"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-a-db-T02-evolve-schema-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b98f30abc65de0e6"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-a-db-T02-evolve-schema-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b6157d43ca4c584b"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-a-db-T02-evolve-schema-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c204f8d60b7f5dcb"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-b-db-T02-evolve-schema-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-54b48fe8271a41e1"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-b-db-T02-evolve-schema-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-be978de60537b5cb"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-b-db-T02-evolve-schema-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-114cd9367d03b043"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-b-db-T02-evolve-schema-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1258af2479b95fcd"
+      ]
+    },
+    {
+      "trial_id": "turso-api-codex-gpt-db-T02-evolve-schema-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-883517a8b775bf8a"
+      ]
+    },
+    {
+      "trial_id": "turso-api-claude-code-claude-db-T02-evolve-schema-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-619012554ea3d433"
+      ]
+    },
+    {
+      "trial_id": "turso-api-claude-code-claude-db-T02-evolve-schema-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d0ba712e098cb457"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-claude-code-claude-db-T02-evolve-schema-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f98586ef81b44d8d"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-claude-code-claude-db-T02-evolve-schema-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-696297efb59c2dda"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-opencode-open-a-db-T02-evolve-schema-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d607fea0fd80c4f6"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-codex-gpt-db-T02-evolve-schema-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-88d427f36cc2cc61"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-pi-open-a-db-T02-evolve-schema-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-745c4ed2b502e0a1"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-a-db-T02-evolve-schema-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a43d7f429ccb95ec"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-pi-open-b-db-T02-evolve-schema-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-969779148d8c3369"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-b-db-T02-evolve-schema-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b5b369dc3a172a73"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-b-db-T02-evolve-schema-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-682d847268cb69fa"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-b-db-T02-evolve-schema-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-bb23fd4d4a8cef71"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-codex-gpt-db-T02-evolve-schema-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-81aa739a5440434c"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-codex-gpt-db-T02-evolve-schema-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8551873791888aed"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-codex-gpt-db-T02-evolve-schema-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d6c4cb16567ace6b"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-claude-code-claude-db-T02-evolve-schema-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d6eb547fed098204"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-claude-code-claude-db-T02-evolve-schema-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3c8db582b186d020"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-claude-code-claude-db-T02-evolve-schema-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-57a85641e0306e75"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-opencode-open-a-db-T02-evolve-schema-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-311ccf8a3d97605e"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-opencode-open-a-db-T02-evolve-schema-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2700342bb9cfb33d"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T02-evolve-schema-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-90fb2797aa466909"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T02-evolve-schema-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-dc096ce75fb78781"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-codex-gpt-db-T02-evolve-schema-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e4dc9902174c2ddf"
+      ]
+    },
+    {
+      "trial_id": "nile-api-opencode-open-a-db-T02-evolve-schema-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7fddcd1322a94285"
+      ]
+    },
+    {
+      "trial_id": "nile-api-opencode-open-a-db-T02-evolve-schema-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-74d5dd3376dc3535"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T02-evolve-schema-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-874cae48644f557c"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T02-evolve-schema-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-855ca84dcf440bd5"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-a-db-T02-evolve-schema-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-95a9426b0ac3c941"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-a-db-T02-evolve-schema-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-47f6a1149aede3a9"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-a-db-T02-evolve-schema-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-00fdc2b4cf8ca440"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-a-db-T02-evolve-schema-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e8f6734873036b2c"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-a-db-T02-evolve-schema-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-052f3fc5e5e849a9"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T02-evolve-schema-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9c4971b854795212"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T02-evolve-schema-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e32711f2465be8d6"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T02-evolve-schema-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a97de9033f54a6be"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T02-evolve-schema-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T02-evolve-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-184650b037b72444"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-codex-gpt-db-T03-inspect-schema-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6051fd4e9bff0d2a"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-claude-code-claude-db-T03-inspect-schema-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d1be333063544f44"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-b-db-T03-inspect-schema-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3da23e8c8c967bc2"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-b-db-T03-inspect-schema-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1625e46c11ad673f"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-b-db-T03-inspect-schema-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c620d4980856320d"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-opencode-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8eced57172361dfc"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-opencode-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-dd7c2dbe57763255"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-opencode-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-70b756cb3d832bd4"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-opencode-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2b1d4f7598906d41"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-opencode-open-a-db-T03-inspect-schema-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-46369552d6a12517"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-04a4029c7162551e"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c67ed12717e70216"
+      ]
+    },
+    {
+      "trial_id": "turso-api-codex-gpt-db-T03-inspect-schema-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3b600c8ccd6a4deb"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-codex-gpt-db-T03-inspect-schema-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4781eb3016bb3cd9"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-claude-code-claude-db-T03-inspect-schema-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2a105c735bec03dd"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4116bb5e9d86fcc6"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T03-inspect-schema-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-fccc83109e25ed8f"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-b-db-T03-inspect-schema-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e615a2b16994d3bb"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-b-db-T03-inspect-schema-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6128098d2f2402d3"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-b-db-T03-inspect-schema-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0caff1c4867675a4"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-opencode-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1bae39fb12e93718"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-opencode-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e4eb643aad94a5f0"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-opencode-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a7116c45bd698777"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-opencode-open-a-db-T03-inspect-schema-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d61e15351bc29153"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0045ea4529fde7ac"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-09ea7f6b4d7bbf59"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-codex-gpt-db-T03-inspect-schema-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7a55d8a4b30958cf"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-codex-gpt-db-T03-inspect-schema-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1d7dff0ac14e98e3"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-codex-gpt-db-T03-inspect-schema-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1bde2e4f4d9426b4"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-codex-gpt-db-T03-inspect-schema-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ffe3c5e2e104e18e"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-claude-code-claude-db-T03-inspect-schema-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0f6879f28494e2cf"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4ea9dc3af490a842"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4fd4249e7b313aa0"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T03-inspect-schema-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a9dde557250a145d"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-a-db-T03-inspect-schema-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-fc006fafc6c20d55"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T03-inspect-schema-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c84e29ae91973827"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T03-inspect-schema-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2efd6d79c032fe62"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T03-inspect-schema-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-11700f6f12b195c1"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-b-db-T03-inspect-schema-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-211beb9236106261"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-b-db-T03-inspect-schema-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-629ed3b4587f5f3c"
+      ]
+    },
+    {
+      "trial_id": "nile-api-claude-code-claude-db-T03-inspect-schema-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4ca8838dbc009f1b"
+      ]
+    },
+    {
+      "trial_id": "nile-api-opencode-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4a65ad68b0f7d58e"
+      ]
+    },
+    {
+      "trial_id": "nile-api-opencode-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d347949a5c39642a"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5f07d41872362cbd"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0e6b0349afa71c98"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T03-inspect-schema-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-aea8a8dafe2bc8df"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-a-db-T03-inspect-schema-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-de5e3c087b49083c"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-a-db-T03-inspect-schema-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T03-inspect-schema",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-00d7afa7d4c44169"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-a-db-T04-query-records-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-fcf7f8fee6d65290"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-a-db-T04-query-records-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6281f3b8222dd0a6"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-a-db-T04-query-records-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ad9954a89e3a25bd"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-a-db-T04-query-records-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f8746ddce749dc3b"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-b-db-T04-query-records-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-70677d8be0a016dd"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-b-db-T04-query-records-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1b0c015b93022eba"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-codex-gpt-db-T04-query-records-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3a3e453c58c8e9f0"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-codex-gpt-db-T04-query-records-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-82a6dd0ad854fffc"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-codex-gpt-db-T04-query-records-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7559602bd201dc76"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-claude-code-claude-db-T04-query-records-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e0a3cc44707f6848"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-claude-code-claude-db-T04-query-records-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a853241e70d3b7ff"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-opencode-open-a-db-T04-query-records-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-fee225defe8933b4"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-b-db-T04-query-records-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7844f9d0b68372a9"
+      ]
+    },
+    {
+      "trial_id": "turso-api-claude-code-claude-db-T04-query-records-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5e31616a40be6768"
+      ]
+    },
+    {
+      "trial_id": "turso-api-opencode-open-a-db-T04-query-records-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-87836c09cc54b05a"
+      ]
+    },
+    {
+      "trial_id": "turso-api-opencode-open-a-db-T04-query-records-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d88b4b2037dd086e"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T04-query-records-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-84dcf0c01752459d"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T04-query-records-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f7b7c0361736ebe9"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T04-query-records-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-72a10d886d8c77df"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T04-query-records-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-11d45c27a7fe9348"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T04-query-records-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d4303ea8a51e94fe"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-b-db-T04-query-records-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-81516ffc140e23cf"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-codex-gpt-db-T04-query-records-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2ed578406a48fffd"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-codex-gpt-db-T04-query-records-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-91b329be68fde79a"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-claude-code-claude-db-T04-query-records-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c3be87a207c2f31f"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-claude-code-claude-db-T04-query-records-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-fda209dab414fbcc"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-claude-code-claude-db-T04-query-records-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a569adf80f6fab04"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-opencode-open-a-db-T04-query-records-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7a44922d04489d09"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-pi-open-b-db-T04-query-records-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a330c5a70d1cc539"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-claude-code-claude-db-T04-query-records-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f7788aafb837eb89"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T04-query-records-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2823fe2dd27d11ce"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T04-query-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-42b5252ce1a82091"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T04-query-records-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-eaea011966c16eb3"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T04-query-records-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-68ca507961f03a96"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T04-query-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7cd7ecbd41c4a364"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-a-db-T04-query-records-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6c68d7ddd729e2a5"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-a-db-T04-query-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d04e91baaf3fc8bc"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-a-db-T04-query-records-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a384b12e7475f0cf"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-b-db-T04-query-records-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-98ac3ba6c84b58ec"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-b-db-T04-query-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c2ed4ccf0fd5bb2b"
+      ]
+    },
+    {
+      "trial_id": "nile-api-codex-gpt-db-T04-query-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-88ba8a99183257e4"
+      ]
+    },
+    {
+      "trial_id": "nile-api-codex-gpt-db-T04-query-records-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e9743327f6081554"
+      ]
+    },
+    {
+      "trial_id": "nile-api-codex-gpt-db-T04-query-records-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c1213dcb0816d175"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-codex-gpt-db-T04-query-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6462b26b7b643efb"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-codex-gpt-db-T04-query-records-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-28092ca4f22f3561"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-codex-gpt-db-T04-query-records-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-cdf2ceea778fc31a"
+      ]
+    },
+    {
+      "trial_id": "nile-api-claude-code-claude-db-T04-query-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7346b2da2cad355f"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-claude-code-claude-db-T04-query-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-651be176268fe8e3"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-claude-code-claude-db-T04-query-records-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-da45e22c3b739d9b"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-claude-code-claude-db-T04-query-records-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c003f050671e7b03"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T04-query-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-18283a421420220c"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T04-query-records-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0c2bf1030f8593c7"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T04-query-records-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b80fb3b4c98f846a"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T04-query-records-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0212f9ab1f8a665c"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T04-query-records-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T04-query-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3ba3313d5d9b8d5e"
+      ]
+    },
+    {
+      "trial_id": "neon-api-claude-code-claude-db-T05-vector-search-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ad2cb0e543a21f99"
+      ]
+    },
+    {
+      "trial_id": "neon-api-claude-code-claude-db-T05-vector-search-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3844dec49b221d95"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-claude-code-claude-db-T05-vector-search-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8c02d69ccd723d6a"
+      ]
+    },
+    {
+      "trial_id": "neon-api-opencode-open-a-db-T05-vector-search-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f884820a016730e2"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-opencode-open-a-db-T05-vector-search-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-91051d253f73b373"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-opencode-open-a-db-T05-vector-search-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-502ba12bf4cdb830"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-a-db-T05-vector-search-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-91fadba3be001bf7"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-codex-gpt-db-T05-vector-search-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-59abbecb35ac716c"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-codex-gpt-db-T05-vector-search-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a801d36398af933c"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-a-db-T05-vector-search-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-189d24f97e057b09"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-b-db-T05-vector-search-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4cf9c1f6fa329ee3"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-b-db-T05-vector-search-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-cb201827960b58c8"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-b-db-T05-vector-search-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b555b993a5013cd0"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-b-db-T05-vector-search-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9d103cfa0776a3d8"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-b-db-T05-vector-search-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6ad19e2dd0bc6707"
+      ]
+    },
+    {
+      "trial_id": "turso-api-claude-code-claude-db-T05-vector-search-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-447f9998375e06a4"
+      ]
+    },
+    {
+      "trial_id": "turso-api-claude-code-claude-db-T05-vector-search-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-45201c4018cc5b54"
+      ]
+    },
+    {
+      "trial_id": "turso-api-claude-code-claude-db-T05-vector-search-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b161c8308b652184"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-claude-code-claude-db-T05-vector-search-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-672d0597f7710fa7"
+      ]
+    },
+    {
+      "trial_id": "turso-api-opencode-open-a-db-T05-vector-search-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4c8e08c17f7a9c76"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-opencode-open-a-db-T05-vector-search-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5e38928c47468a5d"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T05-vector-search-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5e842799238d15db"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-codex-gpt-db-T05-vector-search-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-513267a6d5058c02"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-codex-gpt-db-T05-vector-search-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4137741eb60abb30"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-pi-open-b-db-T05-vector-search-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-30388f287d697474"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-pi-open-b-db-T05-vector-search-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-95e3f6a7941ea2b1"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-b-db-T05-vector-search-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-554c2cf8f426c130"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-b-db-T05-vector-search-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f9faf28a3d558510"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-b-db-T05-vector-search-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-58d99f0119c28de5"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-codex-gpt-db-T05-vector-search-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6449de6a81195e64"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-codex-gpt-db-T05-vector-search-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-df8d81d7df47530b"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-claude-code-claude-db-T05-vector-search-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5faeba7235998d33"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-claude-code-claude-db-T05-vector-search-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-318ab132524194ad"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-claude-code-claude-db-T05-vector-search-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-fbcfbcbc85a04e24"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-claude-code-claude-db-T05-vector-search-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7aa0761fb02065a1"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-claude-code-claude-db-T05-vector-search-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-3d61e492b179f0ca"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T05-vector-search-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-52cb03068fb78a12"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-opencode-open-a-db-T05-vector-search-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a3fe3d6e774cfa69"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-opencode-open-a-db-T05-vector-search-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f56500af44eb3c13"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-opencode-open-a-db-T05-vector-search-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-14078142ec89fe3b"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-a-db-T05-vector-search-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-947562b4b1126c4b"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T05-vector-search-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8a590580d1b438f3"
+      ]
+    },
+    {
+      "trial_id": "nile-api-opencode-open-a-db-T05-vector-search-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4bf21c932e70219f"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-a-db-T05-vector-search-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-597e709ca5901eb4"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-a-db-T05-vector-search-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1e16797c662ec131"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T05-vector-search-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8b1f1577f09f2fcf"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T05-vector-search-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T05-vector-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9868b8d0616aa9ac"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-claude-code-claude-db-T06-write-records-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-bce0860f433fe415"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-claude-code-claude-db-T06-write-records-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c8042669e324522a"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-b-db-T06-write-records-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9cb51ac2b21b42c9"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-opencode-open-a-db-T06-write-records-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-252250e2adf1a104"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-opencode-open-a-db-T06-write-records-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-977f4a20284107f2"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-opencode-open-a-db-T06-write-records-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-4b5460649532d7fe"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-opencode-open-a-db-T06-write-records-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-96a86eec2f350700"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-pi-open-a-db-T06-write-records-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-6d8ca1af2ee77161"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-a-db-T06-write-records-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-685b7fd2144ee118"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-a-db-T06-write-records-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a5e06079564c8b6c"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-a-db-T06-write-records-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9220bb590dafe2fa"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-pi-open-b-db-T06-write-records-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-bd475da93a4fe64b"
+      ]
+    },
+    {
+      "trial_id": "turso-api-codex-gpt-db-T06-write-records-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-67d203e96d15af2e"
+      ]
+    },
+    {
+      "trial_id": "turso-api-codex-gpt-db-T06-write-records-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c640968eae0b5d8f"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-claude-code-claude-db-T06-write-records-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d5030a4d0b139730"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-claude-code-claude-db-T06-write-records-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ba764dd79ad1afc3"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T06-write-records-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-595b0d4fd9e19028"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-b-db-T06-write-records-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-acb77b21f2d1e206"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-b-db-T06-write-records-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a916cbe10db85198"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-opencode-open-a-db-T06-write-records-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-674caeb6058b3554"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-opencode-open-a-db-T06-write-records-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d106a3bfbf7c14b5"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-opencode-open-a-db-T06-write-records-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-730f582e3fe2335a"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-pi-open-a-db-T06-write-records-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a1722ee2289e9b21"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-a-db-T06-write-records-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-cfd08bcc67fede10"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-a-db-T06-write-records-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-02037dae10747db6"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-a-db-T06-write-records-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-52bada70f994f589"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-pi-open-b-db-T06-write-records-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e90530ed91686274"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-codex-gpt-db-T06-write-records-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-90838889d0740f46"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-codex-gpt-db-T06-write-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-2f2f4e0b2d9b2cae"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-codex-gpt-db-T06-write-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0f72dad627a95e9c"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-codex-gpt-db-T06-write-records-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8e6afa12d611abdd"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-claude-code-claude-db-T06-write-records-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-62a9c003cc90a73d"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-claude-code-claude-db-T06-write-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a43b2d8f97c26ad2"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T06-write-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e3cfccebe6a765af"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T06-write-records-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-27a1496a38538a21"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T06-write-records-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f7208f8e50b6203a"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T06-write-records-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-722ffd567beb581c"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T06-write-records-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a6996e188e38249b"
+      ]
+    },
+    {
+      "trial_id": "insforge-cli-pi-open-b-db-T06-write-records-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b96ba6005832bb93"
+      ]
+    },
+    {
+      "trial_id": "nile-api-opencode-open-a-db-T06-write-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b264e359a7c452fe"
+      ]
+    },
+    {
+      "trial_id": "nile-api-opencode-open-a-db-T06-write-records-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f5ea5469c3fccd54"
+      ]
+    },
+    {
+      "trial_id": "nile-api-opencode-open-a-db-T06-write-records-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9e8f04c3080838fc"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T06-write-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a69ac7e25b40257c"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T06-write-records-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-e5c51d5bf5aaf86f"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T06-write-records-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ef6518f8cc070afb"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-a-db-T06-write-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5414b6abea798b8d"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-a-db-T06-write-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-78af045deafedcf8"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-a-db-T06-write-records-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d7b1e9ad26de5386"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-a-db-T06-write-records-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-df5d09788be16b01"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T06-write-records-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T06-write-records",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ec3fe05272204adb"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-codex-gpt-db-T07-full-text-search-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-fc85385f95d93bc9"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-a-db-T07-full-text-search-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-acd5e5dd3ec6bc82"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-a-db-T07-full-text-search-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7268829272e4c117"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-a-db-T07-full-text-search-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7125d211d6898fa3"
+      ]
+    },
+    {
+      "trial_id": "neon-api-pi-open-b-db-T07-full-text-search-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-d192e0a41ee83a43"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-b-db-T07-full-text-search-trial-1",
+      "vendor": "neon",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-72bc05288ee47b12"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-b-db-T07-full-text-search-trial-2",
+      "vendor": "neon",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-31d16cdfb368cda8"
+      ]
+    },
+    {
+      "trial_id": "neon-cli-pi-open-b-db-T07-full-text-search-trial-3",
+      "vendor": "neon",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-295a9d3f7ac6c396"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-codex-gpt-db-T07-full-text-search-trial-3",
+      "vendor": "cockroachdb",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9c99a33934f5d9ee"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-api-claude-code-claude-db-T07-full-text-search-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-c53efd0b4dfcbda4"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-opencode-open-a-db-T07-full-text-search-trial-1",
+      "vendor": "cockroachdb",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f335ed3042185a98"
+      ]
+    },
+    {
+      "trial_id": "cockroachdb-cli-opencode-open-a-db-T07-full-text-search-trial-2",
+      "vendor": "cockroachdb",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-69c4b2066634b37c"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-codex-gpt-db-T07-full-text-search-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-531e6b000e8ddeb1"
+      ]
+    },
+    {
+      "trial_id": "turso-api-opencode-open-a-db-T07-full-text-search-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-acf094eee807c240"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T07-full-text-search-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5267188c1a1449b4"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T07-full-text-search-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-413ad240d0e2545a"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-a-db-T07-full-text-search-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-9043c5441c50ed36"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T07-full-text-search-trial-2",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ac85cfd7237e2115"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-a-db-T07-full-text-search-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-f000df72c1cf1ff3"
+      ]
+    },
+    {
+      "trial_id": "turso-api-pi-open-b-db-T07-full-text-search-trial-1",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-832c35bfaaa9755a"
+      ]
+    },
+    {
+      "trial_id": "turso-cli-pi-open-b-db-T07-full-text-search-trial-3",
+      "vendor": "turso",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-639f720df52729ab"
+      ]
+    },
+    {
+      "trial_id": "supabase-api-claude-code-claude-db-T07-full-text-search-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-edcabae05581bf66"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-claude-code-claude-db-T07-full-text-search-trial-3",
+      "vendor": "supabase",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-20a6bc9f29c47f98"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-opencode-open-a-db-T07-full-text-search-trial-1",
+      "vendor": "supabase",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1deed2536955e169"
+      ]
+    },
+    {
+      "trial_id": "supabase-cli-opencode-open-a-db-T07-full-text-search-trial-2",
+      "vendor": "supabase",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-645724be531caed7"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T07-full-text-search-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-05c60154395f2b0b"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-opencode-open-a-db-T07-full-text-search-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-17b72c6e388c2d18"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T07-full-text-search-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-361f4f855177a8ca"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T07-full-text-search-trial-2",
+      "vendor": "insforge",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-a3f4ec57967ee5e4"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-a-db-T07-full-text-search-trial-3",
+      "vendor": "insforge",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "model": "open-model-a",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-fe88f89019a76c88"
+      ]
+    },
+    {
+      "trial_id": "insforge-api-pi-open-b-db-T07-full-text-search-trial-1",
+      "vendor": "insforge",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-7a6a33b66a4c517b"
+      ]
+    },
+    {
+      "trial_id": "nile-api-codex-gpt-db-T07-full-text-search-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-85421f7b4cfd899c"
+      ]
+    },
+    {
+      "trial_id": "nile-api-codex-gpt-db-T07-full-text-search-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-5774d5ddb0ebb26f"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-codex-gpt-db-T07-full-text-search-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-b8008001bd75182b"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-codex-gpt-db-T07-full-text-search-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "model": "gpt-5.6-terra",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0a451221a8041b71"
+      ]
+    },
+    {
+      "trial_id": "nile-api-claude-code-claude-db-T07-full-text-search-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-922b07d523ff4ae9"
+      ]
+    },
+    {
+      "trial_id": "nile-api-claude-code-claude-db-T07-full-text-search-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "api",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-51980d35d852cae0"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-claude-code-claude-db-T07-full-text-search-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-ca367a000c552584"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-claude-code-claude-db-T07-full-text-search-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "model": "claude-sonnet-5",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-8a2d858ad733b088"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T07-full-text-search-trial-1",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 1,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1a714cf90972d14f"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-opencode-open-a-db-T07-full-text-search-trial-2",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "model": "open-model-a",
+      "surface": "cli",
+      "trial": 2,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-0c3f7867c1b7a3b2"
+      ]
+    },
+    {
+      "trial_id": "nile-api-pi-open-b-db-T07-full-text-search-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "api",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-1529fa6f5ae5a743"
+      ]
+    },
+    {
+      "trial_id": "nile-cli-pi-open-b-db-T07-full-text-search-trial-3",
+      "vendor": "nile",
+      "task_id": "db-T07-full-text-search",
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "model": "open-model-b",
+      "surface": "cli",
+      "trial": 3,
+      "failure_type": "unclassified",
+      "classification_status": "needs_review",
+      "evidence_refs": [
+        "ev-daeb062b00d31499"
+      ]
+    }
+  ]
+}

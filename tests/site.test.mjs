@@ -1,98 +1,108 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { validateDataset } from "../site-data.js";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const dataRoot = resolve(root, "data/axarena-database-v1");
+const fixtureRoot = resolve(root, "public/data/axarena-database-v1-synthetic");
+const source = (path) => readFile(resolve(root, path), "utf8");
+const json = async (name) => JSON.parse(await readFile(resolve(fixtureRoot, name), "utf8"));
 
-async function json(name) {
-  return JSON.parse(await readFile(resolve(dataRoot, `${name}.json`), "utf8"));
-}
-
-async function dataset() {
-  return {
-    publication: await json("publication"),
-    leaderboard: await json("leaderboard"),
-    cells: await json("cells"),
-    tasks: await json("tasks"),
-    evidence: await json("evidence-index"),
-    editorial: await json("editorial"),
-  };
-}
-
-test("draft export schemas, ranks, cells, and evidence references validate", async () => {
-  const data = await dataset();
-  const validation = validateDataset(data);
-  assert.deepEqual(validation.errors, []);
-  assert.equal(validation.ready, false);
-  assert.equal(data.publication.cohort.length, 6);
-  assert.equal(data.publication.benchmark, "axarena-database");
-  assert.equal(data.publication.display_name, "AXArena Database");
-  assert.equal(data.editorial.question, "Can AI agents actually use your product?");
-  assert.match(data.editorial.lede, /neutral, open-source agent usability benchmark/);
-  assert.match(data.editorial.lede, /do not judge whether a product is good or bad/);
-  assert.equal(data.tasks.tasks.filter((task) => task.kind === "core").length, 7);
-  assert.equal(data.tasks.tasks.filter((task) => task.kind === "research").length, 3);
-  assert.equal(data.cells.cells.length, 24);
-  assert.deepEqual(data.leaderboard.rows.map((row) => row.rank), [1, 2, 3, 4, 5, 6]);
-  assert.equal(data.leaderboard.ranking_method.discovery_affects_rank, false);
-});
-
-test("publication-ready mode rejects draft language or failing gates", async () => {
-  const data = await dataset();
-  data.publication.publication_readiness = "publication_ready";
-  const validation = validateDataset(data);
-  assert.equal(validation.ready, false);
-  assert.ok(validation.errors.some((error) => error.includes("draft language")));
-  assert.ok(validation.errors.some((error) => error.includes("failing gate")));
-});
-
-test("database, methodology, and blog pages expose the product, scores, pipeline, and open-source engine", async () => {
-  const [html, methodologyHtml, blogHtml, app, css] = await Promise.all([
-    readFile(resolve(root, "database/index.html"), "utf8"),
-    readFile(resolve(root, "methodology/index.html"), "utf8"),
-    readFile(resolve(root, "blog/introducing-axarena/index.html"), "utf8"),
-    readFile(resolve(root, "app.js"), "utf8"),
-    readFile(resolve(root, "styles.css"), "utf8"),
+test("synthetic presentation contract keeps harnesses, rank, evidence, and diagnostics separate", async () => {
+  const [publication, leaderboard, tasks, trials, evidence, readiness, economics] = await Promise.all([
+    json("publication.json"), json("leaderboard.json"), json("tasks.json"), json("trials.json"), json("evidence-index.json"), json("readiness.json"), json("economics.json"),
   ]);
-  assert.match(html, /id="app"/);
-  assert.match(methodologyHtml, /data-page="methodology"/);
-  assert.match(blogHtml, /data-page="blog"/);
-  assert.match(blogHtml, /Introducing AXArena: Benchmarking Agent Experience/);
-  for (const id of ["results", "task-matrix", "findings", "methodology-preview", "about", "evidence", "reproduce", "independence", "changelog"]) {
-    assert.ok(app.includes(`"${id}"`), `missing ${id} section`);
-  }
-  for (const id of ["category", "canonical-tasks", "adapters", "execution", "verification", "scoring", "database-v1", "open-source"]) {
-    assert.ok(app.includes(`id="${id}"`), `missing methodology ${id} section`);
-  }
-  assert.match(app, /<svg class="bar-chart"/);
-  assert.match(app, /class="github-mark"/);
-  assert.match(app, /function arenaMark/);
-  assert.match(app, /class="methodology-diagram"/);
-  assert.match(app, /<svg viewBox="0 0 1200 500"/);
-  assert.match(app, /function renderBlog/);
-  assert.match(app, /Agents are becoming users of software/);
-  assert.match(app, /href="\/blog\/introducing-axarena\/"/);
-  assert.match(app, /aria-label="\$\{esc\(label\)\}"/);
-  assert.match(app, /AX Score/);
-  assert.match(app, /Draft — not for citation/);
-  assert.match(css, /@media print/);
-  assert.match(css, /--paper: #fff;/);
-  assert.match(css, /--accent: #3157d5/);
-  assert.match(css, /--accent-blue: #3157d5/);
-  assert.match(css, /--accent-blue-light: #7892ef/);
-  assert.match(css, /#aebcff 0, #e8ebff 34%/);
-  assert.match(css, /span:nth-child\(9\).*background: var\(--accent-blue\)/s);
-  assert.doesNotMatch(`${html}\n${methodologyHtml}\n${blogHtml}\n${app}\n${css}`, /https:\/\/(cdn|unpkg|fonts\.)/);
-  assert.doesNotMatch(`${html}\n${methodologyHtml}\n${blogHtml}\n${app}`, /DAEB-1/);
+  assert.equal(publication.synthetic, true);
+  assert.match(publication.warning, /DO NOT CITE/);
+  assert.deepEqual([...new Set(leaderboard.agents.map(({ harness }) => harness))].sort(), ["claude-code", "codex", "opencode", "pi"]);
+  assert.equal(new Set(leaderboard.agents.map(({ configuration_id }) => configuration_id)).size, leaderboard.agents.length);
+  assert.ok(leaderboard.agents.filter(({ harness }) => harness === "pi").length >= 2);
+  assert.equal(leaderboard.agents.some(({ harness }) => /combined|overall-agent/i.test(harness)), false);
+  for (const agent of leaderboard.agents) for (const view of Object.values(agent.views)) assert.deepEqual(view.rows.map(({ rank }) => rank), [1, 2, 3, 4, 5, 6]);
+  assert.equal(tasks.tasks.length, 7);
+  assert.equal(trials.task_results.length, 1260);
+  assert.equal(new Set(trials.task_results.map(({ id }) => id)).size, trials.task_results.length);
+  assert.equal(new Set(evidence.evidence.map(({ id }) => id)).size, evidence.evidence.length);
+  assert.ok(trials.task_results.every((trial) => trial.evidence_refs.every((id) => evidence.evidence.some((item) => item.id === id))));
+  assert.equal(readiness.affects_usability_rank, false);
+  assert.equal(economics.affects_rank, false);
+  assert.ok(trials.task_results.every((trial) => trial.journey.length === 4));
+  assert.ok(trials.task_results.every((trial) => trial.prompt?.sha256 && trial.execution_log?.length && trial.output));
 });
 
-test("legacy routes redirect into the single report", async () => {
-  const app = await readFile(resolve(root, "app.js"), "utf8");
-  assert.match(app, /location\.replace\(`\/database\/#vendor-/);
-  assert.match(app, /location\.replace\(`\/database\/#\$\{section\}`/);
-  assert.match(app, /document\.body\.dataset\.page === "methodology"/);
+test("three prototypes share interactions while preserving distinct visual themes", async () => {
+  const [explorer, vendor, css] = await Promise.all([source("components/benchmark-explorer.tsx"), source("components/vendor-explorer.tsx"), source("app/globals.css")]);
+  for (const mode of ["verdict", "ledger", "journey"]) {
+    assert.match(explorer, new RegExp(`${mode}:`));
+    assert.match(css, new RegExp(`\\.theme-${mode}`));
+  }
+  for (const label of ["Codex", "Claude Code", "Overall", "API", "CLI"]) assert.ok(`${explorer}${vendor}`.includes(label));
+  assert.match(explorer, /trial-glyph/);
+  assert.match(explorer, /live-state oracle/i);
+  assert.match(vendor, /Representative agent journey/);
+});
+
+test("ledger progressively discloses evidence without route navigation", async () => {
+  const [ledger, contract, css] = await Promise.all([
+    source("components/ledger-explorer.tsx"),
+    source("lib/publication-contract.ts"),
+    source("app/globals.css"),
+  ]);
+  assert.match(ledger, /The cross-configuration verdict/);
+  assert.match(ledger, /crossHarnessRows/);
+  assert.match(ledger, /minimum: Math\.min/);
+  assert.match(ledger, /maximum: Math\.max/);
+  assert.match(ledger, /Bar = configuration average/);
+  assert.match(ledger, /role="dialog"/);
+  assert.match(ledger, /aria-modal="true"/);
+  assert.match(ledger, /panel: "vendor"/);
+  assert.match(ledger, /AXArena-Database/);
+  assert.match(ledger, /The first agent experience benchmark for database products/);
+  assert.match(ledger, /Database agent experience, at a glance/);
+  assert.match(ledger, /Every run and all three trials/);
+  assert.match(ledger, /Sanitized execution log/);
+  assert.match(ledger, /trial\.prompt\.text/);
+  assert.match(ledger, /scrollIntoView/);
+  assert.match(ledger, /run-entry.*evidence-open/);
+  assert.match(ledger, /value >= \.8/);
+  assert.match(ledger, /value >= \.6/);
+  assert.match(ledger, /Performance bands/);
+  for (const tier of ["strong", "mixed", "limited", "unavailable"]) assert.ok(`${ledger}${css}`.includes(`tier-${tier}`));
+  assert.doesNotMatch(ledger, /setMatrixOpen/);
+  assert.doesNotMatch(ledger, /aria-label="Agent harness"/);
+  assert.doesNotMatch(ledger, /aria-label="Product surface"/);
+  assert.match(ledger, /navigator\.clipboard/);
+  assert.match(ledger, /DenseLeaderboard/);
+  assert.match(ledger, /Cross-configuration context/);
+  assert.match(ledger, /Diagnostics/);
+  assert.match(css, /\.analysis-table/);
+  assert.match(css, /\.analysis-metric/);
+  assert.match(contract, /"pi"/);
+  assert.match(contract, /"opencode"/);
+  assert.match(contract, /\.min\(2\)/);
+  assert.doesNotMatch(ledger, /\/vendors\/\$\{/);
+  assert.doesNotMatch(ledger, /\/trials\/\$\{/);
+});
+
+test("formal IA, static export, noindex, and markdown siblings are present", async () => {
+  const [config, layout, robots] = await Promise.all([source("next.config.ts"), source("app/layout.tsx"), source("app/robots.ts")]);
+  assert.match(config, /output: "export"/);
+  assert.match(layout, /index: false/);
+  assert.match(robots, /disallow: "\/"/);
+  for (const route of ["app/database/page.tsx", "app/database/compare/page.tsx", "app/methodology/page.tsx", "app/reproduce/page.tsx", "app/independence/page.tsx", "app/changelog/page.tsx", "app/data/page.tsx"]) await assert.doesNotReject(() => source(route));
+  for (const file of ["methodology.md", "reproduce.md", "independence.md", "changelog.md"]) await assert.doesNotReject(() => source(`public/${file}`));
+});
+
+test("all six result states have text-bearing presentation semantics", async () => {
+  const [css, explorer, receipt] = await Promise.all([source("app/globals.css"), source("components/benchmark-explorer.tsx"), source("components/detail-pages.tsx")]);
+  for (const state of ["pass", "fail", "structural_na", "missing", "blocked", "unclassified"]) assert.ok(`${css}${explorer}${receipt}`.includes(state), `missing state ${state}`);
+  assert.match(css, /:focus-visible/);
+  assert.match(css, /@media \(max-width: 600px\)/);
+  assert.match(css, /@media print/);
+});
+
+test("the generated fixture exposes the ten formal indexes plus editorial catalog", async () => {
+  const files = await readdir(fixtureRoot);
+  for (const expected of ["publication.json", "leaderboard.json", "cells.json", "tasks.json", "trials.json", "failures.json", "evidence-index.json", "readiness.json", "methodology-index.json", "economics.json", "editorial.json"]) assert.ok(files.includes(expected));
 });

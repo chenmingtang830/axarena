@@ -1,0 +1,3 @@
+import { TrustPage } from "@/components/trust-page";
+
+export default function ChangelogPage() { return <TrustPage eyebrow="Trust layer · changelog" title="Publication history, without silent edits." deck="Every production release will identify its suite version, batch, source commit, correction status, and downloadable export." markdownHref="/changelog.md"><h2>2026-08-02 · Presentation prototype</h2><p>Added three clickable visual directions, the Database v1 information architecture, strict publication validation, explicit six-state semantics, and synthetic non-citable fixture data.</p><h2>Production results</h2><p>Deferred. No value shown in this sprint may be cited as a product finding.</p></TrustPage>; }

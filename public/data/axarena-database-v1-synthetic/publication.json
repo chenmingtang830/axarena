@@ -1,0 +1,149 @@
+{
+  "schema": "ax.axarena-publication/v2",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
+  "category": "database",
+  "suite_version": 1,
+  "generated_at": "2026-08-02T12:00:00.000Z",
+  "publication_readiness": "prototype_synthetic",
+  "synthetic": true,
+  "warning": "PROTOTYPE · SYNTHETIC VALUES · DO NOT CITE",
+  "cohort": [
+    {
+      "slug": "neon",
+      "expected_surfaces": [
+        "api",
+        "cli"
+      ]
+    },
+    {
+      "slug": "cockroachdb",
+      "expected_surfaces": [
+        "api",
+        "cli"
+      ]
+    },
+    {
+      "slug": "turso",
+      "expected_surfaces": [
+        "api",
+        "cli"
+      ]
+    },
+    {
+      "slug": "supabase",
+      "expected_surfaces": [
+        "api",
+        "cli"
+      ]
+    },
+    {
+      "slug": "insforge",
+      "expected_surfaces": [
+        "api",
+        "cli"
+      ]
+    },
+    {
+      "slug": "nile",
+      "expected_surfaces": [
+        "api",
+        "cli"
+      ]
+    }
+  ],
+  "scope": {
+    "task_count": 7,
+    "surfaces": [
+      "api",
+      "cli"
+    ],
+    "harnesses": [
+      "codex",
+      "claude-code",
+      "opencode",
+      "pi"
+    ],
+    "effort_profiles": [
+      "high"
+    ],
+    "trial_count": 3,
+    "expected_cells": 60,
+    "completed_cells": 60
+  },
+  "execution": {
+    "batch_id": "synthetic-batch-2026-08-02",
+    "source_commit_sha": "synthetic",
+    "configuration_hash": "f7465b05cdfc1219e1614f620e9f51b0d5dea3f867cd0bc23c51b70b78fdd000",
+    "pins": [
+      {
+        "configuration_id": "codex-gpt",
+        "harness": "codex",
+        "model": "gpt-5.6-terra",
+        "effort": "high",
+        "harness_version": "1.2.3-synthetic"
+      },
+      {
+        "configuration_id": "claude-code-claude",
+        "harness": "claude-code",
+        "model": "claude-sonnet-5",
+        "effort": "high",
+        "harness_version": "2.3.4-synthetic"
+      },
+      {
+        "configuration_id": "opencode-open-a",
+        "harness": "opencode",
+        "model": "open-model-a",
+        "effort": "high",
+        "harness_version": "1.0.0-synthetic"
+      },
+      {
+        "configuration_id": "pi-open-a",
+        "harness": "pi",
+        "model": "open-model-a",
+        "effort": "high",
+        "harness_version": "0.1.0-synthetic"
+      },
+      {
+        "configuration_id": "pi-open-b",
+        "harness": "pi",
+        "model": "open-model-b",
+        "effort": "high",
+        "harness_version": "0.1.0-synthetic"
+      }
+    ]
+  },
+  "quality_gates": [
+    {
+      "id": "synthetic-data",
+      "label": "Synthetic fixture only",
+      "status": "warn",
+      "detail": "Production rerun remains deferred."
+    },
+    {
+      "id": "rank-parity",
+      "label": "Stored leaderboard rank parity",
+      "status": "pass",
+      "detail": "Every view is ordered by its sealed rank field."
+    },
+    {
+      "id": "evidence-coverage",
+      "label": "Evidence references resolve",
+      "status": "pass",
+      "detail": "Every synthetic trial resolves to a receipt."
+    }
+  ],
+  "integrity": {
+    "schema": "ax.publication-integrity/v1",
+    "batch_manifest_sha256": "4bb24efc9641afc5ded1ca77eabb6e2fcf062d2112ccd61bd8bd6acd89180bae",
+    "batch_completion_sha256": "21606b5837ee49171e56cff2afe21083fb4dfe5c15c79b54695c2dc335181c89",
+    "runtime_report_sha256": "d92c6a81b2ff50096bcda80885427d1f59a25b5f483f7055523504925d16ab23",
+    "attestation": {
+      "status": "synthetic"
+    }
+  },
+  "notes": [
+    "Transcript, journey, tokens, cost, and timing are diagnostic only.",
+    "Only live-state oracle outcomes are authoritative for success."
+  ]
+}

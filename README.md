@@ -1,38 +1,27 @@
-# AXArena Database Publication Site
+# AXArena presentation layer
 
-AXArena is a neutral, open-source agent usability benchmark. It helps
-developers understand which products are genuinely agent-friendly—especially
-across APIs, CLIs, and discoverability—without judging overall product quality.
+Static, evidence-first publication frontend for AXArena. This branch contains a shared production foundation and three clickable visual directions for AXArena-Database v1:
 
-Static, dependency-free publication site for `axarena.ai`. The primary
-leaderboard is `/database/`; the reusable AXArena evaluation methodology lives
-at `/methodology/`. The launch article lives at
-`/blog/introducing-axarena/`. Legacy vendor and report URLs remain compatible.
+- `/prototypes/verdict/` — conclusion-first launch story.
+- `/prototypes/ledger/` — evidence and provenance ledger.
+- `/prototypes/journey/` — diagnostic agent-execution profile.
 
-Visual language, palette tokens, reusable components, and modification rules
-are documented in [`DESIGN.md`](./DESIGN.md).
+The canonical `/database/` route uses the progressively disclosed Evidence Ledger. Every prototype consumes the same strict synthetic fixture under `public/data/axarena-database-v1-synthetic/`; real vendor names are used, but every value is synthetic and non-citable.
 
-The benchmark JSON files under `data/axarena-database-v1/` use the same
-versioned schemas as `ax-eval export-publication`. They are an explicitly
-watermarked draft fixture. After every publication gate passes, replace the
-schema-produced JSON files with a sanitized frozen export and retain
-`editorial.json` as the website-owned narrative layer; the site never reads raw
-run directories or recomputes ranking.
+## Stack
 
-## Local verification
+Next.js App Router, TypeScript, Tailwind CSS v4, Zod, React SVG, and `d3-scale`. `output: "export"` keeps hosting portable. There is no auth, database, Server Action, or runtime ranking.
+
+## Commands
 
 ```bash
+npm install
+npm run validate:data
 npm test
-python3 -m http.server 4173
+npm run typecheck
+npm run build
 ```
 
-Open `http://localhost:4173/database/`. Before production deployment, verify
-desktop, mobile, keyboard navigation, print layout, evidence downloads, legacy
-redirects, and that the Draft banner disappears only when `publication.json`
-is `publication_ready`, every gate passes, all ranks are complete, and the
-editorial copy contains no draft language.
+`validate:data` fails closed on missing files, unknown schema versions, duplicate trial/evidence IDs, rank mismatch, cohort mismatch, unresolved evidence references, editorial references, and common sensitive-text patterns.
 
-## Vercel
-
-Use this repository as the project root. Framework preset: Other; no build
-command; output directory `.`.
+The production numeric contract is exported by `ax-eval/ax-arena`; this repository owns only the presentation and editorial/catalog layer.
