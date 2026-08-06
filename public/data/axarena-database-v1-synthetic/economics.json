@@ -1,0 +1,548 @@
+{
+  "schema": "ax.arena-economics/v1",
+  "generated_at": "2026-08-02T12:00:00.000Z",
+  "context_only": true,
+  "affects_rank": false,
+  "cells": [
+    {
+      "id": "neon/api/codex-gpt/high",
+      "product": "neon",
+      "surface": "api",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/api/codex-gpt/high",
+      "product": "supabase",
+      "surface": "api",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/api/codex-gpt/high",
+      "product": "cockroachdb",
+      "surface": "api",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/api/codex-gpt/high",
+      "product": "turso",
+      "surface": "api",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/api/codex-gpt/high",
+      "product": "nile",
+      "surface": "api",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/api/codex-gpt/high",
+      "product": "insforge",
+      "surface": "api",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/cli/codex-gpt/high",
+      "product": "turso",
+      "surface": "cli",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/cli/codex-gpt/high",
+      "product": "neon",
+      "surface": "cli",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/cli/codex-gpt/high",
+      "product": "supabase",
+      "surface": "cli",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/cli/codex-gpt/high",
+      "product": "insforge",
+      "surface": "cli",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/cli/codex-gpt/high",
+      "product": "cockroachdb",
+      "surface": "cli",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/cli/codex-gpt/high",
+      "product": "nile",
+      "surface": "cli",
+      "harness": "codex",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/api/claude-code-claude/high",
+      "product": "supabase",
+      "surface": "api",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/api/claude-code-claude/high",
+      "product": "cockroachdb",
+      "surface": "api",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/api/claude-code-claude/high",
+      "product": "neon",
+      "surface": "api",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/api/claude-code-claude/high",
+      "product": "nile",
+      "surface": "api",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/api/claude-code-claude/high",
+      "product": "turso",
+      "surface": "api",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/api/claude-code-claude/high",
+      "product": "insforge",
+      "surface": "api",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/cli/claude-code-claude/high",
+      "product": "cockroachdb",
+      "surface": "cli",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/cli/claude-code-claude/high",
+      "product": "supabase",
+      "surface": "cli",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/cli/claude-code-claude/high",
+      "product": "neon",
+      "surface": "cli",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/cli/claude-code-claude/high",
+      "product": "turso",
+      "surface": "cli",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/cli/claude-code-claude/high",
+      "product": "nile",
+      "surface": "cli",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/cli/claude-code-claude/high",
+      "product": "insforge",
+      "surface": "cli",
+      "harness": "claude-code",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/api/opencode-open-a/high",
+      "product": "neon",
+      "surface": "api",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/api/opencode-open-a/high",
+      "product": "supabase",
+      "surface": "api",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/api/opencode-open-a/high",
+      "product": "cockroachdb",
+      "surface": "api",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/api/opencode-open-a/high",
+      "product": "turso",
+      "surface": "api",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/api/opencode-open-a/high",
+      "product": "insforge",
+      "surface": "api",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/api/opencode-open-a/high",
+      "product": "nile",
+      "surface": "api",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/cli/opencode-open-a/high",
+      "product": "turso",
+      "surface": "cli",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/cli/opencode-open-a/high",
+      "product": "neon",
+      "surface": "cli",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/cli/opencode-open-a/high",
+      "product": "insforge",
+      "surface": "cli",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/cli/opencode-open-a/high",
+      "product": "supabase",
+      "surface": "cli",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/cli/opencode-open-a/high",
+      "product": "cockroachdb",
+      "surface": "cli",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/cli/opencode-open-a/high",
+      "product": "nile",
+      "surface": "cli",
+      "harness": "opencode",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/api/pi-open-a/high",
+      "product": "supabase",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/api/pi-open-a/high",
+      "product": "cockroachdb",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/api/pi-open-a/high",
+      "product": "neon",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/api/pi-open-a/high",
+      "product": "nile",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/api/pi-open-a/high",
+      "product": "turso",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/api/pi-open-a/high",
+      "product": "insforge",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/cli/pi-open-a/high",
+      "product": "cockroachdb",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/cli/pi-open-a/high",
+      "product": "supabase",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/cli/pi-open-a/high",
+      "product": "neon",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/cli/pi-open-a/high",
+      "product": "turso",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/cli/pi-open-a/high",
+      "product": "nile",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/cli/pi-open-a/high",
+      "product": "insforge",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/api/pi-open-b/high",
+      "product": "neon",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/api/pi-open-b/high",
+      "product": "supabase",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/api/pi-open-b/high",
+      "product": "cockroachdb",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/api/pi-open-b/high",
+      "product": "turso",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/api/pi-open-b/high",
+      "product": "nile",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/api/pi-open-b/high",
+      "product": "insforge",
+      "surface": "api",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "turso/cli/pi-open-b/high",
+      "product": "turso",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "neon/cli/pi-open-b/high",
+      "product": "neon",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "insforge/cli/pi-open-b/high",
+      "product": "insforge",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "supabase/cli/pi-open-b/high",
+      "product": "supabase",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "cockroachdb/cli/pi-open-b/high",
+      "product": "cockroachdb",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    },
+    {
+      "id": "nile/cli/pi-open-b/high",
+      "product": "nile",
+      "surface": "cli",
+      "harness": "pi",
+      "status": "unavailable",
+      "estimated_cost_usd": null,
+      "cost_per_success_usd": null
+    }
+  ]
+}

@@ -1,71 +1,43 @@
-# AXArena design system
+# AXArena presentation design system
 
-AXArena uses an **editorial research publication** pattern: a restrained product
-hero, dense evidence tables, wide breakout charts, and a readable long-form
-methodology. It should feel independent and rigorous without looking like an
-academic PDF or a generic SaaS dashboard.
+AXArena is an independent research publication, not a SaaS dashboard. Its interaction rhythm is **cross-configuration average + range → dense harness × model analysis table → always-visible task matrix → vendor report sheet with inline trial evidence**. Product evidence never navigates through nested report pages: each task exposes the complete three-trial series, and a selected trial expands its prompt, sanitized execution log, output, oracle, diagnostics, and provenance in place.
 
-## Visual principles
+## Shared rules
 
-1. **Outcome first.** Lead with the agent-experience question, then show the
-   leaderboard and task matrix before editorial interpretation.
-2. **Editorial typography.** Georgia is used for high-impact headings; the
-   system sans stack handles interface copy and tables; the monospace stack is
-   reserved for labels, scores, ids, and technical metadata.
-3. **White canvas, blue identity.** The full page uses a clean white canvas,
-   cool gray structure, and restrained blue emphasis. The hero adds a soft blue
-   gradient without tinting the rest of the page.
-4. **Evidence is interactive.** Product names, matrix cells, and finding ids
-   lead to underlying evidence. Color never carries status by itself.
-5. **One narrow reading column, wide data breakouts.** Prose tops out near
-   680px; leaderboards, matrices, and charts can use the full 1200px frame.
+- Outcome authority: live-state oracle receipts. Journey, transcript, stdout, duration, tokens, and cost are diagnostic only.
+- Configuration boundary: every harness × model × effort pin has a stable `configuration_id` and separate Overall/API/CLI results; no combined AX Score or Experience Grade. The prototype demonstrates Codex, Claude Code, OpenCode, and two Pi model configurations.
+- Cross-configuration context: the lead chart summarizes arithmetic mean and min–max range across published harness × model configurations. The dense table preserves each configuration and surface, so the average never erases model or harness variance.
+- Surface boundary: Overall, API, and CLI are separate stored views.
+- Status semantics: pass, fail, structural N/A, missing, blocked, and unclassified always carry text or shape in addition to color.
+- Evidence path: any leaderboard result opens one vendor report sheet. Task rows disclose all configuration/surface runs and trials 1–3; a trial expands inline instead of loading another report. Static vendor/task/trial routes remain fallback artifacts, not the primary navigation model.
+- Prototype safety: the fixed banner, watermark, robots metadata, and `/robots.txt` all identify the fixture as synthetic and non-citable.
 
-## Design tokens
+## Three directions
 
-All palette changes belong in the `:root` block of `styles.css`:
+### A · Verdict
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `--paper` | `#fff` | Page and component background |
-| `--soft` | `#f5f6f8` | Quiet panels and table headers |
-| `--ink` | `#121318` | Primary text and strong borders |
-| `--muted` | `#5f6470` | Secondary text |
-| `--faint` | `#e3e5ea` | Dividers and chart tracks |
-| `--accent` | `#3157d5` | Links, labels, bars, and emphasis |
-| `--accent-blue` | `#3157d5` | Cool side of the brand spectrum |
-| `--accent-blue-light` | `#7892ef` | Light end of blue diagrams |
-| `--accent-soft` | `#dce4ff` | Stronger blue highlight |
-| `--accent-pale` | `#f3f5ff` | Hover and card gradients |
+Bold grotesk headlines, ranked dot plot, and large delta metrics. Optimized for a 30-second launch read.
 
-Green, amber, and red status tokens remain semantic and must not be replaced by
-the blue brand accent.
+### B · Evidence Ledger · selected
 
-## Reusable patterns
+Warm paper, editorial serif, provenance stamps, and hard ledger rules. The first viewport contains a portable conclusion chart; professional detail is progressively disclosed in an overlay report. This is the canonical `/database/` direction.
 
-- **Logo:** a 3×3 evidence-grid mark with three blue cells on the main diagonal.
-- **Hero:** large serif question, short definition, three actions, benchmark
-  scope card, and the restrained original blue radial light.
-- **Section heading:** monospace eyebrow + serif title + optional explanatory
-  note aligned on a 1200px frame.
-- **Leaderboard:** horizontally scrollable table with plain-language metrics,
-  tooltips, numbers, and a visible Draft watermark.
-- **Task matrix:** labeled percentage cells, legend, N/A/missing states, and
-  evidence links.
-- **Research cards:** thin borders, white-to-pale-blue gradient, limited use.
-- **Methodology article:** wide introduction, complete SVG pipeline overview,
-  sticky table of contents, and a roughly 720px reading column for detail.
-- **Launch article:** a narrative 760px column that reuses the canonical SVG
-  and links to methodology instead of duplicating formal scoring rules.
-- **External source:** inline SVG mark plus visible link text. No CDN icon or
-  font dependency.
+### C · Agent Journey
 
-## Making changes
+Cool technical canvas and a discovery → authentication → execution → verification track. Optimized for DevRel and product diagnosis.
 
-- Change global color or typography in `styles.css` tokens first; avoid adding
-  one-off hex values inside components.
-- Change content hierarchy and reusable markup helpers in `app.js`.
-- Keep public benchmark values in the versioned JSON dataset. The website must
-  not calculate new benchmark truth.
-- Preserve Draft behavior, keyboard focus, text labels, table scrolling, and
-  print styles.
-- Run `npm test` and `node --check app.js site-data.js` after every design edit.
+All three directions use the same validated fixture and benchmark semantics. Ledger now owns the selected interaction model; Verdict and Journey remain visual comparison prototypes.
+
+## Implementation
+
+- Next.js App Router + static export.
+- Tailwind v4 is available for composition; durable publication styles live in `app/globals.css` tokens and component classes.
+- Native React SVG and `d3-scale` render the dot plot; no general chart bundle.
+- Client JavaScript is limited to leaderboard exploration, nested report-sheet state, and shareable query state. Trust pages and static fallback receipts remain server-rendered output.
+- System fonts avoid external requests and layout shift.
+
+## Breakpoints
+
+- 1440px: full editorial frame and dense grouped analysis table.
+- 1024px: collapsed two-stage hero and horizontally scrollable table with sticky rank/product identity.
+- 390px: single-column story, full-width controls, horizontally contained data tables, and two-column receipt journey.

@@ -1,0 +1,1019 @@
+{
+  "schema": "ax.axarena-leaderboard/v2",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
+  "generated_at": "2026-08-02T12:00:00.000Z",
+  "scoring_authority": "verified live-state oracle outcomes only",
+  "agents": [
+    {
+      "configuration_id": "codex-gpt",
+      "harness": "codex",
+      "label": "Codex",
+      "model": "gpt-5.6-terra",
+      "effort": "high",
+      "harness_version_semver": "1.2.3-synthetic",
+      "views": {
+        "overall": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.86,
+              "pass_3_rate": 0.79,
+              "pass_3_count": 11,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.81,
+              "pass_3_rate": 0.72,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.76,
+              "pass_3_rate": 0.74,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.71,
+              "pass_3_rate": 0.69,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.62,
+              "pass_3_rate": 0.55,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.55,
+              "pass_3_rate": 0.48,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "api": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.91,
+              "pass_3_rate": 0.86,
+              "pass_3_count": 12,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.84,
+              "pass_3_rate": 0.81,
+              "pass_3_count": 11,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.78,
+              "pass_3_rate": 0.76,
+              "pass_3_count": 11,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.72,
+              "pass_3_rate": 0.62,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.61,
+              "pass_3_rate": 0.52,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.58,
+              "pass_3_rate": 0.48,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "cli": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.9,
+              "pass_3_rate": 0.83,
+              "pass_3_count": 12,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.81,
+              "pass_3_rate": 0.71,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.68,
+              "pass_3_rate": 0.67,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.66,
+              "pass_3_rate": 0.61,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.64,
+              "pass_3_rate": 0.62,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.49,
+              "pass_3_rate": 0.43,
+              "pass_3_count": 6,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        }
+      }
+    },
+    {
+      "configuration_id": "claude-code-claude",
+      "harness": "claude-code",
+      "label": "Claude Code",
+      "model": "claude-sonnet-5",
+      "effort": "high",
+      "harness_version_semver": "2.3.4-synthetic",
+      "views": {
+        "overall": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.84,
+              "pass_3_rate": 0.81,
+              "pass_3_count": 11,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.8,
+              "pass_3_rate": 0.76,
+              "pass_3_count": 11,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.74,
+              "pass_3_rate": 0.69,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.67,
+              "pass_3_rate": 0.62,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.64,
+              "pass_3_rate": 0.57,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.58,
+              "pass_3_rate": 0.5,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "api": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.88,
+              "pass_3_rate": 0.86,
+              "pass_3_count": 12,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.86,
+              "pass_3_rate": 0.83,
+              "pass_3_count": 12,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.78,
+              "pass_3_rate": 0.71,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.73,
+              "pass_3_rate": 0.69,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.6,
+              "pass_3_rate": 0.52,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.57,
+              "pass_3_rate": 0.48,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "cli": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.82,
+              "pass_3_rate": 0.79,
+              "pass_3_count": 11,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.72,
+              "pass_3_rate": 0.67,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.7,
+              "pass_3_rate": 0.67,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.68,
+              "pass_3_rate": 0.62,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.61,
+              "pass_3_rate": 0.55,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.59,
+              "pass_3_rate": 0.52,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        }
+      }
+    },
+    {
+      "configuration_id": "opencode-open-a",
+      "harness": "opencode",
+      "label": "OpenCode",
+      "model": "open-model-a",
+      "effort": "high",
+      "harness_version_semver": "1.0.0-synthetic",
+      "views": {
+        "overall": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.79,
+              "pass_3_rate": 0.7,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.71,
+              "pass_3_rate": 0.6,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.69,
+              "pass_3_rate": 0.65,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.66,
+              "pass_3_rate": 0.62,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.58,
+              "pass_3_rate": 0.49,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.46,
+              "pass_3_rate": 0.36,
+              "pass_3_count": 5,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "api": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.84,
+              "pass_3_rate": 0.77,
+              "pass_3_count": 11,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.77,
+              "pass_3_rate": 0.72,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.73,
+              "pass_3_rate": 0.69,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.62,
+              "pass_3_rate": 0.51,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.54,
+              "pass_3_rate": 0.41,
+              "pass_3_count": 6,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.52,
+              "pass_3_rate": 0.4,
+              "pass_3_count": 6,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "cli": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.81,
+              "pass_3_rate": 0.71,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.74,
+              "pass_3_rate": 0.62,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.62,
+              "pass_3_rate": 0.55,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.61,
+              "pass_3_rate": 0.58,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.6,
+              "pass_3_rate": 0.56,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.39,
+              "pass_3_rate": 0.31,
+              "pass_3_count": 4,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        }
+      }
+    },
+    {
+      "configuration_id": "pi-open-a",
+      "harness": "pi",
+      "label": "Pi",
+      "model": "open-model-a",
+      "effort": "high",
+      "harness_version_semver": "0.1.0-synthetic",
+      "views": {
+        "overall": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.74,
+              "pass_3_rate": 0.68,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.72,
+              "pass_3_rate": 0.68,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.68,
+              "pass_3_rate": 0.6,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.58,
+              "pass_3_rate": 0.51,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.55,
+              "pass_3_rate": 0.46,
+              "pass_3_count": 6,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.46,
+              "pass_3_rate": 0.36,
+              "pass_3_count": 5,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "api": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.82,
+              "pass_3_rate": 0.78,
+              "pass_3_count": 11,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.74,
+              "pass_3_rate": 0.69,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.72,
+              "pass_3_rate": 0.63,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.64,
+              "pass_3_rate": 0.58,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.51,
+              "pass_3_rate": 0.41,
+              "pass_3_count": 6,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.45,
+              "pass_3_rate": 0.34,
+              "pass_3_count": 5,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "cli": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.7,
+              "pass_3_rate": 0.66,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.66,
+              "pass_3_rate": 0.59,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.64,
+              "pass_3_rate": 0.59,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.59,
+              "pass_3_rate": 0.51,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.52,
+              "pass_3_rate": 0.44,
+              "pass_3_count": 6,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.47,
+              "pass_3_rate": 0.39,
+              "pass_3_count": 5,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        }
+      }
+    },
+    {
+      "configuration_id": "pi-open-b",
+      "harness": "pi",
+      "label": "Pi",
+      "model": "open-model-b",
+      "effort": "high",
+      "harness_version_semver": "0.1.0-synthetic",
+      "views": {
+        "overall": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.72,
+              "pass_3_rate": 0.6,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.71,
+              "pass_3_rate": 0.63,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.61,
+              "pass_3_rate": 0.57,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.59,
+              "pass_3_rate": 0.55,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.5,
+              "pass_3_rate": 0.41,
+              "pass_3_count": 6,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.46,
+              "pass_3_rate": 0.36,
+              "pass_3_count": 5,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "api": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.77,
+              "pass_3_rate": 0.69,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.69,
+              "pass_3_rate": 0.65,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.66,
+              "pass_3_rate": 0.62,
+              "pass_3_count": 9,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.63,
+              "pass_3_rate": 0.51,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.52,
+              "pass_3_rate": 0.41,
+              "pass_3_count": 6,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.46,
+              "pass_3_rate": 0.34,
+              "pass_3_count": 5,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        },
+        "cli": {
+          "rows": [
+            {
+              "rank": 1,
+              "vendor": "turso",
+              "mean_pass_at_1": 0.81,
+              "pass_3_rate": 0.71,
+              "pass_3_count": 10,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 2,
+              "vendor": "neon",
+              "mean_pass_at_1": 0.67,
+              "pass_3_rate": 0.54,
+              "pass_3_count": 8,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 3,
+              "vendor": "insforge",
+              "mean_pass_at_1": 0.54,
+              "pass_3_rate": 0.47,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 4,
+              "vendor": "supabase",
+              "mean_pass_at_1": 0.54,
+              "pass_3_rate": 0.51,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 5,
+              "vendor": "cockroachdb",
+              "mean_pass_at_1": 0.52,
+              "pass_3_rate": 0.48,
+              "pass_3_count": 7,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            },
+            {
+              "rank": 6,
+              "vendor": "nile",
+              "mean_pass_at_1": 0.4,
+              "pass_3_rate": 0.32,
+              "pass_3_count": 4,
+              "pass_3_total": 14,
+              "surface_count": 2,
+              "surfaces": {}
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

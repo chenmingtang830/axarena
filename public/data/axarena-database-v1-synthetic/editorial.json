@@ -1,0 +1,82 @@
+{
+  "schema": "ax.axarena-editorial/v1",
+  "vendors": {
+    "neon": {
+      "name": "Neon",
+      "url": "https://neon.com",
+      "descriptor": "Serverless Postgres",
+      "summary": "Serverless Postgres evaluated on the same canonical Database v1 task intent.",
+      "limitations": [
+        "All values in this prototype are synthetic."
+      ]
+    },
+    "cockroachdb": {
+      "name": "CockroachDB",
+      "url": "https://www.cockroachlabs.com",
+      "descriptor": "Distributed SQL",
+      "summary": "Distributed SQL evaluated on the same canonical Database v1 task intent.",
+      "limitations": [
+        "All values in this prototype are synthetic."
+      ]
+    },
+    "turso": {
+      "name": "Turso",
+      "url": "https://turso.tech",
+      "descriptor": "Edge SQLite",
+      "summary": "Edge SQLite evaluated on the same canonical Database v1 task intent.",
+      "limitations": [
+        "All values in this prototype are synthetic."
+      ]
+    },
+    "supabase": {
+      "name": "Supabase",
+      "url": "https://supabase.com",
+      "descriptor": "Postgres platform",
+      "summary": "Postgres platform evaluated on the same canonical Database v1 task intent.",
+      "limitations": [
+        "All values in this prototype are synthetic."
+      ]
+    },
+    "insforge": {
+      "name": "InsForge",
+      "url": "https://insforge.dev",
+      "descriptor": "Agent-native backend",
+      "summary": "Agent-native backend evaluated on the same canonical Database v1 task intent.",
+      "limitations": [
+        "All values in this prototype are synthetic."
+      ]
+    },
+    "nile": {
+      "name": "Nile",
+      "url": "https://www.thenile.dev",
+      "descriptor": "Multi-tenant Postgres",
+      "summary": "Multi-tenant Postgres evaluated on the same canonical Database v1 task intent.",
+      "limitations": [
+        "All values in this prototype are synthetic."
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": "finding-rank-reversal",
+      "title": "The agent changes the verdict",
+      "body": "Codex places Neon first; Claude Code places CockroachDB first in the synthetic fixture.",
+      "evidence_refs": [
+        "ev-28d831caaf2371fd"
+      ]
+    },
+    {
+      "id": "finding-surface-divergence",
+      "title": "Surface quality is not interchangeable",
+      "body": "Turso’s synthetic CLI result materially exceeds its API result under Codex.",
+      "evidence_refs": [
+        "ev-3b2500752ce85ba6"
+      ]
+    }
+  ],
+  "limitations": [
+    "Production execution is deferred.",
+    "Vendor names are real; every result, receipt, duration, and score is synthetic.",
+    "Cost and readiness never affect usability rank."
+  ]
+}

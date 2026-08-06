@@ -1,0 +1,201 @@
+{
+  "schema": "ax.axarena-readiness/v1",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
+  "generated_at": "2026-08-02T12:00:00.000Z",
+  "affects_usability_rank": false,
+  "vendors": [
+    {
+      "vendor": "neon",
+      "agent_discovery": [
+        {
+          "harness": "codex",
+          "status": "measured",
+          "score": 0.6
+        },
+        {
+          "harness": "claude-code",
+          "status": "measured",
+          "score": 0.66
+        },
+        {
+          "harness": "opencode",
+          "status": "measured",
+          "score": 0.63
+        },
+        {
+          "harness": "pi",
+          "status": "measured",
+          "score": 0.57
+        }
+      ],
+      "static_readiness": {
+        "status": "methodology_only",
+        "score": null,
+        "methodology_artifacts": [
+          "suite.methodology.yaml"
+        ]
+      }
+    },
+    {
+      "vendor": "cockroachdb",
+      "agent_discovery": [
+        {
+          "harness": "codex",
+          "status": "measured",
+          "score": 0.67
+        },
+        {
+          "harness": "claude-code",
+          "status": "measured",
+          "score": 0.73
+        },
+        {
+          "harness": "opencode",
+          "status": "measured",
+          "score": 0.7
+        },
+        {
+          "harness": "pi",
+          "status": "measured",
+          "score": 0.64
+        }
+      ],
+      "static_readiness": {
+        "status": "methodology_only",
+        "score": null,
+        "methodology_artifacts": [
+          "suite.methodology.yaml"
+        ]
+      }
+    },
+    {
+      "vendor": "turso",
+      "agent_discovery": [
+        {
+          "harness": "codex",
+          "status": "measured",
+          "score": 0.74
+        },
+        {
+          "harness": "claude-code",
+          "status": "measured",
+          "score": 0.8
+        },
+        {
+          "harness": "opencode",
+          "status": "measured",
+          "score": 0.77
+        },
+        {
+          "harness": "pi",
+          "status": "measured",
+          "score": 0.71
+        }
+      ],
+      "static_readiness": {
+        "status": "methodology_only",
+        "score": null,
+        "methodology_artifacts": [
+          "suite.methodology.yaml"
+        ]
+      }
+    },
+    {
+      "vendor": "supabase",
+      "agent_discovery": [
+        {
+          "harness": "codex",
+          "status": "measured",
+          "score": 0.81
+        },
+        {
+          "harness": "claude-code",
+          "status": "measured",
+          "score": 0.87
+        },
+        {
+          "harness": "opencode",
+          "status": "measured",
+          "score": 0.84
+        },
+        {
+          "harness": "pi",
+          "status": "measured",
+          "score": 0.78
+        }
+      ],
+      "static_readiness": {
+        "status": "methodology_only",
+        "score": null,
+        "methodology_artifacts": [
+          "suite.methodology.yaml"
+        ]
+      }
+    },
+    {
+      "vendor": "insforge",
+      "agent_discovery": [
+        {
+          "harness": "codex",
+          "status": "measured",
+          "score": 0.88
+        },
+        {
+          "harness": "claude-code",
+          "status": "measured",
+          "score": 0.59
+        },
+        {
+          "harness": "opencode",
+          "status": "measured",
+          "score": 0.56
+        },
+        {
+          "harness": "pi",
+          "status": "measured",
+          "score": 0.85
+        }
+      ],
+      "static_readiness": {
+        "status": "methodology_only",
+        "score": null,
+        "methodology_artifacts": [
+          "suite.methodology.yaml"
+        ]
+      }
+    },
+    {
+      "vendor": "nile",
+      "agent_discovery": [
+        {
+          "harness": "codex",
+          "status": "measured",
+          "score": 0.6
+        },
+        {
+          "harness": "claude-code",
+          "status": "measured",
+          "score": 0.66
+        },
+        {
+          "harness": "opencode",
+          "status": "measured",
+          "score": 0.63
+        },
+        {
+          "harness": "pi",
+          "status": "measured",
+          "score": 0.57
+        }
+      ],
+      "static_readiness": {
+        "status": "methodology_only",
+        "score": null,
+        "methodology_artifacts": [
+          "suite.methodology.yaml"
+        ]
+      }
+    }
+  ]
+}

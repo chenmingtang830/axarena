@@ -1,0 +1,17 @@
+{
+  "schema": "ax.axarena-methodology-index/v1",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
+  "generated_at": "2026-08-02T12:00:00.000Z",
+  "methodology": {
+    "source_of_truth": "verified live-state read-back",
+    "behavioral": [
+      "suite.yaml",
+      "grader-ledger.yaml"
+    ],
+    "static_ax": [
+      "suite.methodology.yaml"
+    ],
+    "trial_policy": "Three clean-environment trials per agent × vendor × surface × task."
+  }
+}

@@ -1,0 +1,519 @@
+{
+  "schema": "ax.axarena-tasks/v2",
+  "benchmark": "axarena-database",
+  "display_name": "AXArena-Database",
+  "generated_at": "2026-08-02T12:00:00.000Z",
+  "tasks": [
+    {
+      "task_id": "db-T01-access-control",
+      "title": "Configure an idiomatic access-control mechanism",
+      "difficulty": "L2",
+      "intent": "Configure a documented access-control mechanism and leave it discoverable.",
+      "kind": "core",
+      "allowed_surfaces": [
+        "api",
+        "cli"
+      ],
+      "applicability": [
+        {
+          "vendor": "neon",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "neon",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "cli",
+          "status": "applicable"
+        }
+      ]
+    },
+    {
+      "task_id": "db-T02-evolve-schema",
+      "title": "Apply a schema evolution",
+      "difficulty": "L3",
+      "intent": "Add a status field without replacing the task-scoped container.",
+      "kind": "core",
+      "allowed_surfaces": [
+        "api",
+        "cli"
+      ],
+      "applicability": [
+        {
+          "vendor": "neon",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "neon",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "cli",
+          "status": "applicable"
+        }
+      ]
+    },
+    {
+      "task_id": "db-T03-inspect-schema",
+      "title": "Inspect container metadata",
+      "difficulty": "L1",
+      "intent": "Confirm name and status fields through the metadata surface.",
+      "kind": "core",
+      "allowed_surfaces": [
+        "api",
+        "cli"
+      ],
+      "applicability": [
+        {
+          "vendor": "neon",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "neon",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "cli",
+          "status": "applicable"
+        }
+      ]
+    },
+    {
+      "task_id": "db-T04-query-records",
+      "title": "Filter and read matching records",
+      "difficulty": "L2",
+      "intent": "Create three records and return only the two active matches.",
+      "kind": "core",
+      "allowed_surfaces": [
+        "api",
+        "cli"
+      ],
+      "applicability": [
+        {
+          "vendor": "neon",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "neon",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "cli",
+          "status": "applicable"
+        }
+      ]
+    },
+    {
+      "task_id": "db-T05-vector-search",
+      "title": "Create a vector-enabled dataset and query it",
+      "difficulty": "L2",
+      "intent": "Create a three-dimensional vector index and rank alpha first.",
+      "kind": "core",
+      "allowed_surfaces": [
+        "api",
+        "cli"
+      ],
+      "applicability": [
+        {
+          "vendor": "neon",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "neon",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "cli",
+          "status": "structural_na"
+        }
+      ]
+    },
+    {
+      "task_id": "db-T06-write-records",
+      "title": "Create, update, and delete one record lifecycle",
+      "difficulty": "L2",
+      "intent": "Complete one verified CRUD lifecycle.",
+      "kind": "core",
+      "allowed_surfaces": [
+        "api",
+        "cli"
+      ],
+      "applicability": [
+        {
+          "vendor": "neon",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "neon",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "cli",
+          "status": "applicable"
+        }
+      ]
+    },
+    {
+      "task_id": "db-T07-full-text-search",
+      "title": "Create a searchable text dataset and query it",
+      "difficulty": "L2",
+      "intent": "Return orchard as the top full-text result.",
+      "kind": "core",
+      "allowed_surfaces": [
+        "api",
+        "cli"
+      ],
+      "applicability": [
+        {
+          "vendor": "neon",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "neon",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "cockroachdb",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "turso",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "supabase",
+          "surface": "cli",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "insforge",
+          "surface": "cli",
+          "status": "structural_na"
+        },
+        {
+          "vendor": "nile",
+          "surface": "api",
+          "status": "applicable"
+        },
+        {
+          "vendor": "nile",
+          "surface": "cli",
+          "status": "applicable"
+        }
+      ]
+    }
+  ]
+}
