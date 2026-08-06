@@ -30,8 +30,14 @@ export function LedgerExplorer({ data }: { data: PublicationData }) {
   const pathname = usePathname();
   const dialogRef = useRef<HTMLDivElement>(null);
   const [shareState, setShareState] = useState("Copy link");
-  const panel = (search.get("panel") === "vendor" ? "vendor" : null) as Panel | null;
-  const vendor = search.get("vendor");
+  const queryPanel = search.get("panel") === "vendor" ? "vendor" : null;
+  const queryVendor = search.get("vendor");
+  // Keep the interaction responsive even when the static-export router does not
+  // immediately commit a search-param navigation. The URL remains the shareable
+  // source of truth, while this local value provides the optimistic UI state.
+  const [openVendorSlug, setOpenVendorSlug] = useState<string | null>(queryPanel ? queryVendor : null);
+  const panel = (openVendorSlug ? "vendor" : null) as Panel | null;
+  const vendor = openVendorSlug;
   const x = scaleLinear().domain([0, 1]).range([0, 100]);
   const crossHarnessRows = useMemo(() => data.publication.cohort.map(({ slug }) => {
     const values = data.leaderboard.agents.map((configuration) => configuration.views.overall.rows.find((row) => row.vendor === slug)?.mean_pass_at_1).filter((value): value is number => value !== undefined);
@@ -45,8 +51,18 @@ export function LedgerExplorer({ data }: { data: PublicationData }) {
     router.replace(`${pathname}${params.size ? `?${params}` : ""}`, { scroll: false });
   };
 
-  const openVendor = (slug: string) => update({ panel: "vendor", vendor: slug, task: null, trial: null, agent: null, surface: null });
-  const closePanel = () => update({ panel: null, vendor: null, task: null, trial: null });
+  const openVendor = (slug: string) => {
+    setOpenVendorSlug(slug);
+    update({ panel: "vendor", vendor: slug, task: null, trial: null, agent: null, surface: null });
+  };
+  const closePanel = () => {
+    setOpenVendorSlug(null);
+    update({ panel: null, vendor: null, task: null, trial: null });
+  };
+
+  useEffect(() => {
+    setOpenVendorSlug(queryPanel ? queryVendor : null);
+  }, [queryPanel, queryVendor]);
 
   useEffect(() => {
     if (!panel) return;
