@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test tests/*.test.mjs",
-    "stage:calibration": "node scripts/stage-local-calibration.mjs"
+    "stage:calibration": "node scripts/stage-local-calibration.mjs",
+    "stage:calibration:database-v1": "node scripts/stage-local-database-calibration.mjs"
   }
 }

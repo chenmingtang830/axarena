@@ -1,4 +1,4 @@
-import { DATA_ROOT, loadDataset, loadLocalCalibration, validateDataset, validateLocalCalibration } from "/site-data.js";
+import { DATA_ROOT, loadDataset, loadLocalCalibration, loadLocalDatabaseCalibration, validateDataset, validateLocalCalibration, validateLocalDatabaseCalibration } from "/site-data.js";
 
 const app = document.querySelector("#app");
 const GITHUB_URL = "https://github.com/chenmingtang830/ax-eval";
@@ -336,13 +336,36 @@ function renderCalibration(data, validation) {
     const records = cells.filter((cell) => cell.model === model);
     const passed = records.reduce((sum, cell) => sum + (cell.tasks_passed ?? 0), 0);
     const total = records.reduce((sum, cell) => sum + (cell.tasks_total ?? 0), 0);
-    const cost = records.reduce((sum, cell) => sum + (cell.cost_usd ?? 0), 0);
-    return `<article class="finding"><span class="finding-number">OpenCode</span><h3>${esc(model.replace(/^openrouter\//, ""))}</h3><p><strong>${total ? pct(passed / total) : "—"}</strong> verified task success across ${records.length} completed cells.</p><dl><div><dt>Cost</dt><dd>${cost ? `$${cost.toFixed(3)}` : "unavailable"}</dd></div><div><dt>Cleanup</dt><dd>${records.filter((cell) => cell.cleanup_status === "confirmed").length}/${records.length} confirmed</dd></div></dl></article>`;
+    const reportedCost = records.reduce((sum, cell) => sum + (cell.reported_cost_usd ?? 0), 0);
+    return `<article class="finding"><span class="finding-number">OpenCode</span><h3>${esc(model.replace(/^openrouter\//, ""))}</h3><p><strong>${total ? pct(passed / total) : "—"}</strong> verified task success across ${records.length} completed cells.</p><dl><div><dt>Reported cost</dt><dd>${reportedCost ? `$${reportedCost.toFixed(3)}` : "unavailable"}</dd></div><div><dt>Cleanup</dt><dd>${records.filter((cell) => cell.cleanup_status === "confirmed").length}/${records.length} confirmed</dd></div></dl></article>`;
   }).join("");
   const rows = cells.map((cell) => `<tr><td>${esc(cell.vendor)}</td><td>${esc(cell.surface.toUpperCase())}</td><td>${esc(cell.model.replace(/^openrouter\//, ""))}</td><td>${pct(cell.pass_at_1)}</td><td>${esc(cell.cleanup_status)}</td><td><code>${esc(cell.evidence.record)}</code></td></tr>`).join("");
-  const content = `<main><header class="article-hero"><span class="eyebrow">LOCAL CALIBRATION · NOT FOR PUBLICATION</span><h1>OpenCode agent calibration</h1><p>These are local, single-trial diagnostic results. They are not trusted execution evidence, not an AXArena publication, and not a model ranking.</p></header>${validation.errors.length ? `<aside class="validation-note"><strong>Local data validation failed:</strong> ${validation.errors.map(esc).join(" · ")}</aside>` : ""}${section("model-results", "OpenCode × open-weight models", "Verified local task outcomes", `<div class="finding-grid">${byModel}</div>`, `Source ${esc(data.source_commit_sha ?? "unknown")} · budget $${esc(data.budget_usd ?? "unknown")} · recorded $${esc(data.cost_usd ?? "unavailable")}`)}${section("local-cells", "Evidence ledger", "Cell-level records", `<div class="table-shell"><table><thead><tr><th>Vendor</th><th>Surface</th><th>Model</th><th>Verified success</th><th>Cleanup</th><th>Record</th></tr></thead><tbody>${rows}</tbody></table></div>`, "Evidence paths are local-only and sanitized before this view is built.")}</main>`;
+  const content = `<main><header class="article-hero"><span class="eyebrow">LOCAL CALIBRATION · NOT FOR PUBLICATION</span><h1>OpenCode agent calibration</h1><p>These are local, single-trial diagnostic results. They are not trusted execution evidence, not an AXArena publication, and not a model ranking.</p></header>${validation.errors.length ? `<aside class="validation-note"><strong>Local data validation failed:</strong> ${validation.errors.map(esc).join(" · ")}</aside>` : ""}${section("model-results", "OpenCode × open-weight models", "Verified local task outcomes", `<div class="finding-grid">${byModel}</div>`, `Source ${esc(data.source_commit_sha ?? "unknown")} · budget $${esc(data.budget_usd ?? "unknown")} · OpenCode-reported diagnostic spend $${esc(data.reported_cost_usd ?? "unavailable")}`)}${section("local-cells", "Evidence ledger", "Cell-level records", `<div class="table-shell"><table><thead><tr><th>Vendor</th><th>Surface</th><th>Model</th><th>Verified success</th><th>Cleanup</th><th>Record</th></tr></thead><tbody>${rows}</tbody></table></div>`, "Evidence paths are local-only and sanitized before this view is built.")}</main>`;
   app.innerHTML = shell(content, false, "calibration");
   document.title = "Local OpenCode Calibration · AXArena";
+}
+
+function renderDatabaseCalibration(data, validation) {
+  const cells = data.cells ?? [];
+  const executed = cells.filter((cell) => cell.status !== "structural_na");
+  const completed = cells.filter((cell) => cell.status === "completed");
+  const summary = [...new Set(cells.map((cell) => cell.harness))].map((harness) => {
+    const rows = completed.filter((cell) => cell.harness === harness);
+    const passed = rows.reduce((sum, cell) => sum + (cell.tasks_passed ?? 0), 0);
+    const total = rows.reduce((sum, cell) => sum + (cell.tasks_total ?? 0), 0);
+    const measured = rows.reduce((sum, cell) => sum + (cell.cost_usd ?? 0), 0);
+    return `<article class="finding"><span class="finding-number">${esc(harness)}</span><h3>${esc(harness === "codex" ? "Codex · gpt-5.6-terra" : "Claude Code · claude-sonnet-5")}</h3><p><strong>${total ? pct(passed / total) : "—"}</strong> verified task success across ${rows.length} confirmed cells.</p><dl><div><dt>Measured cost</dt><dd>${rows.some((cell) => cell.cost_status === "unknown") ? "partly unknown" : `$${measured.toFixed(3)}`}</dd></div><div><dt>Cleanup</dt><dd>${rows.filter((cell) => cell.cleanup_status === "confirmed").length}/${rows.length} confirmed</dd></div></dl></article>`;
+  }).join("");
+  const rows = cells.map((cell) => {
+    const tasks = cell.task_results?.length
+      ? `<details><summary>${cell.task_results.filter((task) => task.success).length}/${cell.task_results.length} tasks</summary><ul class="cell-list">${cell.task_results.map((task) => `<li><code>${esc(task.id)}</code><span>${task.na ? "N/A" : task.success ? "passed" : esc(task.error ?? "failed")}</span></li>`).join("")}</ul></details>`
+      : "—";
+    const evidence = cell.evidence?.record ? `<code>${esc(cell.evidence.record)}</code>` : "—";
+    return `<tr><td>${esc(vendorName(cell.vendor))}</td><td>${esc(cell.surface.toUpperCase())}</td><td>${esc(cell.harness)}</td><td>${esc(cell.model)}</td><td>${cell.status === "completed" ? pct(cell.pass_at_1) : `<span class="incomplete">${esc(cell.status)}</span>`}</td><td>${esc(cell.cleanup_status)}</td><td>${tasks}</td><td>${evidence}</td></tr>`;
+  }).join("");
+  const content = `<main><header class="article-hero"><span class="eyebrow">LOCAL CALIBRATION · NOT FOR PUBLICATION</span><h1>AXArena Database · local one-trial calibration</h1><p>This is a diagnostic pass@1 view of the existing 24-cell placeholder matrix. It uses medium effort, has no ranking semantics, and is not trusted publication evidence.</p><div class="hero-actions"><a class="primary" href="/calibration/">Open OpenCode diagnostic page</a><a href="/database/">View unchanged database preview</a></div></header>${validation.errors.length ? `<aside class="validation-note"><strong>Local data validation failed:</strong> ${validation.errors.map(esc).join(" · ")}</aside>` : ""}${section("calibration-summary", "Local evidence", "Harness summaries", `<div class="finding-grid">${summary}</div>`, `${completed.length} confirmed cells · ${executed.length} execution slots · ${cells.length} display cells · measured spend $${esc(data.measured_cost_usd ?? "unknown")}`)}${section("calibration-matrix", "No ranking", "24-cell evidence matrix", `<div class="table-shell"><table><thead><tr><th>Vendor</th><th>Surface</th><th>Harness</th><th>Model</th><th>Task success</th><th>Cleanup</th><th>Tasks</th><th>Record</th></tr></thead><tbody>${rows}</tbody></table></div>`, "Structural N/A is an admission/capability result, not a model failure. Evidence paths are local-only.")}</main>`;
+  app.innerHTML = shell(content, false, "calibration");
+  document.title = "Local AXArena Database Calibration · AXArena";
 }
 
 function revealHashTarget() {
@@ -363,6 +386,11 @@ async function start() {
     if (document.body.dataset.page === "calibration") {
       const data = await loadLocalCalibration();
       renderCalibration(data, validateLocalCalibration(data));
+      return;
+    }
+    if (document.body.dataset.page === "calibration-database-v1") {
+      const data = await loadLocalDatabaseCalibration();
+      renderDatabaseCalibration(data, validateLocalDatabaseCalibration(data));
       return;
     }
     const data = await loadDataset();

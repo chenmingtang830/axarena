@@ -1,5 +1,6 @@
 export const DATA_ROOT = "/data/axarena-database-v1";
 export const LOCAL_CALIBRATION_ROOT = "/data/axarena-local-calibration";
+export const LOCAL_DATABASE_CALIBRATION_ROOT = "/data/axarena-local-calibration/database-v1";
 
 const FILES = ["publication", "leaderboard", "cells", "tasks", "evidence-index", "editorial"];
 const SCHEMAS = {
@@ -97,5 +98,30 @@ export function validateLocalCalibration(data) {
   if (!Array.isArray(data?.models) || data.models.length !== 2) errors.push("local calibration must contain two exact model routes");
   if (!Array.isArray(data?.cells) || !data.cells.length) errors.push("local calibration has no completed cell evidence");
   if (!String(data?.warning ?? "").includes("NOT FOR PUBLICATION")) errors.push("local calibration warning is missing");
+  return { errors, ready: errors.length === 0 };
+}
+
+export async function loadLocalDatabaseCalibration(fetchImpl = fetch) {
+  const response = await fetchImpl(`${LOCAL_DATABASE_CALIBRATION_ROOT}/database-v1.json`);
+  if (!response.ok) throw new Error(`Could not load local database calibration (${response.status})`);
+  return response.json();
+}
+
+export function validateLocalDatabaseCalibration(data) {
+  const errors = [];
+  if (data?.schema !== "ax.axarena-local-calibration/v2") errors.push("unexpected local database calibration schema");
+  if (data?.trust_level !== "local") errors.push("local database calibration must declare local trust");
+  if (data?.publication_eligible !== false) errors.push("local database calibration must be non-publishable");
+  if (data?.trial_count !== 1) errors.push("local database calibration must be single-trial");
+  if (data?.profile !== "medium") errors.push("local database calibration must declare medium profile");
+  if (!String(data?.warning ?? "").includes("NOT FOR PUBLICATION")) errors.push("local database warning is missing");
+  if (!Array.isArray(data?.cells) || data.cells.length !== 24) errors.push("local database calibration must contain 24 display cells");
+  const structural = (data?.cells ?? []).filter((cell) => cell.status === "structural_na");
+  if (structural.length !== 2) errors.push("local database calibration must contain two structural N/A cells");
+  for (const cell of data?.cells ?? []) {
+    if (!cell.key || !cell.vendor || !cell.surface || !cell.harness || !cell.model) errors.push("local database cell identity is incomplete");
+    if (cell.status === "completed" && cell.cleanup_status !== "confirmed") errors.push(`${cell.key} completed without confirmed cleanup`);
+    if (cell.status === "structural_na" && !cell.reason) errors.push(`${cell.key} structural N/A has no reason`);
+  }
   return { errors, ready: errors.length === 0 };
 }

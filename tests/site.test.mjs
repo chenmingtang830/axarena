@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { validateDataset, validateLocalCalibration } from "../site-data.js";
+import { validateDataset, validateLocalCalibration, validateLocalDatabaseCalibration } from "../site-data.js";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const dataRoot = resolve(root, "data/axarena-database-v1");
@@ -116,4 +116,25 @@ test("local calibration is a separate non-publication surface", async () => {
   assert.match(app, /LOCAL CALIBRATION · NOT FOR PUBLICATION/);
   assert.match(app, /loadLocalCalibration/);
   assert.ok(validateLocalCalibration({ publication_eligible: true }).errors.includes("local calibration must be non-publishable"));
+});
+
+test("database-v1 local calibration has its own non-publication route and schema", async () => {
+  const [html, app] = await Promise.all([
+    readFile(resolve(root, "calibration/database-v1/index.html"), "utf8"),
+    readFile(resolve(root, "app.js"), "utf8"),
+  ]);
+  const cells = Array.from({ length: 24 }, (_, index) => ({
+    key: `vendor-${index}/api/codex/trial-1`, vendor: `vendor-${index}`, surface: "api", harness: "codex", model: "gpt-5.6-terra",
+    status: index < 2 ? "structural_na" : "completed", cleanup_status: index < 2 ? "not_run" : "confirmed",
+    reason: index < 2 ? "admitted provisioning blocker" : null,
+  }));
+  const valid = validateLocalDatabaseCalibration({
+    schema: "ax.axarena-local-calibration/v2", trust_level: "local", publication_eligible: false,
+    warning: "LOCAL CALIBRATION · NOT FOR PUBLICATION OR RANKING", trial_count: 1, profile: "medium", cells,
+  });
+  assert.deepEqual(valid.errors, []);
+  assert.match(html, /data-page="calibration-database-v1"/);
+  assert.match(html, /noindex,nofollow/);
+  assert.match(app, /renderDatabaseCalibration/);
+  assert.match(app, /Structural N\/A is an admission\/capability result/);
 });
