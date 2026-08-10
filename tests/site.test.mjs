@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { validateDataset } from "../site-data.js";
+import { validateDataset, validateLocalCalibration } from "../site-data.js";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const dataRoot = resolve(root, "data/axarena-database-v1");
@@ -95,4 +95,25 @@ test("legacy routes redirect into the single report", async () => {
   assert.match(app, /location\.replace\(`\/database\/#vendor-/);
   assert.match(app, /location\.replace\(`\/database\/#\$\{section\}`/);
   assert.match(app, /document\.body\.dataset\.page === "methodology"/);
+});
+
+test("local calibration is a separate non-publication surface", async () => {
+  const [html, app] = await Promise.all([
+    readFile(resolve(root, "calibration/index.html"), "utf8"),
+    readFile(resolve(root, "app.js"), "utf8"),
+  ]);
+  const valid = validateLocalCalibration({
+    schema: "ax.axarena-local-calibration/v1",
+    trust_level: "local",
+    publication_eligible: false,
+    warning: "LOCAL CALIBRATION · NOT FOR PUBLICATION OR RANKING",
+    models: ["openrouter/example-a", "openrouter/example-b"],
+    cells: [{ id: "example" }],
+  });
+  assert.deepEqual(valid.errors, []);
+  assert.match(html, /data-page="calibration"/);
+  assert.match(html, /noindex,nofollow/);
+  assert.match(app, /LOCAL CALIBRATION · NOT FOR PUBLICATION/);
+  assert.match(app, /loadLocalCalibration/);
+  assert.ok(validateLocalCalibration({ publication_eligible: true }).errors.includes("local calibration must be non-publishable"));
 });

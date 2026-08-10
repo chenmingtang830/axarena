@@ -1,4 +1,5 @@
 export const DATA_ROOT = "/data/axarena-database-v1";
+export const LOCAL_CALIBRATION_ROOT = "/data/axarena-local-calibration";
 
 const FILES = ["publication", "leaderboard", "cells", "tasks", "evidence-index", "editorial"];
 const SCHEMAS = {
@@ -80,4 +81,21 @@ export function validateDataset(data) {
     errors,
     ready: readiness === "publication_ready" && gatesPass && ranksComplete && errors.length === 0,
   };
+}
+
+export async function loadLocalCalibration(fetchImpl = fetch) {
+  const response = await fetchImpl(`${LOCAL_CALIBRATION_ROOT}/calibration.json`);
+  if (!response.ok) throw new Error(`Could not load local calibration (${response.status})`);
+  return response.json();
+}
+
+export function validateLocalCalibration(data) {
+  const errors = [];
+  if (data?.schema !== "ax.axarena-local-calibration/v1") errors.push("unexpected local calibration schema");
+  if (data?.trust_level !== "local") errors.push("local calibration must declare local trust");
+  if (data?.publication_eligible !== false) errors.push("local calibration must be non-publishable");
+  if (!Array.isArray(data?.models) || data.models.length !== 2) errors.push("local calibration must contain two exact model routes");
+  if (!Array.isArray(data?.cells) || !data.cells.length) errors.push("local calibration has no completed cell evidence");
+  if (!String(data?.warning ?? "").includes("NOT FOR PUBLICATION")) errors.push("local calibration warning is missing");
+  return { errors, ready: errors.length === 0 };
 }
