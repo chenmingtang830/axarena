@@ -89,7 +89,7 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   assert.match(html, /id="app"/);
   assert.match(methodologyHtml, /data-page="methodology"/);
   assert.match(blogHtml, /data-page="blog"/);
-  assert.match(blogHtml, /Introducing AXArena: Benchmarking Agent Experience/);
+  assert.match(blogHtml, /Introducing AXArena Database 1\.0\.0/);
   for (const id of ["results", "task-matrix", "findings", "methodology-preview", "about", "evidence", "reproduce", "independence", "changelog"]) {
     assert.ok(app.includes(`"${id}"`), `missing ${id} section`);
   }
@@ -103,6 +103,8 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   assert.match(app, /<svg viewBox="0 0 1200 500"/);
   assert.match(app, /function renderBlog/);
   assert.match(app, /Agents are becoming users of software/);
+  assert.match(app, /Public release · 8 min read/);
+  assert.match(app, /It generates no composite AX Score and no official rank/);
   assert.match(app, /href="\/blog\/introducing-axarena\/"/);
   assert.match(app, /aria-label="\$\{esc\(label\)\}"/);
   assert.match(app, /AX Score/);
