@@ -1,4 +1,4 @@
-import { DATA_ROOT, V24_DATA_ROOT, loadDataset, loadV24Dataset, validateDataset, validateV24Dataset } from "/site-data.js";
+import { DATA_ROOT, RELEASE_DATA_ROOT, loadDataset, loadReleaseDataset, validateDataset, validateReleaseDataset } from "/site-data.js";
 
 const app = document.querySelector("#app");
 const GITHUB_URL = "https://github.com/chenmingtang830/ax-eval";
@@ -212,7 +212,7 @@ function reproductionCommands() {
     "",
     "npm run ax-eval -- export-publication \\",
     "  --from <frozen-publication-bundle> \\",
-    "  --out data/axarena-database-v1",
+    "  --out data/axarena-database-prepublication-fixture",
   ].join("\n"))}</code></pre>`;
 }
 
@@ -226,7 +226,7 @@ function navigation(page) {
   </nav>`;
 }
 
-function methodologyArticleV24(publication, methodology) {
+function methodologyArticleRelease(publication, methodology) {
   return `<div class="article-layout">
     <aside class="article-toc"><span class="eyebrow">On this page</span><a href="#question">1. Research question</a><a href="#contract">2. Frozen contract</a><a href="#execution">3. Controlled execution</a><a href="#verification">4. Independent verification</a><a href="#aggregation">5. Vendor-first aggregation</a><a href="#validity">6. Validity gates</a><a href="#publication">7. Publication boundary</a><a href="#open-source">Open source</a></aside>
     <article class="methodology-article">
@@ -234,7 +234,7 @@ function methodologyArticleV24(publication, methodology) {
       <section id="contract"><span class="step-number">02</span><h2>Freeze one task and route contract before admitted runs</h2><p>The five-vendor core, CLI surface, task semantics, model/provider identity, trial count, read-back oracles, and exclusion policy are fixed before publication. Turso remains compatibility evidence outside the core matrix.</p></section>
       <section id="execution"><span class="step-number">03</span><h2>Hold the harness fixed and vary model samples</h2><p>One host harness executes ${methodology.model_strata.length} declared model/provider slices for ${methodology.trial_count} isolated trials per core vendor. Fallback is forbidden unless explicitly disclosed; provider resolution and upstream failures remain in the route ledger.</p></section>
       <section id="verification"><span class="step-number">04</span><h2>Verify product state, not agent narration</h2><p>Programmatic read-back oracles determine task outcomes. Audit archives preserve observations, reconciliation decisions, replacement ledgers, and gate results. Discovery evidence is scored separately so a missing discovery trace does not rewrite later observed stage outcomes.</p></section>
-      <section id="aggregation"><span class="step-number">05</span><h2>Aggregate by vendor</h2><p>Every primary row is a vendor. The headline outcome is verified J01 completion over 14 observations per vendor (${methodology.model_strata.length} models × ${methodology.trial_count} trials). Cost, end-to-end latency, first-action latency, discovery mode, atomic success, and stage completion are columns. Models and trials remain supplementary slices.</p><p>No composite AX Score, tie-break, or official rank is generated for V2.4.</p></section>
+      <section id="aggregation"><span class="step-number">05</span><h2>Aggregate by vendor</h2><p>Every primary row is a vendor. The headline outcome is verified J01 completion over 14 observations per vendor (${methodology.model_strata.length} models × ${methodology.trial_count} trials). Cost, end-to-end latency, first-action latency, discovery mode, atomic success, and stage completion are columns. Models and trials remain supplementary slices.</p><p>No composite AX Score, tie-break, or official rank is generated for release 1.0.0.</p></section>
       <section id="validity"><span class="step-number">06</span><h2>Admit only valid evidence</h2><p>Invalid infrastructure, route, or evidence never enters a denominator. The frozen release admits ${publication.sample.atomic_cells} atomic cells and ${publication.sample.j01_sessions} J01 sessions, with zero invalid cells. Failures and transient upstream errors remain visible rather than being silently retried or relabeled.</p></section>
       <section id="publication"><span class="step-number">07</span><h2>Publish a bounded diagnostic claim</h2><p>${esc(methodology.publication_boundary)}</p><p>The site reads a frozen, sanitized export with SHA-256 checksums. It does not read raw run directories or recompute benchmark truth in the browser.</p><a class="text-link" href="/database/#results">View the vendor results →</a></section>
       <section id="open-source"><span class="eyebrow">Open evaluation infrastructure</span><h2>ax-eval powers the evidence pipeline</h2><p><code>ax-eval</code> owns execution contracts, review gates, evidence capture, live-state verification, audits, and deterministic publication exports. AXArena owns benchmark framing and the public presentation.</p>${githubLink("Explore ax-eval on GitHub", "button primary")}</section>
@@ -242,15 +242,15 @@ function methodologyArticleV24(publication, methodology) {
   </div>`;
 }
 
-function renderMethodologyV24(data, ready, validationErrors) {
+function renderMethodologyRelease(data, ready, validationErrors) {
   const content = `<main>
-    <header class="article-hero"><span class="eyebrow">AXArena Database · V2.4 methodology</span><h1>Fixed harness, multi-model samples, vendor-first results</h1><p>AXArena measures whether agents can discover, operate, and verify database work inside a frozen CLI environment. Vendors are the comparison rows; models and trials are samples.</p><div class="hero-actions"><a class="primary" href="/database/#results">View vendor results</a>${githubLink("Inspect ax-eval evidence")}</div></header>
+    <header class="article-hero"><span class="eyebrow">AXArena Database 1.0.0 · DAEB V2.4 protocol</span><h1>Fixed harness, multi-model samples, vendor-first results</h1><p>AXArena measures whether agents can discover, operate, and verify database work inside a frozen CLI environment. Vendors are the comparison rows; models and trials are samples.</p><div class="hero-actions"><a class="primary" href="/database/#results">View vendor results</a>${githubLink("Inspect ax-eval evidence")}</div></header>
     ${validationErrors.length ? `<aside class="validation-note"><strong>Data validation failed:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
-    ${methodologyArticleV24(data.publication, data.methodology)}
+    ${methodologyArticleRelease(data.publication, data.methodology)}
   </main>`;
   app.innerHTML = shell(content, ready, "methodology");
   revealHashTarget();
-  document.title = "V2.4 methodology · AXArena";
+  document.title = "AXArena Database 1.0.0 methodology";
 }
 
 function shell(content, ready, page = "database") {
@@ -263,7 +263,7 @@ function shell(content, ready, page = "database") {
     <footer><div><strong>AXArena</strong> · A neutral, open-source agent usability benchmark</div><div>Evidence generated with ${githubLink("ax-eval on GitHub", "footer-github")}, our open-source evaluation engine.</div></footer>`;
 }
 
-function v24VendorTable(rows) {
+function releaseVendorTable(rows) {
   return `<div class="table-shell"><table><thead><tr>
     <th>Vendor</th><th><abbr title="Completed connection, operation read-back, and recovery read-back">J01 success</abbr></th>
     <th>Pass / 14</th><th>Mean cost</th><th>Mean end-to-end</th><th>Mean first action</th>
@@ -280,7 +280,7 @@ function v24VendorTable(rows) {
   }).join("")}</tbody></table></div>`;
 }
 
-function v24StageTable(rows) {
+function releaseStageTable(rows) {
   return `<div class="table-shell"><table><thead><tr><th>Vendor</th><th>Discovery</th><th>Connect</th><th>Operate</th><th>Recovery</th><th>Upstream errors</th><th>Route entries</th></tr></thead><tbody>${rows.map((row) => {
     const stages = row.outcome_metrics.j01.stages;
     const e = row.efficiency_metrics;
@@ -288,37 +288,37 @@ function v24StageTable(rows) {
   }).join("")}</tbody></table></div>`;
 }
 
-function v24ModelTable(rows) {
+function releaseModelTable(rows) {
   return `<div class="table-shell"><table><thead><tr><th>Model slice</th><th>Provider</th><th>J01 success</th><th>Pass / 10</th><th>Total cost</th><th>Mean cost</th><th>Median end-to-end</th><th>Median first action</th></tr></thead><tbody>${rows.map((row) => `<tr><td><code>${esc(row.model)}</code></td><td>${esc(row.provider)}</td><td>${scoreBadge(row.j01_success_rate)}</td><td>${row.j01_pass}/${row.j01_planned}</td><td>${money(row.j01_total_reported_cost_usd)}</td><td>${money(row.j01_mean_reported_cost_usd)}</td><td>${seconds(row.j01_median_duration_ms)}</td><td>${seconds(row.j01_median_first_action_latency_ms)}</td></tr>`).join("")}</tbody></table></div>`;
 }
 
-function renderDatabaseV24(data, ready, validationErrors) {
+function renderDatabaseRelease(data, ready, validationErrors) {
   const publication = data.publication;
   const rows = data.vendor_summary.rows;
   const models = data.model_slices.rows;
   const downloads = ["publication", "vendor-summary", "model-slices", "tasks", "evidence-index", "archive-manifest", "exclusions", "methodology", "checksums"];
   const content = `<main>
     <section class="hero" id="top"><div class="hero-glow" aria-hidden="true"></div><div class="hero-copy">
-      <span class="eyebrow">AXArena Database · V2.4 diagnostic release</span><h1>Can agents complete a real database journey?</h1>
+      <span class="eyebrow">AXArena Database 1.0.0 · Public diagnostic release</span><h1>Can agents complete a real database journey?</h1>
       <p>Five database vendors, one fixed CLI harness, seven model/provider slices, two trials, and independent live-state verification. Vendors are rows; models are samples.</p>
       <div class="hero-actions"><a class="primary" href="#results">View vendor results</a>${githubLink("Inspect ax-eval evidence")}<a href="/methodology/">Read methodology</a></div></div>
-      <aside class="benchmark-card"><span class="eyebrow">Frozen evidence</span><h2>Database V2.4</h2><p>Diagnostic fixed-environment comparison—not an official product ranking.</p><dl class="scope-card"><div><dt>Vendors</dt><dd>5 core</dd></div><div><dt>Models</dt><dd>7 slices</dd></div><div><dt>Trials</dt><dd>2</dd></div><div><dt>Atomic cells</dt><dd>${publication.sample.atomic_cells}</dd></div><div><dt>J01 journeys</dt><dd>${publication.sample.j01_sessions}</dd></div><div><dt>Invalid admitted</dt><dd>0</dd></div></dl></aside>
+      <aside class="benchmark-card"><span class="eyebrow">Frozen evidence · DAEB V2.4 protocol</span><h2>Database 1.0.0</h2><p>Diagnostic fixed-environment comparison—not an official product ranking.</p><dl class="scope-card"><div><dt>Vendors</dt><dd>5 core</dd></div><div><dt>Models</dt><dd>7 slices</dd></div><div><dt>Trials</dt><dd>2</dd></div><div><dt>Atomic cells</dt><dd>${publication.sample.atomic_cells}</dd></div><div><dt>J01 journeys</dt><dd>${publication.sample.j01_sessions}</dd></div><div><dt>Invalid admitted</dt><dd>0</dd></div></dl></aside>
     </section>
     ${validationErrors.length ? `<aside class="validation-note"><strong>Data validation failed:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
-    ${section("results", "Primary outcome · vendor rows", "End-to-end J01 success, cost, latency, and discovery", `<div class="results-intro"><p class="prose lead">A J01 pass requires connection, successful operation read-back, and recovery read-back in the same journey. No composite AX Score or rank is generated for this diagnostic release.</p></div>${v24VendorTable(rows)}${rankChart(rows.map((row) => ({ vendor: row.vendor, value: row.outcome_metrics.j01.pass_rate })), "value", "J01 success rate — descriptive, not ranked")}`, "14 J01 observations per vendor · 7 models × 2 trials")}
-    ${section("stages", "Partial outcomes", "Where the journey succeeds or breaks", v24StageTable(rows), "Discovery is reported separately; a discovery evidence miss does not erase later observed stages.")}
-    ${section("model-slices", "Supplementary slice", "Model-level stability, cost, and latency", `<p class="prose lead">These rows help interpret sample sensitivity. They are not the primary organization of the benchmark.</p>${v24ModelTable(models)}`, "10 J01 observations per model · 5 vendors × 2 trials")}
+    ${section("results", "Primary outcome · vendor rows", "End-to-end J01 success, cost, latency, and discovery", `<div class="results-intro"><p class="prose lead">A J01 pass requires connection, successful operation read-back, and recovery read-back in the same journey. No composite AX Score or rank is generated for this diagnostic release.</p></div>${releaseVendorTable(rows)}${rankChart(rows.map((row) => ({ vendor: row.vendor, value: row.outcome_metrics.j01.pass_rate })), "value", "J01 success rate — descriptive, not ranked")}`, "14 J01 observations per vendor · 7 models × 2 trials")}
+    ${section("stages", "Partial outcomes", "Where the journey succeeds or breaks", releaseStageTable(rows), "Discovery is reported separately; a discovery evidence miss does not erase later observed stages.")}
+    ${section("model-slices", "Supplementary slice", "Model-level stability, cost, and latency", `<p class="prose lead">These rows help interpret sample sensitivity. They are not the primary organization of the benchmark.</p>${releaseModelTable(models)}`, "10 J01 observations per model · 5 vendors × 2 trials")}
     ${section("task-matrix", "Task pack", "One journey plus six atomic diagnostics", `<div class="split"><article><h3>Primary: db-J01-native-journey</h3><p>Discover a native entry point, connect, operate with independent read-back, then recover and verify the recovered state.</p></article><article><h3>Diagnostics: T17–T22</h3><p>Session discovery, constraint preservation, transactional recovery, aggregate query, principal continuity, and negative-query verification.</p></article></div>`)}
-    ${section("evidence", "Audit trail", "Failures remain first-class evidence", `<div class="open-source-card"><div><span class="eyebrow">28 final-audit archives</span><h3>Every admitted model × trial × task-family input is retained.</h3><p>Sanitized observations, reconciliation ledgers, replacement ledgers, gate decisions, exclusions, and SHA-256 checksums are downloadable. Transient upstream failures are preserved; the release does not promise they will recur on demand.</p></div><div class="open-source-actions"><a class="button primary" href="${V24_DATA_ROOT}/evidence-index.json">Open evidence index</a><a class="button" href="${V24_DATA_ROOT}/checksums.json">Verify checksums</a></div></div><div class="download-grid">${downloads.map((name) => `<a href="${V24_DATA_ROOT}/${name}.json"><strong>${esc(name)}</strong><span>frozen JSON</span></a>`).join("")}</div>`, `Evidence tree ${esc(data.checksums.tree_sha256.slice(0, 16))}…`)}
+    ${section("evidence", "Audit trail", "Failures remain first-class evidence", `<div class="open-source-card"><div><span class="eyebrow">28 final-audit archives</span><h3>Every admitted model × trial × task-family input is retained.</h3><p>Sanitized observations, reconciliation ledgers, replacement ledgers, gate decisions, exclusions, and SHA-256 checksums are downloadable. Transient upstream failures are preserved; the release does not promise they will recur on demand.</p></div><div class="open-source-actions"><a class="button primary" href="${RELEASE_DATA_ROOT}/evidence-index.json">Open evidence index</a><a class="button" href="${RELEASE_DATA_ROOT}/checksums.json">Verify checksums</a></div></div><div class="download-grid">${downloads.map((name) => `<a href="${RELEASE_DATA_ROOT}/${name}.json"><strong>${esc(name)}</strong><span>frozen JSON</span></a>`).join("")}</div>`, `Evidence tree ${esc(data.checksums.tree_sha256.slice(0, 16))}…`)}
     ${section("methodology-preview", "Methodology", "Fixed harness, varying models, vendor-first aggregation", `<div class="principles"><p><strong>Outcome:</strong> J01 verified completion.</p><p><strong>Diagnostics:</strong> atomic and discovery signals stay separate.</p><p><strong>Validity:</strong> invalid infrastructure, route, and evidence never enter denominators.</p></div><div class="section-actions"><a class="button primary" href="/methodology/">Read the full methodology</a></div>`)}
     ${section("about", "Claim boundary", "A strong AX diagnostic, not a universal leaderboard", `<div class="prose"><p>This release supports comparison inside its frozen CLI environment. It does not claim all database workloads, interfaces, harnesses, or future model versions behave the same way. Turso remains journey-only compatibility evidence outside the five-vendor core.</p></div>`)}
     ${section("reproduce", "Reproduce", "Recompute the public export", `<pre><code>npx tsx ax-arena/benchmark/scripts/summarize-v24-vendor.ts\nnpx tsx ax-arena/benchmark/scripts/export-v24-publication.ts\nnpm test --workspace @ax-arena/benchmark -- --run tests/v24-publication.test.ts</code></pre>`)}
     ${section("independence", "Independence", "Results follow audited evidence", `<div class="principles"><p>Task and route contracts were frozen before admitted runs.</p><p>Independent read-back decides outcomes; agent narration does not.</p><p>Excluded diagnostics and invalid routes remain disclosed.</p></div>`)}
-    ${section("changelog", "Corrections", "A versioned public record", `<div class="prose"><p><strong>2026-08-17 · V2.4.</strong> Published the seven-model, two-trial, five-vendor diagnostic cohort with vendor-first reporting and sanitized final-audit evidence.</p></div>`)}
+    ${section("changelog", "Corrections", "A versioned public record", `<div class="prose"><p><strong>2026-08-17 · AXArena Database 1.0.0.</strong> Published the seven-model, two-trial, five-vendor diagnostic cohort from the frozen DAEB V2.4 protocol, with vendor-first reporting and sanitized final-audit evidence.</p></div>`)}
   </main>`;
   app.innerHTML = shell(content, ready, "database");
   revealHashTarget();
-  document.title = "AXArena Database V2.4 · Vendor experience";
+  document.title = "AXArena Database 1.0.0 · Vendor experience";
 }
 
 function renderDatabase(data, ready, validationErrors) {
@@ -433,10 +433,10 @@ async function start() {
   app.innerHTML = `<main class="loading"><p>Loading the frozen benchmark export…</p></main>`;
   try {
     if (document.body.dataset.page !== "blog") {
-      const data = await loadV24Dataset();
-      const validation = validateV24Dataset(data);
-      if (document.body.dataset.page === "methodology") renderMethodologyV24(data, validation.ready, validation.errors);
-      else renderDatabaseV24(data, validation.ready, validation.errors);
+      const data = await loadReleaseDataset();
+      const validation = validateReleaseDataset(data);
+      if (document.body.dataset.page === "methodology") renderMethodologyRelease(data, validation.ready, validation.errors);
+      else renderDatabaseRelease(data, validation.ready, validation.errors);
       return;
     }
     const data = await loadDataset();

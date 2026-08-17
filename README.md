@@ -12,10 +12,10 @@ at `/methodology/`. The launch article lives at
 Visual language, palette tokens, reusable components, and modification rules
 are documented in [`DESIGN.md`](./DESIGN.md).
 
-The current report consumes the frozen vendor-first V2.4 package under
-`data/axarena-database-v2.4/`. It treats J01 end-to-end success as the primary
+The current report consumes the frozen vendor-first public 1.0.0 package under
+`data/axarena-database-1.0.0/`, built from the internal DAEB V2.4 protocol. It treats J01 end-to-end success as the primary
 outcome, atomic tasks as diagnostics, and model/provider rows as supplementary
-slices. The older files under `data/axarena-database-v1/` remain an explicitly
+slices. The older files under `data/axarena-database-prepublication-fixture/` remain an explicitly
 watermarked historical fixture for the launch article. After every publication gate passes, replace the
 schema-produced JSON files with a sanitized frozen export and retain
 `editorial.json` as the website-owned narrative layer; the site never reads raw
