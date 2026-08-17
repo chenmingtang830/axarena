@@ -296,7 +296,7 @@ function renderDatabaseV24(data, ready, validationErrors) {
   const publication = data.publication;
   const rows = data.vendor_summary.rows;
   const models = data.model_slices.rows;
-  const downloads = ["publication", "vendor-summary", "model-slices", "tasks", "evidence-index", "exclusions", "methodology", "checksums"];
+  const downloads = ["publication", "vendor-summary", "model-slices", "tasks", "evidence-index", "archive-manifest", "exclusions", "methodology", "checksums"];
   const content = `<main>
     <section class="hero" id="top"><div class="hero-glow" aria-hidden="true"></div><div class="hero-copy">
       <span class="eyebrow">AXArena Database · V2.4 diagnostic release</span><h1>Can agents complete a real database journey?</h1>

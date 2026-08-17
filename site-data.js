@@ -27,7 +27,7 @@ export async function loadDataset(fetchImpl = fetch) {
   };
 }
 
-const V24_FILES = ["publication", "vendor-summary", "model-slices", "tasks", "evidence-index", "exclusions", "methodology", "checksums"];
+const V24_FILES = ["publication", "vendor-summary", "model-slices", "tasks", "evidence-index", "archive-manifest", "exclusions", "methodology", "checksums"];
 
 export async function loadV24Dataset(fetchImpl = fetch) {
   const values = await Promise.all(V24_FILES.map(async (name) => {
@@ -55,6 +55,9 @@ export function validateV24Dataset(data) {
     }
   }
   if (data.evidence_index?.archives?.length !== 28) errors.push("V2.4 requires 28 final-audit archives");
+  if (data.archive_manifest?.public_evidence?.archive_count !== 28 || data.archive_manifest?.external_archive_required !== false) {
+    errors.push("V2.4 archive disposition is incomplete");
+  }
   if (!data.checksums?.tree_sha256 || data.checksums?.files?.length < 100) errors.push("V2.4 checksum inventory is incomplete");
   return { errors, ready: errors.length === 0 };
 }

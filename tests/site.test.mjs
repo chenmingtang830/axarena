@@ -24,6 +24,7 @@ test("V2.4 is vendor-primary, complete, and checksum-bound", async () => {
     model_slices: await v24("model-slices"),
     tasks: await v24("tasks"),
     evidence_index: await v24("evidence-index"),
+    archive_manifest: await v24("archive-manifest"),
     exclusions: await v24("exclusions"),
     methodology: await v24("methodology"),
     checksums: await v24("checksums"),
@@ -33,6 +34,8 @@ test("V2.4 is vendor-primary, complete, and checksum-bound", async () => {
   assert.ok(data.vendor_summary.rows.every((row) => row.outcome_metrics.j01.planned === 14));
   assert.equal(data.model_slices.role, "supplementary");
   assert.equal(data.evidence_index.archives.length, 28);
+  assert.equal(data.archive_manifest.public_evidence.archive_count, 28);
+  assert.equal(data.archive_manifest.external_archive_required, false);
 });
 
 async function dataset() {
