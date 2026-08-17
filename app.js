@@ -25,6 +25,12 @@ const esc = (value) => String(value ?? "")
   .replaceAll("'", "&#39;");
 const pct = (value) => value === null || value === undefined ? "—" : `${Math.round(value * 100)}%`;
 const vendorName = (slug) => displayNames[slug] ?? slug;
+const surfaceName = (surface) => String(surface ?? "").toUpperCase();
+const harnessName = (harness) => harness === "claude-code" ? "Claude" : harness === "codex" ? "Codex" : String(harness ?? "");
+function formatCellLabel(cellId) {
+  const [, surface, harness] = String(cellId).split("/");
+  return surface && harness ? `${surfaceName(surface)} - ${harnessName(harness)}` : cellId;
+}
 
 function githubIcon() {
   return `<svg class="github-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .7C5.7.7.6 5.8.6 12.1c0 5 3.2 9.3 7.7 10.8.6.1.8-.3.8-.6v-2.1c-3.1.7-3.8-1.3-3.8-1.3-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.8-1.5-2.5-.3-5.2-1.3-5.2-5.6 0-1.2.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.9 5 19 5.3 19 5.3c.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.1 0 4.3-2.6 5.2-5.2 5.5.4.4.8 1.1.8 2.2V22c0 .3.2.7.8.6a11.5 11.5 0 0 0 7.7-10.8C23.4 5.8 18.3.7 12 .7Z"/></svg>`;
@@ -168,7 +174,7 @@ function vendorEvidence(rows, cells, tasks) {
       <div class="vendor-detail">
         <p>${esc(vendorName(row.vendor))} is applicable to ${applicableTasks.length}/${tasks.filter((task) => task.kind === "core").length} core tasks in this draft view. Official rank uses only the comparable cohort-wide task and surface set.</p>
         <dl><div><dt>Reliability</dt><dd>${pct(row.intersection_consistency_at_3)}</dd></div><div><dt>Coverage</dt><dd>${pct(row.applicability_coverage)}</dd></div><div><dt>Discoverability</dt><dd>${pct(row.discovery_score)}</dd></div></dl>
-        <ul class="cell-list">${vendorCells.map((cell) => `<li><code>${esc(cell.id)}</code><span>${pct(cell.mean_success_rate)} success · ${pct(cell.task_consistency_at_3)} reliable</span></li>`).join("")}</ul>
+        <ul class="cell-list">${vendorCells.map((cell) => `<li><code>${esc(formatCellLabel(cell.id))}</code><span>${pct(cell.mean_success_rate)} success · ${pct(cell.task_consistency_at_3)} reliable</span></li>`).join("")}</ul>
       </div>
     </details>`;
   }).join("")}</div>`;
@@ -181,11 +187,11 @@ function pipeline(className = "method-flow") {
 
 function methodologyDiagram() {
   const steps = [
-    { x: 34, number: "01", label: "SELECT", title: "Choose the field", lines: ["Category definition", "Transparent cohort criteria"] },
-    { x: 264, number: "02", label: "DEFINE", title: "Freeze shared work", lines: ["Canonical outcomes", "Core and research tasks"] },
-    { x: 494, number: "03", label: "ADAPT", title: "Compile product paths", lines: ["Auth, terms, and surfaces", "Independent read-back checks"] },
-    { x: 724, number: "04", label: "RUN + VERIFY", title: "Test real agent use", lines: ["Harness × surface × trial", "Live state decides success"] },
-    { x: 954, number: "05", label: "PUBLISH", title: "Release the evidence", lines: ["Frozen sanitized export", "AX Score and drill-downs"] },
+    { x: 34, number: "01", label: "SELECT", title: ["Choose the", "field"], lines: ["Category definition", "Transparent cohort", "criteria"] },
+    { x: 264, number: "02", label: "DEFINE", title: ["Freeze shared", "work"], lines: ["Canonical outcomes", "Core and research", "tasks"] },
+    { x: 494, number: "03", label: "ADAPT", title: ["Compile product", "paths"], lines: ["Auth, terms, and", "surfaces", "Independent read-back", "checks"] },
+    { x: 724, number: "04", label: "RUN + VERIFY", title: ["Test real", "agent use"], lines: ["Harness × surface", "× trial", "Live state decides", "success"] },
+    { x: 954, number: "05", label: "PUBLISH", title: ["Release the", "evidence"], lines: ["Frozen sanitized", "export", "AX Score and", "drill-downs"] },
   ];
   return `<figure class="methodology-diagram">
     <figcaption><span class="eyebrow">Big picture</span><strong>One benchmark contract, adapted to products and verified against reality.</strong></figcaption>
@@ -206,8 +212,8 @@ function methodologyDiagram() {
         <rect x="${step.x}" y="142" width="196" height="236" rx="8"/>
         <circle cx="${step.x + 28}" cy="172" r="13"/><text class="diagram-number" x="${step.x + 28}" y="176">${step.number}</text>
         <text class="diagram-label" x="${step.x + 20}" y="216">${step.label}</text>
-        <text class="diagram-title" x="${step.x + 20}" y="252">${step.title}</text>
-        ${step.lines.map((line, lineIndex) => `<text class="diagram-copy" x="${step.x + 20}" y="${302 + lineIndex * 27}">${line}</text>`).join("")}
+        <text class="diagram-title" x="${step.x + 20}" y="244">${step.title.map((line, lineIndex) => `<tspan x="${step.x + 20}" dy="${lineIndex === 0 ? 0 : 23}">${line}</tspan>`).join("")}</text>
+        ${step.lines.map((line, lineIndex) => `<text class="diagram-copy" x="${step.x + 20}" y="${302 + lineIndex * 21}">${line}</text>`).join("")}
         ${index < steps.length - 1 ? `<path class="diagram-arrow" d="M${step.x + 196} 260 H${step.x + 224}" marker-end="url(#pipeline-arrow)"/>` : ""}
       </g>`).join("")}
       <text class="diagram-footnote" x="34" y="444">Product-neutral intent stays fixed</text><path class="diagram-footline" d="M34 458 H678"/>
