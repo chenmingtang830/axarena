@@ -1,4 +1,5 @@
 export const DATA_ROOT = "/data/axarena-database-v1";
+export const V24_DATA_ROOT = "/data/axarena-database-v2.4";
 
 const FILES = ["publication", "leaderboard", "cells", "tasks", "evidence-index", "editorial"];
 const SCHEMAS = {
@@ -24,6 +25,38 @@ export async function loadDataset(fetchImpl = fetch) {
     evidence: values[4],
     editorial: values[5],
   };
+}
+
+const V24_FILES = ["publication", "vendor-summary", "model-slices", "tasks", "evidence-index", "exclusions", "methodology", "checksums"];
+
+export async function loadV24Dataset(fetchImpl = fetch) {
+  const values = await Promise.all(V24_FILES.map(async (name) => {
+    const response = await fetchImpl(`${V24_DATA_ROOT}/${name}.json`);
+    if (!response.ok) throw new Error(`Could not load ${name}.json (${response.status})`);
+    return response.json();
+  }));
+  return Object.fromEntries(V24_FILES.map((name, index) => [name.replaceAll("-", "_"), values[index]]));
+}
+
+export function validateV24Dataset(data) {
+  const errors = [];
+  const publication = data.publication;
+  const vendors = data.vendor_summary;
+  const models = data.model_slices;
+  if (publication?.schema !== "ax.daeb-v2-4-publication/v1") errors.push("invalid V2.4 publication schema");
+  if (publication?.formal !== false || publication?.primary_unit !== "vendor") errors.push("V2.4 must be diagnostic and vendor-primary");
+  if (publication?.sample?.atomic_cells !== 420 || publication?.sample?.j01_sessions !== 70) errors.push("unexpected V2.4 denominator");
+  if (vendors?.schema !== "ax.daeb-v2-4-vendor-summary/v1" || vendors?.rows?.length !== 5) errors.push("V2.4 requires five vendor rows");
+  if (models?.schema !== "ax.daeb-v2-4-model-slices/v1" || models?.role !== "supplementary" || models?.rows?.length !== 7) errors.push("V2.4 requires seven supplementary model slices");
+  for (const row of vendors?.rows ?? []) if (row.outcome_metrics?.j01?.planned !== 14) errors.push(`${row.vendor} must have 14 J01 observations`);
+  for (const family of ["atomic_status_counts", "j01_status_counts"]) {
+    for (const status of ["invalid-infra", "invalid-route", "invalid-evidence"]) {
+      if ((publication?.sample?.[family]?.[status] ?? 0) !== 0) errors.push(`${family} admits ${status}`);
+    }
+  }
+  if (data.evidence_index?.archives?.length !== 28) errors.push("V2.4 requires 28 final-audit archives");
+  if (!data.checksums?.tree_sha256 || data.checksums?.files?.length < 100) errors.push("V2.4 checksum inventory is incomplete");
+  return { errors, ready: errors.length === 0 };
 }
 
 export function validateDataset(data) {

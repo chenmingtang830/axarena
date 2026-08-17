@@ -5,16 +5,18 @@ developers understand which products are genuinely agent-friendly—especially
 across APIs, CLIs, and discoverability—without judging overall product quality.
 
 Static, dependency-free publication site for `axarena.ai`. The primary
-leaderboard is `/database/`; the reusable AXArena evaluation methodology lives
+vendor-experience report is `/database/`; the reusable AXArena evaluation methodology lives
 at `/methodology/`. The launch article lives at
 `/blog/introducing-axarena/`. Legacy vendor and report URLs remain compatible.
 
 Visual language, palette tokens, reusable components, and modification rules
 are documented in [`DESIGN.md`](./DESIGN.md).
 
-The benchmark JSON files under `data/axarena-database-v1/` use the same
-versioned schemas as `ax-eval export-publication`. They are an explicitly
-watermarked draft fixture. After every publication gate passes, replace the
+The current report consumes the frozen vendor-first V2.4 package under
+`data/axarena-database-v2.4/`. It treats J01 end-to-end success as the primary
+outcome, atomic tasks as diagnostics, and model/provider rows as supplementary
+slices. The older files under `data/axarena-database-v1/` remain an explicitly
+watermarked historical fixture for the methodology and launch article. After every publication gate passes, replace the
 schema-produced JSON files with a sanitized frozen export and retain
 `editorial.json` as the website-owned narrative layer; the site never reads raw
 run directories or recomputes ranking.
