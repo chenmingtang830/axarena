@@ -1,4 +1,4 @@
-import { DATA_ROOT, loadDataset, validateDataset } from "/site-data.js";
+import { DATA_ROOT, V24_DATA_ROOT, loadDataset, loadV24Dataset, validateDataset, validateV24Dataset } from "/site-data.js";
 
 const app = document.querySelector("#app");
 const GITHUB_URL = "https://github.com/chenmingtang830/ax-eval";
@@ -24,6 +24,8 @@ const esc = (value) => String(value ?? "")
   .replaceAll('"', "&quot;")
   .replaceAll("'", "&#39;");
 const pct = (value) => value === null || value === undefined ? "—" : `${Math.round(value * 100)}%`;
+const seconds = (value) => value === null || value === undefined ? "—" : `${(value / 1000).toFixed(1)}s`;
+const money = (value) => value === null || value === undefined ? "—" : `$${Number(value).toFixed(3)}`;
 const vendorName = (slug) => displayNames[slug] ?? slug;
 
 function githubIcon() {
@@ -234,6 +236,64 @@ function shell(content, ready, page = "database") {
     <footer><div><strong>AXArena</strong> · A neutral, open-source agent usability benchmark</div><div>Evidence generated with ${githubLink("ax-eval on GitHub", "footer-github")}, our open-source evaluation engine.</div></footer>`;
 }
 
+function v24VendorTable(rows) {
+  return `<div class="table-shell"><table><thead><tr>
+    <th>Vendor</th><th><abbr title="Completed connection, operation read-back, and recovery read-back">J01 success</abbr></th>
+    <th>Pass / 14</th><th>Mean cost</th><th>Mean end-to-end</th><th>Mean first action</th>
+    <th>Direct discovery</th><th>Assisted</th><th>Unresolved</th><th>Atomic diagnostics</th>
+  </tr></thead><tbody>${rows.map((row) => {
+    const j = row.outcome_metrics.j01;
+    const d = row.discovery_metrics;
+    const e = row.efficiency_metrics;
+    return `<tr id="vendor-${esc(row.vendor)}"><td><strong>${esc(vendorName(row.vendor))}</strong></td>
+      <td>${scoreBadge(j.pass_rate)}</td><td>${j.pass}/${j.planned}</td><td>${money(e.j01_mean_reported_cost_usd)}</td>
+      <td>${seconds(e.j01_mean_duration_ms)}</td><td>${seconds(e.j01_mean_first_action_latency_ms)}</td>
+      <td>${d.modes["direct-success"]}/${d.denominator_j01}</td><td>${d.modes["assisted-discovery"]}/${d.denominator_j01}</td>
+      <td>${d.modes.unresolved}/${d.denominator_j01}</td><td>${pct(row.outcome_metrics.atomic.pass_rate)}</td></tr>`;
+  }).join("")}</tbody></table></div>`;
+}
+
+function v24StageTable(rows) {
+  return `<div class="table-shell"><table><thead><tr><th>Vendor</th><th>Discovery</th><th>Connect</th><th>Operate</th><th>Recovery</th><th>Upstream errors</th><th>Route entries</th></tr></thead><tbody>${rows.map((row) => {
+    const stages = row.outcome_metrics.j01.stages;
+    const e = row.efficiency_metrics;
+    return `<tr><td>${esc(vendorName(row.vendor))}</td><td>${stages.discovery}/14</td><td>${stages.connect}/14</td><td>${stages.operate}/14</td><td>${stages.recovery}/14</td><td>${e.j01_upstream_errors}</td><td>${e.j01_route_entries}</td></tr>`;
+  }).join("")}</tbody></table></div>`;
+}
+
+function v24ModelTable(rows) {
+  return `<div class="table-shell"><table><thead><tr><th>Model slice</th><th>Provider</th><th>J01 success</th><th>Pass / 10</th><th>Total cost</th><th>Mean cost</th><th>Median end-to-end</th><th>Median first action</th></tr></thead><tbody>${rows.map((row) => `<tr><td><code>${esc(row.model)}</code></td><td>${esc(row.provider)}</td><td>${scoreBadge(row.j01_success_rate)}</td><td>${row.j01_pass}/${row.j01_planned}</td><td>${money(row.j01_total_reported_cost_usd)}</td><td>${money(row.j01_mean_reported_cost_usd)}</td><td>${seconds(row.j01_median_duration_ms)}</td><td>${seconds(row.j01_median_first_action_latency_ms)}</td></tr>`).join("")}</tbody></table></div>`;
+}
+
+function renderDatabaseV24(data, ready, validationErrors) {
+  const publication = data.publication;
+  const rows = data.vendor_summary.rows;
+  const models = data.model_slices.rows;
+  const downloads = ["publication", "vendor-summary", "model-slices", "tasks", "evidence-index", "exclusions", "methodology", "checksums"];
+  const content = `<main>
+    <section class="hero" id="top"><div class="hero-glow" aria-hidden="true"></div><div class="hero-copy">
+      <span class="eyebrow">AXArena Database · V2.4 diagnostic release</span><h1>Can agents complete a real database journey?</h1>
+      <p>Five database vendors, one fixed CLI harness, seven model/provider slices, two trials, and independent live-state verification. Vendors are rows; models are samples.</p>
+      <div class="hero-actions"><a class="primary" href="#results">View vendor results</a>${githubLink("Inspect ax-eval evidence")}<a href="/methodology/">Read methodology</a></div></div>
+      <aside class="benchmark-card"><span class="eyebrow">Frozen evidence</span><h2>Database V2.4</h2><p>Diagnostic fixed-environment comparison—not an official product ranking.</p><dl class="scope-card"><div><dt>Vendors</dt><dd>5 core</dd></div><div><dt>Models</dt><dd>7 slices</dd></div><div><dt>Trials</dt><dd>2</dd></div><div><dt>Atomic cells</dt><dd>${publication.sample.atomic_cells}</dd></div><div><dt>J01 journeys</dt><dd>${publication.sample.j01_sessions}</dd></div><div><dt>Invalid admitted</dt><dd>0</dd></div></dl></aside>
+    </section>
+    ${validationErrors.length ? `<aside class="validation-note"><strong>Data validation failed:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
+    ${section("results", "Primary outcome · vendor rows", "End-to-end J01 success, cost, latency, and discovery", `<div class="results-intro"><p class="prose lead">A J01 pass requires connection, successful operation read-back, and recovery read-back in the same journey. No composite AX Score or rank is generated for this diagnostic release.</p></div>${v24VendorTable(rows)}${rankChart(rows.map((row) => ({ vendor: row.vendor, value: row.outcome_metrics.j01.pass_rate })), "value", "J01 success rate — descriptive, not ranked")}`, "14 J01 observations per vendor · 7 models × 2 trials")}
+    ${section("stages", "Partial outcomes", "Where the journey succeeds or breaks", v24StageTable(rows), "Discovery is reported separately; a discovery evidence miss does not erase later observed stages.")}
+    ${section("model-slices", "Supplementary slice", "Model-level stability, cost, and latency", `<p class="prose lead">These rows help interpret sample sensitivity. They are not the primary organization of the benchmark.</p>${v24ModelTable(models)}`, "10 J01 observations per model · 5 vendors × 2 trials")}
+    ${section("task-matrix", "Task pack", "One journey plus six atomic diagnostics", `<div class="split"><article><h3>Primary: db-J01-native-journey</h3><p>Discover a native entry point, connect, operate with independent read-back, then recover and verify the recovered state.</p></article><article><h3>Diagnostics: T17–T22</h3><p>Session discovery, constraint preservation, transactional recovery, aggregate query, principal continuity, and negative-query verification.</p></article></div>`)}
+    ${section("evidence", "Audit trail", "Failures remain first-class evidence", `<div class="open-source-card"><div><span class="eyebrow">28 final-audit archives</span><h3>Every admitted model × trial × task-family input is retained.</h3><p>Sanitized observations, reconciliation ledgers, replacement ledgers, gate decisions, exclusions, and SHA-256 checksums are downloadable. Transient upstream failures are preserved; the release does not promise they will recur on demand.</p></div><div class="open-source-actions"><a class="button primary" href="${V24_DATA_ROOT}/evidence-index.json">Open evidence index</a><a class="button" href="${V24_DATA_ROOT}/checksums.json">Verify checksums</a></div></div><div class="download-grid">${downloads.map((name) => `<a href="${V24_DATA_ROOT}/${name}.json"><strong>${esc(name)}</strong><span>frozen JSON</span></a>`).join("")}</div>`, `Evidence tree ${esc(data.checksums.tree_sha256.slice(0, 16))}…`)}
+    ${section("methodology-preview", "Methodology", "Fixed harness, varying models, vendor-first aggregation", `<div class="principles"><p><strong>Outcome:</strong> J01 verified completion.</p><p><strong>Diagnostics:</strong> atomic and discovery signals stay separate.</p><p><strong>Validity:</strong> invalid infrastructure, route, and evidence never enter denominators.</p></div><div class="section-actions"><a class="button primary" href="/methodology/">Read the full methodology</a></div>`)}
+    ${section("about", "Claim boundary", "A strong AX diagnostic, not a universal leaderboard", `<div class="prose"><p>This release supports comparison inside its frozen CLI environment. It does not claim all database workloads, interfaces, harnesses, or future model versions behave the same way. Turso remains journey-only compatibility evidence outside the five-vendor core.</p></div>`)}
+    ${section("reproduce", "Reproduce", "Recompute the public export", `<pre><code>npx tsx ax-arena/benchmark/scripts/summarize-v24-vendor.ts\nnpx tsx ax-arena/benchmark/scripts/export-v24-publication.ts\nnpm test --workspace @ax-arena/benchmark -- --run tests/v24-publication.test.ts</code></pre>`)}
+    ${section("independence", "Independence", "Results follow audited evidence", `<div class="principles"><p>Task and route contracts were frozen before admitted runs.</p><p>Independent read-back decides outcomes; agent narration does not.</p><p>Excluded diagnostics and invalid routes remain disclosed.</p></div>`)}
+    ${section("changelog", "Corrections", "A versioned public record", `<div class="prose"><p><strong>2026-08-17 · V2.4.</strong> Published the seven-model, two-trial, five-vendor diagnostic cohort with vendor-first reporting and sanitized final-audit evidence.</p></div>`)}
+  </main>`;
+  app.innerHTML = shell(content, ready, "database");
+  revealHashTarget();
+  document.title = "AXArena Database V2.4 · Vendor experience";
+}
+
 function renderDatabase(data, ready, validationErrors) {
   const { publication, leaderboard, cells, tasks, evidence, editorial } = data;
   const rows = leaderboard.rows;
@@ -345,6 +405,12 @@ async function start() {
   if (redirectLegacyRoute()) return;
   app.innerHTML = `<main class="loading"><p>Loading the frozen benchmark export…</p></main>`;
   try {
+    if (document.body.dataset.page !== "methodology" && document.body.dataset.page !== "blog") {
+      const data = await loadV24Dataset();
+      const validation = validateV24Dataset(data);
+      renderDatabaseV24(data, validation.ready, validation.errors);
+      return;
+    }
     const data = await loadDataset();
     const validation = validateDataset(data);
     if (document.body.dataset.page === "methodology") renderMethodology(data, validation.ready, validation.errors);
