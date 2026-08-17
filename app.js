@@ -25,6 +25,12 @@ const esc = (value) => String(value ?? "")
   .replaceAll("'", "&#39;");
 const pct = (value) => value === null || value === undefined ? "—" : `${Math.round(value * 100)}%`;
 const vendorName = (slug) => displayNames[slug] ?? slug;
+const surfaceName = (surface) => String(surface ?? "").toUpperCase();
+const harnessName = (harness) => harness === "claude-code" ? "Claude" : harness === "codex" ? "Codex" : String(harness ?? "");
+function formatCellLabel(cellId) {
+  const [, surface, harness] = String(cellId).split("/");
+  return surface && harness ? `${surfaceName(surface)} - ${harnessName(harness)}` : cellId;
+}
 
 function githubIcon() {
   return `<svg class="github-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .7C5.7.7.6 5.8.6 12.1c0 5 3.2 9.3 7.7 10.8.6.1.8-.3.8-.6v-2.1c-3.1.7-3.8-1.3-3.8-1.3-.5-1.2-1.2-1.5-1.2-1.5-1-.7.1-.7.1-.7 1.1.1 1.7 1.2 1.7 1.2 1 1.7 2.6 1.2 3.2.9.1-.7.4-1.2.8-1.5-2.5-.3-5.2-1.3-5.2-5.6 0-1.2.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0C17.9 5 19 5.3 19 5.3c.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.1 0 4.3-2.6 5.2-5.2 5.5.4.4.8 1.1.8 2.2V22c0 .3.2.7.8.6a11.5 11.5 0 0 0 7.7-10.8C23.4 5.8 18.3.7 12 .7Z"/></svg>`;
@@ -90,6 +96,22 @@ function rankChart(rows, metric, label) {
   </figure>`;
 }
 
+function scoreRelationship(rows) {
+  const width = 1080, height = 500, left = 142, top = 66, plotWidth = 760, plotHeight = 270;
+  const x = (value) => left + value * plotWidth;
+  const y = (value) => top + (1 - value) * plotHeight;
+  const ticks = [0, .25, .5, .75, 1];
+  const bands = [{ start: 0, end: .6, tone: "low" }, { start: .6, end: .8, tone: "mid" }, { start: .8, end: 1, tone: "good" }];
+  const zones = bands.flatMap((xBand) => bands.map((yBand) => {
+    const tone = xBand.tone === "low" || yBand.tone === "low" ? "low" : xBand.tone === "mid" || yBand.tone === "mid" ? "mid" : "good";
+    return `<rect class="relationship-zone ${tone}" x="${x(xBand.start)}" y="${y(yBand.end)}" width="${x(xBand.end) - x(xBand.start)}" height="${y(yBand.start) - y(yBand.end)}" />`;
+  })).join("");
+  const grid = ticks.map((tick) => `<line class="relationship-grid" x1="${x(tick)}" y1="${top}" x2="${x(tick)}" y2="${top + plotHeight}" /><line class="relationship-grid" x1="${left}" y1="${y(tick)}" x2="${left + plotWidth}" y2="${y(tick)}" /><text class="relationship-tick" x="${x(tick)}" y="${top + plotHeight + 25}" text-anchor="middle">${pct(tick)}</text><text class="relationship-tick" x="${left - 12}" y="${y(tick) + 4}" text-anchor="end">${pct(tick)}</text>`).join("");
+  const offsets = { neon: [12, -12], cockroachdb: [12, -12], turso: [12, -12], supabase: [12, 20], nile: [12, -12], insforge: [12, -12] };
+  const points = rows.map((row) => { const [dx, dy] = offsets[row.vendor] ?? [12, -12]; return `<g class="relationship-point"><circle cx="${x(row.intersection_score)}" cy="${y(row.discovery_score)}" r="6" /><text x="${x(row.intersection_score) + dx}" y="${y(row.discovery_score) + dy}">${esc(vendorName(row.vendor))}</text></g>`; }).join("");
+  return `<figure class="score-relationship"><figcaption><strong>AX-Score and Discoverability</strong></figcaption><div class="relationship-legend"><span><i class="good"></i>Both metrics 80%+</span><span><i class="mid"></i>Both metrics 60%+</span><span><i class="low"></i>Either metric below 60%</span></div><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="AX-Score and Discoverability by product"><rect class="relationship-frame" x="${left}" y="${top}" width="${plotWidth}" height="${plotHeight}" />${zones}${grid}${points}<text class="relationship-axis" x="${left + plotWidth / 2}" y="${top + plotHeight + 70}" text-anchor="middle">AX Score</text><text class="relationship-axis" transform="translate(38 ${top + plotHeight / 2}) rotate(-90)" text-anchor="middle">Discoverability</text></svg></figure>`;
+}
+
 function leaderboardTable(rows, draft) {
   return `<div class="table-shell"><table>
     <thead><tr>
@@ -105,11 +127,11 @@ function leaderboardTable(rows, draft) {
       <td><a href="#vendor-${esc(row.vendor)}">${esc(vendorName(row.vendor))}</a>${row.status !== "ranked" ? `<span class="incomplete">${esc(row.status)}</span>` : ""}</td>
       <td>${scoreBadge(row.intersection_score)}</td>
       <td>${scoreBadge(row.intersection_consistency_at_3)}</td>
-      <td>${pct(row.applicability_coverage)}</td>
-      <td>${pct(row.applicable_success_rate)}</td>
-      <td>${pct(row.surface_success_rates?.api)}</td>
-      <td>${pct(row.surface_success_rates?.cli)}</td>
-      <td>${pct(row.discovery_score)}</td>
+      <td>${scoreBadge(row.applicability_coverage)}</td>
+      <td>${scoreBadge(row.applicable_success_rate)}</td>
+      <td>${scoreBadge(row.surface_success_rates?.api)}</td>
+      <td>${scoreBadge(row.surface_success_rates?.cli)}</td>
+      <td>${scoreBadge(row.discovery_score)}</td>
     </tr>`).join("")}</tbody>
   </table>${draft ? `<div class="table-watermark" aria-hidden="true">PREVIEW</div>` : ""}</div>`;
 }
@@ -121,15 +143,15 @@ function taskHeatmap(tasks, vendors) {
     const cells = vendors.map((vendor) => {
       const applicable = (task.applicability?.[vendor] ?? []).length > 0;
       const results = (task.results ?? []).filter((result) => result.vendor === vendor && !result.na);
-      if (!applicable) return `<div class="heat-cell na" aria-label="${esc(vendorName(vendor))}: not applicable">N/A</div>`;
-      if (!results.length) return `<div class="heat-cell missing" aria-label="${esc(vendorName(vendor))}: no result">—</div>`;
+      if (!applicable) return `<div class="heat-cell na" aria-label="${esc(vendorName(vendor))}: not applicable"><span>N/A</span></div>`;
+      if (!results.length) return `<div class="heat-cell missing" aria-label="${esc(vendorName(vendor))}: no result"><span>—</span></div>`;
       const score = results.filter((result) => result.success).length / results.length;
       const tone = score >= 0.8 ? "good" : score >= 0.6 ? "mid" : "low";
-      return `<a class="heat-cell ${tone}" href="#vendor-${esc(vendor)}" aria-label="${esc(vendorName(vendor))}: ${pct(score)}; view evidence">${pct(score)}</a>`;
+      return `<a class="heat-cell ${tone}" href="#vendor-${esc(vendor)}" aria-label="${esc(vendorName(vendor))}: ${pct(score)}; view evidence"><span>${pct(score)}</span></a>`;
     }).join("");
     return `<div class="heat-task"><strong>${esc(task.task_id.replace(/^db-/, ""))}</strong><span>${esc(task.title)}</span></div>${cells}`;
   }).join("");
-  return `<div class="matrix-legend" aria-label="Task matrix legend"><span><i class="good"></i>80–100%</span><span><i class="mid"></i>60–79%</span><span><i class="low"></i>Below 60%</span><span><i class="na"></i>N/A or missing</span></div><div class="heatmap" style="--vendor-count:${vendors.length}">${header}${rows}</div>`;
+  return `<div class="matrix-legend" aria-label="Task matrix legend"><span><i class="good"></i>80–100%</span><span><i class="mid"></i>60–79%</span><span><i class="low"></i>Below 60%</span><span><i class="na"></i>N/A or missing</span></div><div class="heatmap-scroll"><div class="heatmap" style="--vendor-count:${vendors.length}">${header}${rows}</div></div>`;
 }
 
 function findings(editorial, evidence) {
@@ -152,7 +174,7 @@ function vendorEvidence(rows, cells, tasks) {
       <div class="vendor-detail">
         <p>${esc(vendorName(row.vendor))} is applicable to ${applicableTasks.length}/${tasks.filter((task) => task.kind === "core").length} core tasks in this draft view. Official rank uses only the comparable cohort-wide task and surface set.</p>
         <dl><div><dt>Reliability</dt><dd>${pct(row.intersection_consistency_at_3)}</dd></div><div><dt>Coverage</dt><dd>${pct(row.applicability_coverage)}</dd></div><div><dt>Discoverability</dt><dd>${pct(row.discovery_score)}</dd></div></dl>
-        <ul class="cell-list">${vendorCells.map((cell) => `<li><code>${esc(cell.id)}</code><span>${pct(cell.mean_success_rate)} success · ${pct(cell.task_consistency_at_3)} reliable</span></li>`).join("")}</ul>
+        <ul class="cell-list">${vendorCells.map((cell) => `<li><code>${esc(formatCellLabel(cell.id))}</code><span>${pct(cell.mean_success_rate)} success · ${pct(cell.task_consistency_at_3)} reliable</span></li>`).join("")}</ul>
       </div>
     </details>`;
   }).join("")}</div>`;
@@ -165,11 +187,11 @@ function pipeline(className = "method-flow") {
 
 function methodologyDiagram() {
   const steps = [
-    { x: 34, number: "01", label: "SELECT", title: "Choose the field", lines: ["Category definition", "Transparent cohort criteria"] },
-    { x: 264, number: "02", label: "DEFINE", title: "Freeze shared work", lines: ["Canonical outcomes", "Core and research tasks"] },
-    { x: 494, number: "03", label: "ADAPT", title: "Compile product paths", lines: ["Auth, terms, and surfaces", "Independent read-back checks"] },
-    { x: 724, number: "04", label: "RUN + VERIFY", title: "Test real agent use", lines: ["Harness × surface × trial", "Live state decides success"] },
-    { x: 954, number: "05", label: "PUBLISH", title: "Release the evidence", lines: ["Frozen sanitized export", "AX Score and drill-downs"] },
+    { x: 34, number: "01", label: "SELECT", title: ["Choose the", "field"], lines: ["Category definition", "Transparent cohort", "criteria"] },
+    { x: 264, number: "02", label: "DEFINE", title: ["Freeze shared", "work"], lines: ["Canonical outcomes", "Core and research", "tasks"] },
+    { x: 494, number: "03", label: "ADAPT", title: ["Compile product", "paths"], lines: ["Auth, terms, and", "surfaces", "Independent read-back", "checks"] },
+    { x: 724, number: "04", label: "RUN + VERIFY", title: ["Test real", "agent use"], lines: ["Harness × surface", "× trial", "Live state decides", "success"] },
+    { x: 954, number: "05", label: "PUBLISH", title: ["Release the", "evidence"], lines: ["Frozen sanitized", "export", "AX Score and", "drill-downs"] },
   ];
   return `<figure class="methodology-diagram">
     <figcaption><span class="eyebrow">Big picture</span><strong>One benchmark contract, adapted to products and verified against reality.</strong></figcaption>
@@ -190,8 +212,8 @@ function methodologyDiagram() {
         <rect x="${step.x}" y="142" width="196" height="236" rx="8"/>
         <circle cx="${step.x + 28}" cy="172" r="13"/><text class="diagram-number" x="${step.x + 28}" y="176">${step.number}</text>
         <text class="diagram-label" x="${step.x + 20}" y="216">${step.label}</text>
-        <text class="diagram-title" x="${step.x + 20}" y="252">${step.title}</text>
-        ${step.lines.map((line, lineIndex) => `<text class="diagram-copy" x="${step.x + 20}" y="${302 + lineIndex * 27}">${line}</text>`).join("")}
+        <text class="diagram-title" x="${step.x + 20}" y="244">${step.title.map((line, lineIndex) => `<tspan x="${step.x + 20}" dy="${lineIndex === 0 ? 0 : 23}">${line}</tspan>`).join("")}</text>
+        ${step.lines.map((line, lineIndex) => `<text class="diagram-copy" x="${step.x + 20}" y="${302 + lineIndex * 21}">${line}</text>`).join("")}
         ${index < steps.length - 1 ? `<path class="diagram-arrow" d="M${step.x + 196} 260 H${step.x + 224}" marker-end="url(#pipeline-arrow)"/>` : ""}
       </g>`).join("")}
       <text class="diagram-footnote" x="34" y="444">Product-neutral intent stays fixed</text><path class="diagram-footline" d="M34 458 H678"/>
@@ -244,8 +266,8 @@ function renderDatabase(data, ready, validationErrors) {
   const content = `<main>
     <section class="hero" id="top">
       <div class="hero-glow" aria-hidden="true"></div>
-      <div class="hero-copy"><span class="eyebrow">AXArena · Agent experience benchmarks</span>
-        <h1>${esc(editorial.question)}</h1><p>${esc(editorial.lede)}</p>
+      <div class="hero-copy"><span class="eyebrow">Database benchmark · AXArena v${esc(publication.suite_version)}</span>
+        <h1>Can AI agents use your database product?</h1><p>This first AXArena benchmark measures how easily agents discover, use, and verify work in database products across their APIs and CLIs. It measures agent experience, not overall product quality.</p>
         <div class="hero-actions"><a class="primary" href="#results">View Database leaderboard</a>${githubLink("View ax-eval on GitHub")}<a href="/methodology/">Read methodology</a></div>
       </div>
       <aside class="benchmark-card" aria-label="First public benchmark">
@@ -254,8 +276,9 @@ function renderDatabase(data, ready, validationErrors) {
       </aside>
     </section>
     ${!ready && validationErrors.length ? `<aside class="validation-note"><strong>Draft validation:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
-    ${section("results", "AXArena Database · Leaderboard", "Agent experience, ranked by verified work", `<div class="results-intro"><p class="prose lead">AX Score measures verified success on the core task and surface combinations shared across every product. Reliability breaks ties; coverage and discoverability remain visible without changing official rank.</p><a class="text-link" href="/methodology/#scoring">How scoring works →</a></div>${leaderboardTable(rows, !ready)}${rankChart(rows, "intersection_score", "AX Score — verified success on comparable work")}${rankChart(rows, "discovery_score", "Discoverability — reported separately, never ranked")}`, `${leaderboard.ranking_method.intersection_pairs.length} comparable task × surface pairs · ${leaderboard.ranking_method.required_trial_count} trials per required cell`)}
-    ${section("task-matrix", "Task performance", "See where products differ", `<p class="prose lead">Every cell shows verified task success. N/A represents a structural product difference, not a hidden failure. Select a score to inspect the product evidence.</p>${taskHeatmap(tasks.tasks, vendors)}`, `${coreTasks.length} scored core tasks · ${researchTasks.length} research tasks outside the official ranking`)}
+    ${section("results", "AXArena Database · Leaderboard", "Agent experience, ranked by verified work", `<div class="results-intro"><p class="prose lead">AX Score measures verified success on the core task and surface combinations shared across every product. Reliability breaks ties; coverage and discoverability remain visible without changing official rank.</p><a class="text-link" href="/methodology/#scoring">How scoring works →</a></div>${leaderboardTable(rows, !ready)}${rankChart(rows, "intersection_score", "AX Score — verified success on comparable work")}`, `${leaderboard.ranking_method.intersection_pairs.length} comparable task × surface pairs · ${leaderboard.ranking_method.required_trial_count} trials per required cell`)}
+    ${section("task-matrix", "Task matrix", "Verified task outcomes", `<p class="prose lead">Each score is verified task success. N/A means the task does not apply; select a score to inspect its evidence.</p>${taskHeatmap(tasks.tasks, vendors)}`, `${coreTasks.length} core tasks · ${researchTasks.length} research tasks excluded from rank`)}
+    ${section("score-context", "Metric comparison", "Compare discovery with task success", scoreRelationship(rows), "AX Score sets rank. Discoverability describes how agents find the right path, without changing the order.")}
     ${section("findings", "What the evidence says", "Three findings from the current matrix", findings(editorial, evidence.evidence), "Every claim links to a public leaderboard row, task, or execution cell.")}
     ${section("failure-path", "Agent experience", "Where agents get stuck", `<ol class="funnel"><li><span>01</span><strong>Discovery</strong><p>Find the authoritative surface.</p></li><li><span>02</span><strong>Authentication</strong><p>Identify the correct credential and scope.</p></li><li><span>03</span><strong>Surface choice</strong><p>Choose the appropriate product interface.</p></li><li><span>04</span><strong>Execution</strong><p>Complete the canonical task.</p></li><li><span>05</span><strong>Read-back</strong><p>Verify live product state independently.</p></li></ol>`)}
     ${section("methodology-preview", "Methodology", "From a product category to public evidence", `<p class="prose lead">AXArena defines product-neutral outcomes, adapts them without changing their intent, runs controlled agent trials, and verifies results against live sandbox state.</p>${pipeline()}<div class="section-actions"><a class="button primary" href="/methodology/">Read the full methodology</a><a class="button" href="/methodology/#database-v1">AXArena Database v1 details</a></div>`, "A reusable evaluation pipeline for Database and future AXArena verticals.")}
