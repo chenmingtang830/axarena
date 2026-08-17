@@ -3,33 +3,35 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { validateDataset, validateV24Dataset } from "../site-data.js";
+import { validateDataset, validateReleaseDataset } from "../site-data.js";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const dataRoot = resolve(root, "data/axarena-database-v1");
-const v24Root = resolve(root, "data/axarena-database-v2.4");
+const dataRoot = resolve(root, "data/axarena-database-prepublication-fixture");
+const releaseRoot = resolve(root, "data/axarena-database-1.0.0");
 
 async function json(name) {
   return JSON.parse(await readFile(resolve(dataRoot, `${name}.json`), "utf8"));
 }
 
-async function v24(name) {
-  return JSON.parse(await readFile(resolve(v24Root, `${name}.json`), "utf8"));
+async function release(name) {
+  return JSON.parse(await readFile(resolve(releaseRoot, `${name}.json`), "utf8"));
 }
 
-test("V2.4 is vendor-primary, complete, and checksum-bound", async () => {
+test("public 1.0.0 is vendor-primary, complete, and checksum-bound", async () => {
   const data = {
-    publication: await v24("publication"),
-    vendor_summary: await v24("vendor-summary"),
-    model_slices: await v24("model-slices"),
-    tasks: await v24("tasks"),
-    evidence_index: await v24("evidence-index"),
-    archive_manifest: await v24("archive-manifest"),
-    exclusions: await v24("exclusions"),
-    methodology: await v24("methodology"),
-    checksums: await v24("checksums"),
+    publication: await release("publication"),
+    vendor_summary: await release("vendor-summary"),
+    model_slices: await release("model-slices"),
+    tasks: await release("tasks"),
+    evidence_index: await release("evidence-index"),
+    archive_manifest: await release("archive-manifest"),
+    exclusions: await release("exclusions"),
+    methodology: await release("methodology"),
+    checksums: await release("checksums"),
   };
-  assert.deepEqual(validateV24Dataset(data), { errors: [], ready: true });
+  assert.deepEqual(validateReleaseDataset(data), { errors: [], ready: true });
+  assert.equal(data.publication.release, "1.0.0");
+  assert.deepEqual(data.publication.protocol, { name: "DAEB", version: "2.4" });
   assert.deepEqual(data.vendor_summary.rows.map((row) => row.vendor), ["cockroachdb", "insforge", "neon", "nile", "supabase"]);
   assert.ok(data.vendor_summary.rows.every((row) => row.outcome_metrics.j01.planned === 14));
   assert.equal(data.model_slices.role, "supplementary");
@@ -104,10 +106,10 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   assert.match(app, /href="\/blog\/introducing-axarena\/"/);
   assert.match(app, /aria-label="\$\{esc\(label\)\}"/);
   assert.match(app, /AX Score/);
-  assert.match(app, /function renderDatabaseV24/);
+  assert.match(app, /function renderDatabaseRelease/);
   assert.match(app, /J01 success/);
   assert.match(app, /No composite AX Score or rank/);
-  assert.match(app, /function renderMethodologyV24/);
+  assert.match(app, /function renderMethodologyRelease/);
   assert.match(app, /Fixed harness, multi-model samples, vendor-first results/);
   assert.match(app, /Draft — not for citation/);
   assert.match(css, /@media print/);
