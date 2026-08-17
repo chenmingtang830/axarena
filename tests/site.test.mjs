@@ -88,7 +88,7 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   for (const id of ["results", "task-matrix", "findings", "methodology-preview", "about", "evidence", "reproduce", "independence", "changelog"]) {
     assert.ok(app.includes(`"${id}"`), `missing ${id} section`);
   }
-  for (const id of ["category", "canonical-tasks", "adapters", "execution", "verification", "scoring", "database-v1", "open-source"]) {
+  for (const id of ["question", "contract", "execution", "verification", "aggregation", "validity", "publication", "open-source"]) {
     assert.ok(app.includes(`id="${id}"`), `missing methodology ${id} section`);
   }
   assert.match(app, /<svg class="bar-chart"/);
@@ -104,6 +104,8 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   assert.match(app, /function renderDatabaseV24/);
   assert.match(app, /J01 success/);
   assert.match(app, /No composite AX Score or rank/);
+  assert.match(app, /function renderMethodologyV24/);
+  assert.match(app, /Fixed harness, multi-model samples, vendor-first results/);
   assert.match(app, /Draft — not for citation/);
   assert.match(css, /@media print/);
   assert.match(css, /--paper: #fff;/);

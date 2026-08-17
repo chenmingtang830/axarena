@@ -218,12 +218,39 @@ function reproductionCommands() {
 
 function navigation(page) {
   return `<nav aria-label="Primary navigation">
-    <a href="/database/#results">Leaderboard</a>
+    <a href="/database/#results">Vendor results</a>
     <a href="/database/#task-matrix">Task matrix</a>
     <a href="/methodology/"${page === "methodology" ? ` aria-current="page"` : ""}>Methodology</a>
     <a href="/blog/introducing-axarena/"${page === "blog" ? ` aria-current="page"` : ""}>Blog</a>
     <a href="/database/#about">About</a>
   </nav>`;
+}
+
+function methodologyArticleV24(publication, methodology) {
+  return `<div class="article-layout">
+    <aside class="article-toc"><span class="eyebrow">On this page</span><a href="#question">1. Research question</a><a href="#contract">2. Frozen contract</a><a href="#execution">3. Controlled execution</a><a href="#verification">4. Independent verification</a><a href="#aggregation">5. Vendor-first aggregation</a><a href="#validity">6. Validity gates</a><a href="#publication">7. Publication boundary</a><a href="#open-source">Open source</a></aside>
+    <article class="methodology-article">
+      <section id="question"><span class="step-number">01</span><h2>Ask whether an agent can complete a real database journey</h2><p>The primary unit is the vendor experience. J01 starts at discovery and ends only after connection, an independently verified operation, recovery, and recovery read-back. The six atomic tasks diagnose specific capabilities; they do not inflate the J01 success rate.</p></section>
+      <section id="contract"><span class="step-number">02</span><h2>Freeze one task and route contract before admitted runs</h2><p>The five-vendor core, CLI surface, task semantics, model/provider identity, trial count, read-back oracles, and exclusion policy are fixed before publication. Turso remains compatibility evidence outside the core matrix.</p></section>
+      <section id="execution"><span class="step-number">03</span><h2>Hold the harness fixed and vary model samples</h2><p>One host harness executes ${methodology.model_strata.length} declared model/provider slices for ${methodology.trial_count} isolated trials per core vendor. Fallback is forbidden unless explicitly disclosed; provider resolution and upstream failures remain in the route ledger.</p></section>
+      <section id="verification"><span class="step-number">04</span><h2>Verify product state, not agent narration</h2><p>Programmatic read-back oracles determine task outcomes. Audit archives preserve observations, reconciliation decisions, replacement ledgers, and gate results. Discovery evidence is scored separately so a missing discovery trace does not rewrite later observed stage outcomes.</p></section>
+      <section id="aggregation"><span class="step-number">05</span><h2>Aggregate by vendor</h2><p>Every primary row is a vendor. The headline outcome is verified J01 completion over 14 observations per vendor (${methodology.model_strata.length} models × ${methodology.trial_count} trials). Cost, end-to-end latency, first-action latency, discovery mode, atomic success, and stage completion are columns. Models and trials remain supplementary slices.</p><p>No composite AX Score, tie-break, or official rank is generated for V2.4.</p></section>
+      <section id="validity"><span class="step-number">06</span><h2>Admit only valid evidence</h2><p>Invalid infrastructure, route, or evidence never enters a denominator. The frozen release admits ${publication.sample.atomic_cells} atomic cells and ${publication.sample.j01_sessions} J01 sessions, with zero invalid cells. Failures and transient upstream errors remain visible rather than being silently retried or relabeled.</p></section>
+      <section id="publication"><span class="step-number">07</span><h2>Publish a bounded diagnostic claim</h2><p>${esc(methodology.publication_boundary)}</p><p>The site reads a frozen, sanitized export with SHA-256 checksums. It does not read raw run directories or recompute benchmark truth in the browser.</p><a class="text-link" href="/database/#results">View the vendor results →</a></section>
+      <section id="open-source"><span class="eyebrow">Open evaluation infrastructure</span><h2>ax-eval powers the evidence pipeline</h2><p><code>ax-eval</code> owns execution contracts, review gates, evidence capture, live-state verification, audits, and deterministic publication exports. AXArena owns benchmark framing and the public presentation.</p>${githubLink("Explore ax-eval on GitHub", "button primary")}</section>
+    </article>
+  </div>`;
+}
+
+function renderMethodologyV24(data, ready, validationErrors) {
+  const content = `<main>
+    <header class="article-hero"><span class="eyebrow">AXArena Database · V2.4 methodology</span><h1>Fixed harness, multi-model samples, vendor-first results</h1><p>AXArena measures whether agents can discover, operate, and verify database work inside a frozen CLI environment. Vendors are the comparison rows; models and trials are samples.</p><div class="hero-actions"><a class="primary" href="/database/#results">View vendor results</a>${githubLink("Inspect ax-eval evidence")}</div></header>
+    ${validationErrors.length ? `<aside class="validation-note"><strong>Data validation failed:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
+    ${methodologyArticleV24(data.publication, data.methodology)}
+  </main>`;
+  app.innerHTML = shell(content, ready, "methodology");
+  revealHashTarget();
+  document.title = "V2.4 methodology · AXArena";
 }
 
 function shell(content, ready, page = "database") {
@@ -405,10 +432,11 @@ async function start() {
   if (redirectLegacyRoute()) return;
   app.innerHTML = `<main class="loading"><p>Loading the frozen benchmark export…</p></main>`;
   try {
-    if (document.body.dataset.page !== "methodology" && document.body.dataset.page !== "blog") {
+    if (document.body.dataset.page !== "blog") {
       const data = await loadV24Dataset();
       const validation = validateV24Dataset(data);
-      renderDatabaseV24(data, validation.ready, validation.errors);
+      if (document.body.dataset.page === "methodology") renderMethodologyV24(data, validation.ready, validation.errors);
+      else renderDatabaseV24(data, validation.ready, validation.errors);
       return;
     }
     const data = await loadDataset();
