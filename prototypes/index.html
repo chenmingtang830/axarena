@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AXArena Design Directions</title>
+  <style>
+    :root { --ink:#121318; --muted:#626875; --faint:#dfe3ea; --paper:#fff; --soft:#f5f6f8; --blue:#3157d5; --blue-soft:#eef1ff; --green:#176b45; --green-soft:#e2f4e9; --amber:#8b5d08; --amber-soft:#fff0cc; --red:#a13a32; --red-soft:#fde5e2; --serif:Georgia,"Times New Roman",serif; --sans:"Avenir Next","Segoe UI",Arial,sans-serif; --mono:"SFMono-Regular",Consolas,monospace; }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:#f8f9fb; font-family:var(--sans); }
+    .shell { max-width:1320px; margin:0 auto; padding:30px 24px 70px; }
+    .eyebrow { color:var(--blue); font:700 11px/1.4 var(--mono); letter-spacing:.1em; text-transform:uppercase; }
+    h1,h2,h3 { font-family:var(--serif); font-weight:500; letter-spacing:-.02em; } h1 { max-width:720px; margin:14px 0 12px; font-size:clamp(44px,6vw,78px); line-height:.98; } h2 { margin:0; font-size:32px; line-height:1; } h3 { margin:0; font-size:23px; }
+    .intro { display:flex; justify-content:space-between; gap:40px; align-items:end; padding-bottom:28px; border-bottom:1px solid var(--ink); } .intro p { max-width:460px; margin:0; color:var(--muted); font-size:16px; line-height:1.55; }
+    .directions { margin-top:30px; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .direction { min-width:0; background:var(--paper); border:1px solid var(--faint); display:flex; flex-direction:column; }
+    .direction.is-selected { border:2px solid var(--blue); }
+    .direction-head { padding:20px; min-height:152px; border-bottom:1px solid var(--faint); display:flex; flex-direction:column; gap:10px; }
+    .direction-head p { margin:0; color:var(--muted); font-size:14px; line-height:1.45; }
+    .choice { margin-top:auto; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:10px; border-top:1px solid var(--faint); font:700 11px var(--mono); text-transform:uppercase; letter-spacing:.05em; }
+    .choice button { border:1px solid var(--ink); background:var(--paper); color:var(--ink); padding:8px 10px; font:700 11px var(--mono); cursor:pointer; }
+    .direction.is-selected .choice button { background:var(--ink); color:#fff; }
+    .mock { min-height:380px; padding:20px; background:#fbfcff; }
+    .mock-top { display:flex; justify-content:space-between; align-items:center; gap:14px; padding-bottom:14px; border-bottom:1px solid var(--ink); }
+    .mock-brand { font:700 15px var(--serif); } .mock-nav { color:var(--muted); font:11px var(--mono); }
+    .report-title { margin:32px 0 26px; font:500 37px/.98 var(--serif); } .report-lede { max-width:275px; color:var(--muted); font-size:13px; line-height:1.45; }
+    .report-list { margin-top:28px; border-top:1px solid var(--ink); } .report-row { display:grid; grid-template-columns:1fr 58px; gap:12px; padding:12px 0; border-bottom:1px solid var(--faint); align-items:center; } .report-row strong { font:700 12px var(--mono); } .report-row span { display:block; margin-top:4px; color:var(--muted); font-size:11px; }
+    .score { display:inline-grid; place-items:center; min-width:52px; padding:7px 5px; border:1px solid currentColor; font:700 12px var(--mono); } .good { color:var(--green); background:var(--green-soft); } .mid { color:var(--amber); background:var(--amber-soft); } .low { color:var(--red); background:var(--red-soft); }
+    .explorer-toolbar { display:flex; gap:7px; flex-wrap:wrap; margin:23px 0 18px; } .control { padding:7px 9px; background:var(--paper); border:1px solid var(--faint); color:var(--muted); font:11px var(--mono); } .control.active { color:var(--ink); border-color:var(--ink); }
+    .explorer-grid { display:grid; grid-template-columns:112px repeat(3,1fr); border-top:1px solid var(--ink); border-left:1px solid var(--ink); } .explorer-grid > div { min-height:60px; padding:9px; border-right:1px solid var(--faint); border-bottom:1px solid var(--faint); display:grid; place-items:center; text-align:center; font:700 11px var(--mono); } .explorer-grid .label { place-items:start; text-align:left; color:var(--muted); background:var(--soft); font-size:10px; }
+    .evidence-head { padding:18px 0; border-bottom:1px solid var(--ink); } .evidence-head small { color:var(--muted); font:11px var(--mono); } .evidence-score { display:flex; align-items:baseline; justify-content:space-between; gap:12px; margin:28px 0; } .evidence-score strong { font:500 38px var(--serif); } .evidence-score span { color:var(--blue); font:700 13px var(--mono); }
+    .evidence-item { padding:15px 0; border-top:1px solid var(--faint); display:flex; justify-content:space-between; gap:14px; } .evidence-item code { font:700 11px var(--mono); } .evidence-item p { margin:4px 0 0; color:var(--muted); font-size:11px; }
+    .note { margin-top:28px; padding:18px; border-top:1px solid var(--ink); background:var(--paper); } .note strong { font:700 11px var(--mono); text-transform:uppercase; letter-spacing:.06em; } .note p { margin:8px 0 0; color:var(--muted); font-size:14px; line-height:1.5; }
+    @media (max-width:980px) { .directions { grid-template-columns:1fr; } .direction-head { min-height:0; } .intro { flex-direction:column; align-items:flex-start; } }
+  </style>
+</head>
+<body>
+  <main class="shell" id="directions-board">
+    <section class="intro">
+      <div><span class="eyebrow">AXArena · design directions</span><h1>Choose the next shape of the benchmark.</h1></div>
+      <p>Three small prototypes for the Database pilot. Select the directions worth carrying into the main site; the choices stay local to this browser.</p>
+    </section>
+    <section class="directions" aria-label="Design directions">
+      <article class="direction" data-direction="report"><div class="direction-head"><span class="eyebrow">01 · Report</span><h2>Editorial scorecard</h2><p>Keep the current report feel, but make the headline result and the reason behind it easier to scan.</p></div><div class="mock"><div class="mock-top"><span class="mock-brand">AXArena Database</span><span class="mock-nav">RESULTS · EVIDENCE</span></div><div class="report-title">Can agents use your database?</div><div class="report-lede">Verified work across shared database tasks, with discovery and reliability kept visible beside rank.</div><div class="report-list"><div class="report-row"><div><strong>Neon</strong><span>Highest verified success</span></div><b class="score good">86%</b></div><div class="report-row"><div><strong>CockroachDB</strong><span>Strongest coverage</span></div><b class="score good">82%</b></div><div class="report-row"><div><strong>Turso</strong><span>Best discoverability</span></div><b class="score mid">78%</b></div></div></div><div class="choice"><span data-status>Not selected</span><button type="button" data-select>Keep direction</button></div></article>
+      <article class="direction" data-direction="explorer"><div class="direction-head"><span class="eyebrow">02 · Explorer</span><h2>Benchmark explorer</h2><p>Turn the matrix into the main experience with a small number of purposeful comparison controls.</p></div><div class="mock"><div class="mock-top"><span class="mock-brand">Database pilot</span><span class="mock-nav">6 PRODUCTS</span></div><div class="explorer-toolbar"><span class="control active">All products</span><span class="control">API</span><span class="control">CLI</span><span class="control">Core tasks</span></div><div class="explorer-grid"><div class="label">TASK</div><div>NEON</div><div>TURSO</div><div>NILE</div><div class="label">Access control</div><div class="good">100%</div><div class="good">100%</div><div class="low">0%</div><div class="label">Inspect schema</div><div class="good">100%</div><div class="good">100%</div><div class="good">100%</div><div class="label">Vector search</div><div class="good">100%</div><div class="low">0%</div><div class="low">0%</div></div></div><div class="choice"><span data-status>Not selected</span><button type="button" data-select>Keep direction</button></div></article>
+      <article class="direction" data-direction="evidence"><div class="direction-head"><span class="eyebrow">03 · Evidence</span><h2>Evidence-first lab</h2><p>Lead with one product at a time and make the underlying runs the primary interaction.</p></div><div class="mock"><div class="mock-top"><span class="mock-brand">Neon</span><span class="mock-nav">DATABASE · V1</span></div><div class="evidence-head"><small>PRODUCT EVIDENCE / API + CLI</small><div class="evidence-score"><strong>Neon</strong><span>86% AX SCORE</span></div></div><div class="evidence-item"><div><code>API - Codex</code><p>Access control · 86% success</p></div><b class="score good">81%</b></div><div class="evidence-item"><div><code>API - Claude</code><p>Schema inspection · 82% success</p></div><b class="score good">76%</b></div><div class="evidence-item"><div><code>CLI - Codex</code><p>Write records · 80% success</p></div><b class="score mid">75%</b></div></div><div class="choice"><span data-status>Not selected</span><button type="button" data-select>Keep direction</button></div></article>
+    </section>
+    <aside class="note"><strong>Selection</strong><p id="selection-note">Choose one or more directions to carry into the next iteration.</p></aside>
+  </main>
+  <script>
+    const board = document.querySelector("#directions-board");
+    const note = document.querySelector("#selection-note");
+    const selected = new Set(JSON.parse(localStorage.getItem("axarena-design-directions") || "[]"));
+    function render() {
+      board.querySelectorAll(".direction").forEach((card) => {
+        const isSelected = selected.has(card.dataset.direction);
+        card.classList.toggle("is-selected", isSelected);
+        card.querySelector("[data-status]").textContent = isSelected ? "Selected" : "Not selected";
+        card.querySelector("[data-select]").textContent = isSelected ? "Remove" : "Keep direction";
+      });
+      localStorage.setItem("axarena-design-directions", JSON.stringify([...selected]));
+      note.textContent = selected.size ? `Selected for the next pass: ${[...selected].join(", ")}.` : "Choose one or more directions to carry into the next iteration.";
+    }
+    board.querySelectorAll("[data-select]").forEach((button) => button.addEventListener("click", () => {
+      const key = button.closest(".direction").dataset.direction;
+      selected.has(key) ? selected.delete(key) : selected.add(key);
+      render();
+    }));
+    render();
+  </script>
+</body>
+</html>
