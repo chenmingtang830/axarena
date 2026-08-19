@@ -6,7 +6,10 @@ across APIs, CLIs, and discoverability—without judging overall product quality
 
 Static, dependency-free publication site for `axarena.ai`. The primary
 vendor-experience report is `/database/`; the reusable AXArena evaluation methodology lives
-at `/methodology/`. The launch article lives at
+at `/methodology/`. The full printable research artifact lives at
+`/database/technical-report/`, with the study design, primary and supplementary
+tables, journey and efficiency charts, limitations, citation text, and links to
+every frozen public artifact. The launch article lives at
 `/blog/introducing-axarena/`. Legacy vendor and report URLs remain compatible.
 
 Visual language, palette tokens, reusable components, and modification rules
@@ -28,8 +31,10 @@ npm test
 python3 -m http.server 4173
 ```
 
-Open `http://localhost:4173/database/`. Before production deployment, verify
-desktop, mobile, keyboard navigation, print layout, evidence downloads, legacy
+Open `http://localhost:4173/database/` and
+`http://localhost:4173/database/technical-report/`. Before production deployment,
+verify desktop, mobile, keyboard navigation, technical-report print layout,
+evidence downloads, legacy
 redirects, and that the Draft banner disappears only when `publication.json`
 is `publication_ready`, every gate passes, all ranks are complete, and the
 editorial copy contains no draft language.

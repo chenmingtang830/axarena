@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { validateDataset, validateReleaseDataset } from "../site-data.js";
+import { rankReleaseVendors, validateDataset, validateReleaseDataset } from "../site-data.js";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const dataRoot = resolve(root, "data/axarena-database-prepublication-fixture");
@@ -38,6 +38,31 @@ test("public 1.0.0 is vendor-primary, complete, and checksum-bound", async () =>
   assert.equal(data.evidence_index.archives.length, 28);
   assert.equal(data.archive_manifest.public_evidence.archive_count, 28);
   assert.equal(data.archive_manifest.external_archive_required, false);
+});
+
+test("release ranking is success-first with cost and duration tie-breaks", async () => {
+  const summary = await release("vendor-summary");
+  const ranked = rankReleaseVendors(summary.rows);
+  assert.deepEqual(ranked.map((row) => [row.rank, row.vendor]), [
+    [1, "supabase"], [2, "neon"], [3, "cockroachdb"], [4, "insforge"], [5, "nile"],
+  ]);
+  assert.equal(ranked[0].primary_score, ranked[1].primary_score);
+  assert.ok(ranked[0].tie_break_cost < ranked[1].tie_break_cost);
+
+  const row = structuredClone(summary.rows[0]);
+  const faster = structuredClone(row);
+  row.vendor = "slow";
+  faster.vendor = "fast";
+  row.efficiency_metrics.j01_mean_reported_cost_usd = 0.1;
+  faster.efficiency_metrics.j01_mean_reported_cost_usd = 0.1;
+  row.efficiency_metrics.j01_median_duration_ms = 200;
+  faster.efficiency_metrics.j01_median_duration_ms = 100;
+  assert.deepEqual(rankReleaseVendors([row, faster]).map((item) => item.vendor), ["fast", "slow"]);
+
+  const missing = structuredClone(row);
+  missing.vendor = "missing";
+  missing.efficiency_metrics.j01_mean_reported_cost_usd = null;
+  assert.equal(rankReleaseVendors([missing, row]).at(-1).vendor, "missing");
 });
 
 async function dataset() {
@@ -78,20 +103,24 @@ test("publication-ready mode rejects draft language or failing gates", async () 
   assert.ok(validation.errors.some((error) => error.includes("failing gate")));
 });
 
-test("database, methodology, and blog pages expose the product, scores, pipeline, and open-source engine", async () => {
-  const [html, methodologyHtml, blogHtml, app, css] = await Promise.all([
+test("database, technical report, and methodology expose the official leaderboard and evidence", async () => {
+  const [html, technicalReportHtml, methodologyHtml, blogHtml, app, css, favicon] = await Promise.all([
     readFile(resolve(root, "database/index.html"), "utf8"),
+    readFile(resolve(root, "database/technical-report/index.html"), "utf8"),
     readFile(resolve(root, "methodology/index.html"), "utf8"),
     readFile(resolve(root, "blog/introducing-axarena/index.html"), "utf8"),
     readFile(resolve(root, "app.js"), "utf8"),
     readFile(resolve(root, "styles.css"), "utf8"),
+    readFile(resolve(root, "favicon.svg"), "utf8"),
   ]);
   assert.match(html, /id="app"/);
+  assert.match(technicalReportHtml, /data-page="technical-report"/);
+  assert.match(technicalReportHtml, /Technical Report · AXArena Database 1\.0\.0/);
   assert.match(methodologyHtml, /data-page="methodology"/);
   assert.match(blogHtml, /data-page="blog"/);
   assert.match(blogHtml, /Introducing AXArena Database 1\.0\.0/);
-  for (const id of ["results", "task-matrix", "findings", "methodology-preview", "about", "evidence", "reproduce", "independence", "changelog"]) {
-    assert.ok(app.includes(`"${id}"`), `missing ${id} section`);
+  for (const id of ["results", "findings", "how-it-works", "research"]) {
+    assert.ok(app.includes(`"${id}"`), `missing homepage ${id} section`);
   }
   for (const id of ["question", "contract", "execution", "verification", "aggregation", "validity", "publication", "open-source"]) {
     assert.ok(app.includes(`id="${id}"`), `missing methodology ${id} section`);
@@ -104,30 +133,48 @@ test("database, methodology, and blog pages expose the product, scores, pipeline
   assert.match(app, /function renderBlog/);
   assert.match(app, /Agents are becoming users of software/);
   assert.match(app, /Public release · 8 min read/);
-  assert.match(app, /It generates no composite AX Score and no official rank/);
+  assert.match(app, /The first public benchmark for database agent experience/);
+  assert.match(app, /Supabase ranks first/);
+  assert.match(app, /function officialLeaderboard/);
+  assert.match(app, /Verified completion ranks first\. Cost and speed break ties/);
   assert.match(app, /href="\/blog\/introducing-axarena\/"/);
   assert.match(app, /aria-label="\$\{esc\(label\)\}"/);
   assert.match(app, /AX Score/);
   assert.match(app, /function renderDatabaseRelease/);
+  assert.match(app, /function renderTechnicalReport/);
+  assert.match(app, /Technical Report 01/);
+  assert.match(app, /function stageOverviewChart/);
+  assert.match(app, /function efficiencyScatter/);
+  assert.match(app, /data-print-report/);
+  assert.match(app, /Publication tree SHA-256/);
+  assert.match(app, /Suggested citation/);
+  assert.match(app, /href="\/database\/technical-report\/"/);
   assert.match(app, /J01 success/);
-  assert.match(app, /No composite AX Score or rank/);
+  assert.doesNotMatch(app, /No composite AX Score, tie-break, or official rank/);
   assert.match(app, /function renderMethodologyRelease/);
-  assert.match(app, /Fixed harness, multi-model samples, vendor-first results/);
+  assert.match(app, /Rank vendors with a transparent lexicographic rule/);
   assert.match(app, /Draft — not for citation/);
   assert.match(css, /@media print/);
+  assert.match(css, /\.technical-report/);
+  assert.match(css, /\.scatter-figure/);
+  assert.match(css, /\.release-stat-grid/);
+  assert.match(css, /\.official-leaderboard/);
+  assert.match(css, /\.leaderboard-hero/);
   assert.match(css, /--paper: #fff;/);
   assert.match(css, /--accent: #3157d5/);
   assert.match(css, /--accent-blue: #3157d5/);
   assert.match(css, /--accent-blue-light: #7892ef/);
   assert.match(css, /#aebcff 0, #e8ebff 34%/);
   assert.match(css, /span:nth-child\(9\).*background: var\(--accent-blue\)/s);
-  assert.doesNotMatch(`${html}\n${methodologyHtml}\n${blogHtml}\n${app}\n${css}`, /https:\/\/(cdn|unpkg|fonts\.)/);
-  assert.doesNotMatch(`${html}\n${methodologyHtml}\n${blogHtml}\n${app}`, /DAEB-1/);
+  assert.match(favicon, /#3157d5/);
+  assert.doesNotMatch(`${html}\n${technicalReportHtml}\n${methodologyHtml}\n${blogHtml}\n${app}\n${css}`, /https:\/\/(cdn|unpkg|fonts\.)/);
+  assert.doesNotMatch(`${html}\n${technicalReportHtml}\n${methodologyHtml}\n${blogHtml}\n${app}`, /DAEB-1/);
 });
 
 test("legacy routes redirect into the single report", async () => {
   const app = await readFile(resolve(root, "app.js"), "utf8");
   assert.match(app, /location\.replace\(`\/database\/#vendor-/);
+  assert.match(app, /parts\[1\] !== "technical-report"/);
   assert.match(app, /location\.replace\(`\/database\/#\$\{section\}`/);
   assert.match(app, /document\.body\.dataset\.page === "methodology"/);
 });

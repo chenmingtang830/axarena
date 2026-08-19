@@ -38,6 +38,23 @@ export async function loadReleaseDataset(fetchImpl = fetch) {
   return Object.fromEntries(RELEASE_FILES.map((name, index) => [name.replaceAll("-", "_"), values[index]]));
 }
 
+export function rankReleaseVendors(rows) {
+  const finiteOrInfinity = (value) => Number.isFinite(value) ? value : Number.POSITIVE_INFINITY;
+  return [...rows]
+    .sort((left, right) =>
+      right.outcome_metrics.j01.pass_rate - left.outcome_metrics.j01.pass_rate ||
+      finiteOrInfinity(left.efficiency_metrics.j01_mean_reported_cost_usd) - finiteOrInfinity(right.efficiency_metrics.j01_mean_reported_cost_usd) ||
+      finiteOrInfinity(left.efficiency_metrics.j01_median_duration_ms) - finiteOrInfinity(right.efficiency_metrics.j01_median_duration_ms) ||
+      left.vendor.localeCompare(right.vendor))
+    .map((row, index) => ({
+      ...row,
+      rank: index + 1,
+      primary_score: row.outcome_metrics.j01.pass_rate,
+      tie_break_cost: row.efficiency_metrics.j01_mean_reported_cost_usd,
+      tie_break_duration: row.efficiency_metrics.j01_median_duration_ms,
+    }));
+}
+
 export function validateReleaseDataset(data) {
   const errors = [];
   const publication = data.publication;
