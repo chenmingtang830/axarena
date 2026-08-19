@@ -1,4 +1,4 @@
-import { DATA_ROOT, RELEASE_DATA_ROOT, loadDataset, loadReleaseDataset, validateDataset, validateReleaseDataset } from "/site-data.js";
+import { DATA_ROOT, RELEASE_DATA_ROOT, loadDataset, loadReleaseDataset, rankReleaseVendors, validateDataset, validateReleaseDataset } from "/site-data.js?v=20260819-2";
 
 const app = document.querySelector("#app");
 const GITHUB_URL = "https://github.com/chenmingtang830/ax-eval";
@@ -42,7 +42,7 @@ function arenaMark() {
 
 function redirectLegacyRoute() {
   const parts = location.pathname.split("/").filter(Boolean);
-  if (parts[0] === "database" && parts[1]) {
+  if (parts[0] === "database" && parts[1] && parts[1] !== "technical-report") {
     location.replace(`/database/#vendor-${encodeURIComponent(parts[1])}`);
     return true;
   }
@@ -90,6 +90,58 @@ function rankChart(rows, metric, label) {
   return `<figure class="wide-figure"><figcaption>${esc(label)}</figcaption>
     <svg class="bar-chart" viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(label)}">${bars}</svg>
   </figure>`;
+}
+
+function summaryMetrics(publication, rows) {
+  const passes = rows.reduce((total, row) => total + row.outcome_metrics.j01.pass, 0);
+  const planned = rows.reduce((total, row) => total + row.outcome_metrics.j01.planned, 0);
+  const atomicPasses = rows.reduce((total, row) => total + row.outcome_metrics.atomic.pass, 0);
+  const atomicValid = rows.reduce((total, row) => total + row.outcome_metrics.atomic.valid, 0);
+  return { passes, planned, passRate: passes / planned, atomicPasses, atomicValid, atomicRate: atomicPasses / atomicValid, archives: 28, invalid: 0, publication };
+}
+
+function releaseStatGrid(metrics) {
+  return `<div class="release-stat-grid" aria-label="Release at a glance">
+    <article><span>Verified J01 journeys</span><strong>${metrics.passes}/${metrics.planned}</strong><small>${pct(metrics.passRate)} end-to-end completion</small></article>
+    <article><span>Atomic diagnostics</span><strong>${metrics.atomicPasses}/${metrics.atomicValid}</strong><small>${pct(metrics.atomicRate)} verified task success</small></article>
+    <article><span>Evidence archives</span><strong>${metrics.archives}</strong><small>sanitized final-audit bundles</small></article>
+    <article><span>Invalid admitted</span><strong>${metrics.invalid}</strong><small>infra, route, or evidence</small></article>
+  </div>`;
+}
+
+function stageOverviewChart(rows) {
+  const stages = ["discovery", "connect", "operate", "recovery"];
+  const totals = Object.fromEntries(stages.map((stage) => [stage, rows.reduce((sum, row) => sum + row.outcome_metrics.j01.stages[stage], 0)]));
+  const denominator = rows.reduce((sum, row) => sum + row.outcome_metrics.j01.planned, 0);
+  return `<figure class="stage-chart"><figcaption><span>Journey progression</span><strong>Where verified progress drops across all 70 journeys</strong></figcaption>
+    <ol>${stages.map((stage, index) => { const value = totals[stage]; return `<li><span>0${index + 1}</span><div><strong>${esc(stage)}</strong><small>${value}/${denominator} journeys</small></div><div class="stage-track"><i style="--stage-width:${Math.round(value / denominator * 100)}%"></i></div><b>${pct(value / denominator)}</b></li>`; }).join("")}</ol>
+    <p>Discovery is diagnostic evidence; J01 completion still requires connection, operation read-back, and recovery read-back in the same journey.</p>
+  </figure>`;
+}
+
+function efficiencyScatter(rows) {
+  const width = 920;
+  const height = 500;
+  const left = 94;
+  const right = 60;
+  const top = 42;
+  const bottom = 72;
+  const maxCost = Math.max(...rows.map((row) => row.efficiency_metrics.j01_mean_reported_cost_usd));
+  const maxDuration = Math.max(...rows.map((row) => row.efficiency_metrics.j01_mean_duration_ms));
+  const plotWidth = width - left - right;
+  const plotHeight = height - top - bottom;
+  const points = rows.map((row) => {
+    const x = left + row.efficiency_metrics.j01_mean_reported_cost_usd / maxCost * plotWidth;
+    const y = top + (1 - row.outcome_metrics.j01.pass_rate) * plotHeight;
+    const radius = 8 + row.efficiency_metrics.j01_mean_duration_ms / maxDuration * 12;
+    return `<g class="scatter-point"><circle cx="${x}" cy="${y}" r="${radius}"/><text x="${x + radius + 7}" y="${y + 5}">${esc(vendorName(row.vendor))}</text></g>`;
+  }).join("");
+  const ticks = [0, .25, .5, .75, 1].map((tick) => {
+    const x = left + tick * plotWidth;
+    const y = top + (1 - tick) * plotHeight;
+    return `<path class="scatter-grid" d="M${x} ${top}V${top + plotHeight}"/><text class="scatter-tick" x="${x}" y="${height - 42}">$${(tick * maxCost).toFixed(2)}</text><path class="scatter-grid" d="M${left} ${y}H${left + plotWidth}"/><text class="scatter-tick y" x="${left - 14}" y="${y + 4}">${Math.round(tick * 100)}%</text>`;
+  }).join("");
+  return `<figure class="scatter-figure"><figcaption><span>Efficiency context</span><strong>Success, reported cost, and duration remain separate dimensions</strong></figcaption><div class="chart-scroll"><svg viewBox="0 0 ${width} ${height}" role="img" aria-label="Vendor J01 success by mean reported cost; point size represents mean duration">${ticks}<path class="scatter-axis" d="M${left} ${top}V${top + plotHeight}H${left + plotWidth}"/>${points}<text class="scatter-axis-label" x="${left + plotWidth / 2}" y="${height - 8}">Mean reported cost per J01 journey</text><text class="scatter-axis-label y" x="22" y="${top + plotHeight / 2}" transform="rotate(-90 22 ${top + plotHeight / 2})">J01 success rate</text></svg></div><p>Bubble size represents mean end-to-end duration. Efficiency never compensates for an unsuccessful journey.</p></figure>`;
 }
 
 function leaderboardTable(rows, draft) {
@@ -218,11 +270,11 @@ function reproductionCommands() {
 
 function navigation(page) {
   return `<nav aria-label="Primary navigation">
-    <a href="/database/#results">Vendor results</a>
-    <a href="/database/#task-matrix">Task matrix</a>
+    <a href="/database/#results">Leaderboard</a>
+    <a href="/database/technical-report/"${page === "technical-report" ? ` aria-current="page"` : ""}>Technical report</a>
     <a href="/methodology/"${page === "methodology" ? ` aria-current="page"` : ""}>Methodology</a>
     <a href="/blog/introducing-axarena/"${page === "blog" ? ` aria-current="page"` : ""}>Blog</a>
-    <a href="/database/#about">About</a>
+    <a href="${RELEASE_DATA_ROOT}/vendor-summary.json">Data</a>
   </nav>`;
 }
 
@@ -234,9 +286,9 @@ function methodologyArticleRelease(publication, methodology) {
       <section id="contract"><span class="step-number">02</span><h2>Freeze one task and route contract before admitted runs</h2><p>The five-vendor core, CLI surface, task semantics, model/provider identity, trial count, read-back oracles, and exclusion policy are fixed before publication. Turso remains compatibility evidence outside the core matrix.</p></section>
       <section id="execution"><span class="step-number">03</span><h2>Hold the harness fixed and vary model samples</h2><p>One host harness executes ${methodology.model_strata.length} declared model/provider slices for ${methodology.trial_count} isolated trials per core vendor. Fallback is forbidden unless explicitly disclosed; provider resolution and upstream failures remain in the route ledger.</p></section>
       <section id="verification"><span class="step-number">04</span><h2>Verify product state, not agent narration</h2><p>Programmatic read-back oracles determine task outcomes. Audit archives preserve observations, reconciliation decisions, replacement ledgers, and gate results. Discovery evidence is scored separately so a missing discovery trace does not rewrite later observed stage outcomes.</p></section>
-      <section id="aggregation"><span class="step-number">05</span><h2>Aggregate by vendor</h2><p>Every primary row is a vendor. The headline outcome is verified J01 completion over 14 observations per vendor (${methodology.model_strata.length} models × ${methodology.trial_count} trials). Cost, end-to-end latency, first-action latency, discovery mode, atomic success, and stage completion are columns. Models and trials remain supplementary slices.</p><p>No composite AX Score, tie-break, or official rank is generated for release 1.0.0.</p></section>
+      <section id="aggregation"><span class="step-number">05</span><h2>Rank vendors with a transparent lexicographic rule</h2><p>Every primary row is a vendor. The headline outcome is verified J01 completion over 14 observations per vendor (${methodology.model_strata.length} models × ${methodology.trial_count} trials). Official rank sorts first by J01 success rate, then by lower mean reported J01 cost, then by lower median J01 duration. Vendor slug is only a deterministic final fallback if every published metric is equal.</p><p>This produces an official release ranking without a weighted composite score: efficiency can break a tie, but it can never compensate for a failed journey. Unrounded values determine order; displayed values are rounded.</p></section>
       <section id="validity"><span class="step-number">06</span><h2>Admit only valid evidence</h2><p>Invalid infrastructure, route, or evidence never enters a denominator. The frozen release admits ${publication.sample.atomic_cells} atomic cells and ${publication.sample.j01_sessions} J01 sessions, with zero invalid cells. Failures and transient upstream errors remain visible rather than being silently retried or relabeled.</p></section>
-      <section id="publication"><span class="step-number">07</span><h2>Publish a bounded diagnostic claim</h2><p>${esc(methodology.publication_boundary)}</p><p>The site reads a frozen, sanitized export with SHA-256 checksums. It does not read raw run directories or recompute benchmark truth in the browser.</p><a class="text-link" href="/database/#results">View the vendor results →</a></section>
+      <section id="publication"><span class="step-number">07</span><h2>Publish a bounded diagnostic claim</h2><p>${esc(methodology.publication_boundary)}</p><p>The site reads a frozen, sanitized export with SHA-256 checksums. It does not read raw run directories or recompute benchmark truth in the browser.</p><div class="report-links"><a href="/database/#results">View vendor results →</a><a href="/database/technical-report/">Read technical report →</a></div></section>
       <section id="open-source"><span class="eyebrow">Open evaluation infrastructure</span><h2>ax-eval powers the evidence pipeline</h2><p><code>ax-eval</code> owns execution contracts, review gates, evidence capture, live-state verification, audits, and deterministic publication exports. AXArena owns benchmark framing and the public presentation.</p>${githubLink("Explore ax-eval on GitHub", "button primary")}</section>
     </article>
   </div>`;
@@ -244,7 +296,7 @@ function methodologyArticleRelease(publication, methodology) {
 
 function renderMethodologyRelease(data, ready, validationErrors) {
   const content = `<main>
-    <header class="article-hero"><span class="eyebrow">AXArena Database 1.0.0 · DAEB V2.4 protocol</span><h1>Fixed harness, multi-model samples, vendor-first results</h1><p>AXArena measures whether agents can discover, operate, and verify database work inside a frozen CLI environment. Vendors are the comparison rows; models and trials are samples.</p><div class="hero-actions"><a class="primary" href="/database/#results">View vendor results</a>${githubLink("Inspect ax-eval evidence")}</div></header>
+    <header class="article-hero"><span class="eyebrow">AXArena Database 1.0.0 · DAEB V2.4 protocol</span><h1>Fixed harness, multi-model samples, vendor-first results</h1><p>AXArena measures whether agents can discover, operate, and verify database work inside a frozen CLI environment. Vendors are the comparison rows; models and trials are samples.</p><div class="hero-actions"><a class="primary" href="/database/#results">View vendor results</a><a href="/database/technical-report/">Read technical report</a>${githubLink("Inspect ax-eval evidence")}</div></header>
     ${validationErrors.length ? `<aside class="validation-note"><strong>Data validation failed:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
     ${methodologyArticleRelease(data.publication, data.methodology)}
   </main>`;
@@ -264,7 +316,7 @@ function shell(content, ready, page = "database") {
 }
 
 function releaseVendorTable(rows) {
-  return `<div class="table-shell"><table><thead><tr>
+  return `<div class="table-block"><div class="table-shell"><table><thead><tr>
     <th>Vendor</th><th><abbr title="Completed connection, operation read-back, and recovery read-back">J01 success</abbr></th>
     <th>Pass / 14</th><th>Mean cost</th><th>Mean end-to-end</th><th>Mean first action</th>
     <th>Direct discovery</th><th>Assisted</th><th>Unresolved</th><th>Atomic diagnostics</th>
@@ -277,48 +329,104 @@ function releaseVendorTable(rows) {
       <td>${seconds(e.j01_mean_duration_ms)}</td><td>${seconds(e.j01_mean_first_action_latency_ms)}</td>
       <td>${d.modes["direct-success"]}/${d.denominator_j01}</td><td>${d.modes["assisted-discovery"]}/${d.denominator_j01}</td>
       <td>${d.modes.unresolved}/${d.denominator_j01}</td><td>${pct(row.outcome_metrics.atomic.pass_rate)}</td></tr>`;
-  }).join("")}</tbody></table></div>`;
+  }).join("")}</tbody></table></div><p class="table-scroll-note" aria-hidden="true">Scroll horizontally to inspect every metric →</p></div>`;
 }
 
 function releaseStageTable(rows) {
-  return `<div class="table-shell"><table><thead><tr><th>Vendor</th><th>Discovery</th><th>Connect</th><th>Operate</th><th>Recovery</th><th>Upstream errors</th><th>Route entries</th></tr></thead><tbody>${rows.map((row) => {
+  return `<div class="table-block"><div class="table-shell"><table><thead><tr><th>Vendor</th><th>Discovery</th><th>Connect</th><th>Operate</th><th>Recovery</th><th>Upstream errors</th><th>Route entries</th></tr></thead><tbody>${rows.map((row) => {
     const stages = row.outcome_metrics.j01.stages;
     const e = row.efficiency_metrics;
     return `<tr><td>${esc(vendorName(row.vendor))}</td><td>${stages.discovery}/14</td><td>${stages.connect}/14</td><td>${stages.operate}/14</td><td>${stages.recovery}/14</td><td>${e.j01_upstream_errors}</td><td>${e.j01_route_entries}</td></tr>`;
-  }).join("")}</tbody></table></div>`;
+  }).join("")}</tbody></table></div><p class="table-scroll-note" aria-hidden="true">Scroll horizontally to inspect every stage →</p></div>`;
 }
 
 function releaseModelTable(rows) {
-  return `<div class="table-shell"><table><thead><tr><th>Model slice</th><th>Provider</th><th>J01 success</th><th>Pass / 10</th><th>Total cost</th><th>Mean cost</th><th>Median end-to-end</th><th>Median first action</th></tr></thead><tbody>${rows.map((row) => `<tr><td><code>${esc(row.model)}</code></td><td>${esc(row.provider)}</td><td>${scoreBadge(row.j01_success_rate)}</td><td>${row.j01_pass}/${row.j01_planned}</td><td>${money(row.j01_total_reported_cost_usd)}</td><td>${money(row.j01_mean_reported_cost_usd)}</td><td>${seconds(row.j01_median_duration_ms)}</td><td>${seconds(row.j01_median_first_action_latency_ms)}</td></tr>`).join("")}</tbody></table></div>`;
+  return `<div class="table-block"><div class="table-shell"><table><thead><tr><th>Model slice</th><th>Provider</th><th>J01 success</th><th>Pass / 10</th><th>Total cost</th><th>Mean cost</th><th>Median end-to-end</th><th>Median first action</th></tr></thead><tbody>${rows.map((row) => `<tr><td><code>${esc(row.model)}</code></td><td>${esc(row.provider)}</td><td>${scoreBadge(row.j01_success_rate)}</td><td>${row.j01_pass}/${row.j01_planned}</td><td>${money(row.j01_total_reported_cost_usd)}</td><td>${money(row.j01_mean_reported_cost_usd)}</td><td>${seconds(row.j01_median_duration_ms)}</td><td>${seconds(row.j01_median_first_action_latency_ms)}</td></tr>`).join("")}</tbody></table></div><p class="table-scroll-note" aria-hidden="true">Scroll horizontally to inspect every model metric →</p></div>`;
+}
+
+function officialLeaderboard(rows, compact = false) {
+  return `<div class="official-leaderboard${compact ? " compact" : ""}" role="region" aria-label="Official AXArena Database leaderboard">
+    <div class="leaderboard-rule"><strong>Official ranking</strong><span>Verified completion ranks first. Cost and speed break ties.</span><a href="/methodology/#aggregation">How it works →</a></div>
+    <div class="leaderboard-head" aria-hidden="true"><span>Rank</span><span>Database</span><span>J01 success</span><span>Passed</span><span>Mean cost</span><span>Median time</span></div>
+    <ol>${rows.map((row) => `<li id="rank-${esc(row.vendor)}" class="${row.rank === 1 ? "winner" : ""}">
+      <a href="/database/technical-report/#vendor-${esc(row.vendor)}" aria-label="Rank ${row.rank}: ${esc(vendorName(row.vendor))}, ${pct(row.primary_score)} J01 success; view details">
+        <span class="leaderboard-rank"><small>#</small>${row.rank}</span>
+        <strong>${esc(vendorName(row.vendor))}${row.rank === 1 ? `<em>Best in Database 1.0</em>` : ""}</strong>
+        <span class="leaderboard-score">${pct(row.primary_score)}</span>
+        <span>${row.outcome_metrics.j01.pass}/${row.outcome_metrics.j01.planned}</span>
+        <span>${money(row.tie_break_cost)}</span>
+        <span>${seconds(row.tie_break_duration)}</span>
+      </a>
+    </li>`).join("")}</ol>
+  </div>`;
+}
+
+function releaseFindings(rows) {
+  const leader = rows[0];
+  const last = rows.at(-1);
+  return `<div class="editorial-findings">
+    <article class="finding-lead"><span>01 · The answer</span><strong>${esc(vendorName(leader.vendor))} ranks first.</strong><p>It ties Neon on verified completion, then wins the published efficiency tie-break: ${money(leader.tie_break_cost)} per journey and ${seconds(leader.tie_break_duration)} median completion time.</p></article>
+    <article><span>02 · The gap</span><strong>21.4 points separate first and last.</strong><p>${esc(vendorName(leader.vendor))} completed ${leader.outcome_metrics.j01.pass}/14 journeys; ${esc(vendorName(last.vendor))} completed ${last.outcome_metrics.j01.pass}/14 under the same contract.</p></article>
+    <article><span>03 · The bottleneck</span><strong>Operating and recovery decide the outcome.</strong><p>Most journeys discover and connect. The ranking separates when agents must change real state, verify it, recover, and verify again.</p></article>
+  </div>`;
+}
+
+function vendorDossiers(rows) {
+  return `<div class="vendor-dossiers"><h3>Inspect each database</h3>${rows.map((row) => {
+    const failedSlices = row.model_trial_slices.filter((slice) => slice.j01.status !== "pass");
+    const stages = row.outcome_metrics.j01.stages;
+    return `<details id="vendor-${esc(row.vendor)}"><summary><span>#${row.rank} ${esc(vendorName(row.vendor))}</span><strong>${row.outcome_metrics.j01.pass}/14 complete</strong></summary><div><dl><span><dt>Operate</dt><dd>${stages.operate}/14</dd></span><span><dt>Recovery</dt><dd>${stages.recovery}/14</dd></span><span><dt>Atomic diagnostics</dt><dd>${pct(row.outcome_metrics.atomic.pass_rate)}</dd></span><span><dt>Mean cost</dt><dd>${money(row.tie_break_cost)}</dd></span></dl><p><strong>Unsuccessful journey samples:</strong> ${failedSlices.map((slice) => `${esc(slice.model)} · trial ${slice.trial}`).join("; ") || "None"}.</p><div class="report-links"><a href="#report-models">Compare model slices →</a><a href="#report-stages">Compare failure stages →</a><a href="${RELEASE_DATA_ROOT}/evidence-index.json">Open evidence index ↗</a></div></div></details>`;
+  }).join("")}</div>`;
 }
 
 function renderDatabaseRelease(data, ready, validationErrors) {
   const publication = data.publication;
-  const rows = data.vendor_summary.rows;
-  const models = data.model_slices.rows;
-  const downloads = ["publication", "vendor-summary", "model-slices", "tasks", "evidence-index", "archive-manifest", "exclusions", "methodology", "checksums"];
+  const rows = rankReleaseVendors(data.vendor_summary.rows);
   const content = `<main>
-    <section class="hero" id="top"><div class="hero-glow" aria-hidden="true"></div><div class="hero-copy">
-      <span class="eyebrow">AXArena Database 1.0.0 · Public diagnostic release</span><h1>Can agents complete a real database journey?</h1>
-      <p>Five database vendors, one fixed CLI harness, seven model/provider slices, two trials, and independent live-state verification. Vendors are rows; models are samples.</p>
-      <div class="hero-actions"><a class="primary" href="#results">View vendor results</a>${githubLink("Inspect ax-eval evidence")}<a href="/methodology/">Read methodology</a></div></div>
-      <aside class="benchmark-card"><span class="eyebrow">Frozen evidence · DAEB V2.4 protocol</span><h2>Database 1.0.0</h2><p>Diagnostic fixed-environment comparison—not an official product ranking.</p><dl class="scope-card"><div><dt>Vendors</dt><dd>5 core</dd></div><div><dt>Models</dt><dd>7 slices</dd></div><div><dt>Trials</dt><dd>2</dd></div><div><dt>Atomic cells</dt><dd>${publication.sample.atomic_cells}</dd></div><div><dt>J01 journeys</dt><dd>${publication.sample.j01_sessions}</dd></div><div><dt>Invalid admitted</dt><dd>0</dd></div></dl></aside>
+    <section class="leaderboard-hero" id="results">
+      <div class="leaderboard-intro"><span class="eyebrow">Agent Experience · AXArena Database</span><h1>The first public benchmark for database agent experience.</h1><p>Which database can AI agents actually discover and use? <strong>Supabase ranks first.</strong></p></div>
+      ${officialLeaderboard(rows)}
+      <div class="hero-actions"><a class="primary" href="/database/technical-report/">Read the technical report</a></div>
     </section>
     ${validationErrors.length ? `<aside class="validation-note"><strong>Data validation failed:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
-    ${section("results", "Primary outcome · vendor rows", "End-to-end J01 success, cost, latency, and discovery", `<div class="results-intro"><p class="prose lead">A J01 pass requires connection, successful operation read-back, and recovery read-back in the same journey. No composite AX Score or rank is generated for this diagnostic release.</p></div>${releaseVendorTable(rows)}${rankChart(rows.map((row) => ({ vendor: row.vendor, value: row.outcome_metrics.j01.pass_rate })), "value", "J01 success rate — descriptive, not ranked")}`, "14 J01 observations per vendor · 7 models × 2 trials")}
-    ${section("stages", "Partial outcomes", "Where the journey succeeds or breaks", releaseStageTable(rows), "Discovery is reported separately; a discovery evidence miss does not erase later observed stages.")}
-    ${section("model-slices", "Supplementary slice", "Model-level stability, cost, and latency", `<p class="prose lead">These rows help interpret sample sensitivity. They are not the primary organization of the benchmark.</p>${releaseModelTable(models)}`, "10 J01 observations per model · 5 vendors × 2 trials")}
-    ${section("task-matrix", "Task pack", "One journey plus six atomic diagnostics", `<div class="split"><article><h3>Primary: db-J01-native-journey</h3><p>Discover a native entry point, connect, operate with independent read-back, then recover and verify the recovered state.</p></article><article><h3>Diagnostics: T17–T22</h3><p>Session discovery, constraint preservation, transactional recovery, aggregate query, principal continuity, and negative-query verification.</p></article></div>`)}
-    ${section("evidence", "Audit trail", "Failures remain first-class evidence", `<div class="open-source-card"><div><span class="eyebrow">28 final-audit archives</span><h3>Every admitted model × trial × task-family input is retained.</h3><p>Sanitized observations, reconciliation ledgers, replacement ledgers, gate decisions, exclusions, and SHA-256 checksums are downloadable. Transient upstream failures are preserved; the release does not promise they will recur on demand.</p></div><div class="open-source-actions"><a class="button primary" href="${RELEASE_DATA_ROOT}/evidence-index.json">Open evidence index</a><a class="button" href="${RELEASE_DATA_ROOT}/checksums.json">Verify checksums</a></div></div><div class="download-grid">${downloads.map((name) => `<a href="${RELEASE_DATA_ROOT}/${name}.json"><strong>${esc(name)}</strong><span>frozen JSON</span></a>`).join("")}</div>`, `Evidence tree ${esc(data.checksums.tree_sha256.slice(0, 16))}…`)}
-    ${section("methodology-preview", "Methodology", "Fixed harness, varying models, vendor-first aggregation", `<div class="principles"><p><strong>Outcome:</strong> J01 verified completion.</p><p><strong>Diagnostics:</strong> atomic and discovery signals stay separate.</p><p><strong>Validity:</strong> invalid infrastructure, route, and evidence never enter denominators.</p></div><div class="section-actions"><a class="button primary" href="/methodology/">Read the full methodology</a></div>`)}
-    ${section("about", "Claim boundary", "A strong AX diagnostic, not a universal leaderboard", `<div class="prose"><p>This release supports comparison inside its frozen CLI environment. It does not claim all database workloads, interfaces, harnesses, or future model versions behave the same way. Turso remains journey-only compatibility evidence outside the five-vendor core.</p></div>`)}
-    ${section("reproduce", "Reproduce", "Recompute the public export", `<pre><code>npx tsx ax-arena/benchmark/scripts/summarize-v24-vendor.ts\nnpx tsx ax-arena/benchmark/scripts/export-v24-publication.ts\nnpm test --workspace @ax-arena/benchmark -- --run tests/v24-publication.test.ts</code></pre>`)}
-    ${section("independence", "Independence", "Results follow audited evidence", `<div class="principles"><p>Task and route contracts were frozen before admitted runs.</p><p>Independent read-back decides outcomes; agent narration does not.</p><p>Excluded diagnostics and invalid routes remain disclosed.</p></div>`)}
-    ${section("changelog", "Corrections", "A versioned public record", `<div class="prose"><p><strong>2026-08-17 · AXArena Database 1.0.0.</strong> Published the seven-model, two-trial, five-vendor diagnostic cohort from the frozen DAEB V2.4 protocol, with vendor-first reporting and sanitized final-audit evidence.</p></div>`)}
+    ${section("findings", "What the benchmark found", "The ranking is only the beginning", `${releaseFindings(rows)}${rankChart(rows.map((row) => ({ vendor: row.vendor, value: row.primary_score })), "value", "Verified J01 completion by database")}`)}
+    ${section("how-it-works", "How it works", "Real work, independently verified", `<p class="prose lead">A pass requires a complete journey: discover a native path, connect, operate on real state, verify the operation, recover, and verify the recovered state.</p>${pipeline()}<div class="benchmark-scope"><span><strong>5</strong> databases</span><span><strong>7</strong> model routes</span><span><strong>2</strong> trials</span><span><strong>${publication.sample.j01_sessions}</strong> journeys</span></div>`)}
+    ${section("research", "Go deeper", "Read the research or inspect the evidence", `<div class="research-links"><a href="/database/technical-report/"><span>Technical report</span><strong>The story, results, failures, and implications</strong><b>Read report →</b></a><a href="/methodology/"><span>Methodology</span><strong>Task contract, ranking rule, and validity boundaries</strong><b>Review method →</b></a><a href="${RELEASE_DATA_ROOT}/vendor-summary.json"><span>Open data</span><strong>Frozen vendor results behind every rank</strong><b>Download JSON ↗</b></a><a href="${RELEASE_DATA_ROOT}/evidence-index.json"><span>Evidence</span><strong>Sanitized audit records and checksums</strong><b>Inspect archive ↗</b></a></div>`, `AXArena Database 1.0 · DAEB V2.4 · evidence tree ${esc(data.checksums.tree_sha256.slice(0, 12))}…`)}
   </main>`;
   app.innerHTML = shell(content, ready, "database");
   revealHashTarget();
-  document.title = "AXArena Database 1.0.0 · Vendor experience";
+  document.title = "What is the best database for AI agents? · AXArena";
+}
+
+function technicalReportDownloads() {
+  const artifacts = [["publication", "Release identity and sample contract"], ["vendor-summary", "Primary vendor-level results"], ["model-slices", "Supplementary model diagnostics"], ["tasks", "Frozen task family contract"], ["methodology", "Machine-readable methodology"], ["evidence-index", "Sanitized audit archive index"], ["archive-manifest", "Archive disposition and scope"], ["exclusions", "Admission and exclusion ledger"], ["checksums", "SHA-256 integrity inventory"]];
+  return `<div class="artifact-list">${artifacts.map(([name, description]) => `<a href="${RELEASE_DATA_ROOT}/${name}.json"><span><strong>${esc(name)}.json</strong><small>${esc(description)}</small></span><b>JSON ↗</b></a>`).join("")}</div>`;
+}
+
+function renderTechnicalReport(data, ready, validationErrors) {
+  const publication = data.publication;
+  const rows = rankReleaseVendors(data.vendor_summary.rows);
+  const models = data.model_slices.rows;
+  const metrics = summaryMetrics(publication, rows);
+  const content = `<main class="technical-report">
+    <header class="report-hero editorial"><div><span class="eyebrow">AXArena Research · Technical Report 01</span><h1>What is the best database for AI agents?</h1><p class="report-dek">We put five databases through 70 verified, end-to-end journeys. Supabase ranks first in AXArena Database 1.0, edging Neon on cost after both completed 11 of 14 journeys.</p><div class="blog-meta"><span>AXArena Research</span><span>August 17, 2026</span><span>Technical report · 12 min read</span></div><div class="hero-actions"><a class="primary" href="#report-results">See the ranking</a><button type="button" data-print-report>Print / save PDF</button><a href="${RELEASE_DATA_ROOT}/checksums.json">Verify release</a></div></div><aside class="report-folio"><span>AXArena Database</span><strong>1.0.0</strong><dl><div><dt>Question</dt><dd>Can an agent finish?</dd></div><div><dt>Databases</dt><dd>5</dd></div><div><dt>Journeys</dt><dd>70</dd></div><div><dt>Winner</dt><dd>Supabase</dd></div><div><dt>Protocol</dt><dd>DAEB V2.4</dd></div></dl></aside></header>
+    ${validationErrors.length ? `<aside class="validation-note"><strong>Data validation failed:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
+    <div class="report-layout"><aside class="report-toc"><span class="eyebrow">Contents</span><a href="#report-abstract">Why we built it</a><a href="#report-design">How we tested</a><a href="#report-results">Official ranking</a><a href="#report-stages">Where agents fail</a><a href="#report-models">Model sensitivity</a><a href="#report-efficiency">Cost & speed</a><a href="#report-validity">Limits & next</a><a href="#report-artifacts">Open artifacts</a><a href="#report-citation">Citation</a></aside><article class="report-body">
+      <section id="report-abstract"><span class="section-number">01</span><span class="eyebrow">Why we built it</span><h2>Agents are becoming database users. Product pages cannot tell us whether they succeed.</h2><p class="report-lead">Documentation coverage and API availability are inputs, not outcomes. AXArena Database asks a harder question: can an agent find the right path, connect, change real state, prove the change happened, recover, and prove the recovery?</p><p>We built a bounded, reproducible test around that journey. Five databases faced the same task contract under one CLI harness, seven model/provider routes, and two isolated trials. Programmatic read-back—not the agent's own claim—decided every pass.</p>${releaseStatGrid(metrics)}<div class="report-callout"><strong>The result</strong><p>Supabase is the official #1 in Database 1.0. It tied Neon at 11/14 successful journeys, then won the published cost tie-break at ${money(rows[0].tie_break_cost)} versus ${money(rows[1].tie_break_cost)} per journey.</p></div></section>
+      <section id="report-design"><span class="section-number">02</span><span class="eyebrow">Study design</span><h2>Hold the execution contract fixed; vary the product and sampled model route.</h2><div class="design-grid"><article><span>Primary unit</span><strong>5 vendors</strong><p>CockroachDB, Insforge, Neon, Nile, and Supabase.</p></article><article><span>Sample strata</span><strong>7 routes × 2 trials</strong><p>Purposeful model/provider samples, not independent population draws.</p></article><article><span>Primary outcome</span><strong>J01 completion</strong><p>Connection, operation read-back, and recovery read-back in one journey.</p></article><article><span>Diagnostics</span><strong>420 atomic cells</strong><p>Six capability tasks per vendor, route, and trial.</p></article></div><p>The task prompts, product scope, route identities, verification predicates, and exclusion policy were frozen before admitted execution. Programmatic live-state read-back, not agent narration, determined pass or failure. Cleanup followed verification.</p><div class="report-links"><a href="/methodology/">Full methodology →</a><a href="${RELEASE_DATA_ROOT}/tasks.json">Task contract →</a><a href="${RELEASE_DATA_ROOT}/exclusions.json">Exclusion ledger →</a></div></section>
+      <section id="report-results"><span class="section-number">03</span><span class="eyebrow">Official ranking</span><h2>Supabase ranks first. Neon is a close second.</h2><p>Every database contributes 14 admitted J01 observations. Verified journey success determines rank; mean reported cost breaks equal success rates; median duration breaks any remaining tie. This lexicographic rule keeps efficiency from compensating for failed work.</p>${officialLeaderboard(rows, true)}${releaseFindings(rows)}${vendorDossiers(rows)}</section>
+      <section id="report-stages"><span class="section-number">04</span><span class="eyebrow">Where agents fail</span><h2>Finding the database is not the same as finishing the job.</h2><p>Discovery and connection remain comparatively strong. The largest separation appears when an agent must operate on real state and then recover it without losing the evidence chain.</p>${stageOverviewChart(rows)}${releaseStageTable(rows)}</section>
+      <section id="report-models"><span class="section-number">05</span><span class="eyebrow">Supplementary sensitivity</span><h2>Model slices reveal sample dependence.</h2><p>These rows pool five vendors only to describe the seven sampled routes. They are not the primary benchmark organization and must not be read as a general model leaderboard.</p>${releaseModelTable(models)}</section>
+      <section id="report-efficiency"><span class="section-number">06</span><span class="eyebrow">Efficiency context</span><h2>Success, cost, and latency answer different questions.</h2>${efficiencyScatter(rows)}<p>Reported cost covers the J01 route observations available in the frozen export. Shared gateway-lane atomic cost is intentionally not allocated to vendor rows. Latency includes real upstream behavior observed during admitted runs.</p></section>
+      <section id="report-validity"><span class="section-number">07</span><span class="eyebrow">Limits and what comes next</span><h2>An official benchmark ranking, not a universal product verdict.</h2><div class="boundary-grid"><article><h3>Supported</h3><ul><li>Ranking observed agent experience for five vendors in this frozen CLI environment.</li><li>Locating discovery, connection, operation, recovery, cost, and latency friction.</li><li>Recomputing the publication from released normalized artifacts.</li></ul></article><article><h3>Not supported</h3><ul><li>A claim that one database is best for every workload or human developer.</li><li>Claims about API, SDK, MCP, database performance, or production reliability.</li><li>Treating seven model routes or two trials as representative population samples.</li></ul></article></div><p>Future releases can expand surfaces, harnesses, model samples, and vendors. Any scoring-rule change requires a new version; corrections preserve the original observation and publish a reason.</p></section>
+      <section id="report-artifacts"><span class="section-number">08</span><span class="eyebrow">Research artifact</span><h2>Follow every public claim back to frozen evidence.</h2><p>The 1.0.0 release includes normalized result tables, 28 sanitized final-audit archives, an archive manifest, exclusions, methodology metadata, and a deterministic SHA-256 inventory. Raw local run trees are intentionally excluded because they may contain sensitive operational context.</p><div class="checksum-card"><span>Publication tree SHA-256</span><code>${esc(data.checksums.tree_sha256)}</code><a href="${RELEASE_DATA_ROOT}/checksums.json">Open checksum inventory</a></div>${technicalReportDownloads()}</section>
+      <section id="report-citation"><span class="section-number">09</span><span class="eyebrow">Reproduce and cite</span><h2>A versioned public record.</h2><pre><code>npx tsx ax-arena/benchmark/scripts/summarize-v24-vendor.ts\nnpx tsx ax-arena/benchmark/scripts/export-v24-publication.ts\nnpm test --workspace @ax-arena/benchmark -- --run tests/v24-publication.test.ts</code></pre><div class="citation-block"><span>Suggested citation</span><p>AXArena. “AXArena Database 1.0.0: Can agents complete a real database journey?” Technical Report 01, August 17, 2026. DAEB V2.4 protocol.</p></div><div class="section-actions"><button class="button primary" type="button" data-print-report>Print / save PDF</button>${githubLink("Inspect ax-eval source", "button")}<a class="button" href="/database/">Return to release overview</a></div></section>
+    </article></div>
+  </main>`;
+  app.innerHTML = shell(content, ready, "technical-report");
+  document.querySelectorAll("[data-print-report]").forEach((button) => button.addEventListener("click", () => window.print()));
+  revealHashTarget();
+  document.title = "What is the best database for AI agents? · AXArena Technical Report";
 }
 
 function renderDatabase(data, ready, validationErrors) {
@@ -391,7 +499,7 @@ function renderBlog(data, ready, validationErrors) {
   const { publication, methodology, vendor_summary: vendors } = data;
   const benchmarkName = publication.display_name;
   const content = `<main>
-    <header class="article-hero blog-hero"><span class="eyebrow">Introducing AXArena Database 1.0.0</span><h1>Benchmarking Agent Experience</h1><p>AI agents are becoming software users. We need a neutral way to measure whether products are actually usable by them.</p><div class="blog-meta"><span>AXArena Team</span><span>August 17, 2026</span><span>Public release · 8 min read</span></div><div class="hero-actions"><a class="primary" href="/database/#results">View vendor results</a><a href="/methodology/">Read the methodology</a>${githubLink("View ax-eval on GitHub")}</div></header>
+    <header class="article-hero blog-hero"><span class="eyebrow">Introducing AXArena Database 1.0.0</span><h1>Benchmarking Agent Experience</h1><p>AI agents are becoming software users. We need a neutral way to measure whether products are actually usable by them.</p><div class="blog-meta"><span>AXArena Team</span><span>August 17, 2026</span><span>Public release · 8 min read</span></div><div class="hero-actions"><a class="primary" href="/database/#results">View vendor results</a><a href="/database/technical-report/">Read technical report</a><a href="/methodology/">Read methodology</a>${githubLink("View ax-eval on GitHub")}</div></header>
     ${validationErrors.length ? `<aside class="validation-note"><strong>Data validation failed:</strong> ${validationErrors.map(esc).join(" · ")}</aside>` : ""}
     <article class="blog-article">
       <p class="blog-dek">Most software evaluation still assumes the user is a person reading documentation, choosing an endpoint, and recovering from mistakes. Agents encounter the same product very differently. They must discover an interface, understand authentication, select a surface, execute work, and verify that it actually happened.</p>
@@ -404,11 +512,11 @@ function renderBlog(data, ready, validationErrors) {
 
       <section class="blog-diagram"><span class="eyebrow">How it works</span><h2>One contract, product-specific paths</h2><p>We define product-neutral outcomes before execution, then compile the vendor-specific details needed to run and verify the same intent fairly. Missing evidence, blocked cells, and incomplete trials remain visible.</p>${methodologyDiagram()}<p class="blog-method-link"><a class="text-link" href="/methodology/">Read the complete methodology →</a></p></section>
 
-      <section><span class="eyebrow">The public record</span><h2>Every metric should lead back to evidence</h2><p>The primary table uses vendors as rows. Verified J01 completion, cost, latency, first-action time, discovery mode, stage completion, and atomic diagnostics remain separate columns so partial success or efficiency cannot be mistaken for end-to-end completion.</p><p>Release 1.0.0 contains ${publication.sample.j01_sessions} J01 journeys and ${publication.sample.atomic_cells} atomic cells, plus 28 sanitized final-audit archives and a complete SHA-256 ledger. It generates no composite AX Score and no official rank.</p></section>
+      <section><span class="eyebrow">The public record</span><h2>Every rank should lead back to evidence</h2><p>The primary table uses vendors as rows. Verified J01 completion determines official rank; lower mean cost and then lower median duration break ties. Discovery mode, stage completion, and atomic diagnostics remain separate so partial success cannot be mistaken for end-to-end completion.</p><p>Release 1.0.0 contains ${publication.sample.j01_sessions} J01 journeys and ${publication.sample.atomic_cells} atomic cells, plus 28 sanitized final-audit archives and a complete SHA-256 ledger.</p></section>
 
       <section><span class="eyebrow">Open source</span><h2>The evaluation engine is available to everyone</h2><p>AXArena is powered by <code>ax-eval</code>, our open-source, CLI-first evaluation engine. It turns product specifications and documentation into reviewed task packs, executes real agent harnesses across API, CLI, SDK, and MCP surfaces, verifies live state, and exports normalized evidence.</p><p>Open infrastructure matters because benchmark trust should not depend on a private scoring script. Developers should be able to inspect the contract, reproduce the pipeline, challenge assumptions, and contribute improvements.</p>${githubLink("Explore ax-eval on GitHub", "button primary")}</section>
 
-      <section><span class="eyebrow">What comes next</span><h2>A benchmark should improve with the ecosystem</h2><p>Database is the first AXArena vertical, not the final definition of agent experience. Future work can expand product categories, surfaces, harnesses, model samples, and task families while preserving the same core commitments: frozen outcomes, human review, real execution, independent verification, explicit exclusions, and evidence-linked publication.</p><p>We welcome factual corrections, methodology discussion, and open-source contributions. What we will not offer is purchasable placement, hidden result suppression, or vendor-authored benchmark tasks.</p><div class="blog-cta"><div><span class="eyebrow">Start with the evidence</span><h3>Explore AXArena Database 1.0.0</h3></div><div><a class="button primary" href="/database/#results">View vendor results</a><a class="button" href="/methodology/">Read methodology</a></div></div></section>
+      <section><span class="eyebrow">What comes next</span><h2>A benchmark should improve with the ecosystem</h2><p>Database is the first AXArena vertical, not the final definition of agent experience. Future work can expand product categories, surfaces, harnesses, model samples, and task families while preserving the same core commitments: frozen outcomes, human review, real execution, independent verification, explicit exclusions, and evidence-linked publication.</p><p>We welcome factual corrections, methodology discussion, and open-source contributions. What we will not offer is purchasable placement, hidden result suppression, or vendor-authored benchmark tasks.</p><div class="blog-cta"><div><span class="eyebrow">Start with the evidence</span><h3>Explore AXArena Database 1.0.0</h3></div><div><a class="button primary" href="/database/technical-report/">Read technical report</a><a class="button" href="/database/#results">View vendor results</a><a class="button" href="/methodology/">Read methodology</a></div></div></section>
     </article>
   </main>`;
   app.innerHTML = shell(content, ready, "blog");
@@ -435,6 +543,7 @@ async function start() {
       const data = await loadReleaseDataset();
       const validation = validateReleaseDataset(data);
       if (document.body.dataset.page === "methodology") renderMethodologyRelease(data, validation.ready, validation.errors);
+      else if (document.body.dataset.page === "technical-report") renderTechnicalReport(data, validation.ready, validation.errors);
       else renderDatabaseRelease(data, validation.ready, validation.errors);
       return;
     }
@@ -443,7 +552,7 @@ async function start() {
     if (document.body.dataset.page === "blog") renderBlog(data, validation.ready, validation.errors);
     else renderDatabase(data, validation.ready, validation.errors);
   } catch (error) {
-    const page = document.body.dataset.page === "methodology" ? "methodology" : document.body.dataset.page === "blog" ? "blog" : "database";
+    const page = ["methodology", "blog", "technical-report"].includes(document.body.dataset.page) ? document.body.dataset.page : "database";
     app.innerHTML = shell(`<main class="error-state"><span class="eyebrow">Data error</span><h1>The benchmark export could not be rendered.</h1><p>${esc(error instanceof Error ? error.message : error)}</p><p>Check the versioned JSON files under <code>${esc(DATA_ROOT)}</code>. The site will not display a partial or silently recomputed ranking.</p></main>`, false, page);
   }
 }

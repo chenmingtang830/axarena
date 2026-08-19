@@ -54,6 +54,11 @@ the blue brand accent.
 - **Research cards:** thin borders, white-to-pale-blue gradient, limited use.
 - **Methodology article:** wide introduction, complete SVG pipeline overview,
   sticky table of contents, and a roughly 720px reading column for detail.
+- **Technical report:** numbered, printable research publication at
+  `/database/technical-report/`, with a compact folio, sticky contents rail,
+  exact-denominator tables, journey and efficiency charts, explicit validity
+  boundaries, stable artifact links, checksum identity, and citation text.
+  Browser print is the PDF path so HTML and printable output cannot diverge.
 - **Launch article:** a narrative 760px column that reuses the canonical SVG
   and links to methodology instead of duplicating formal scoring rules.
 - **External source:** inline SVG mark plus visible link text. No CDN icon or
@@ -66,6 +71,12 @@ the blue brand accent.
 - Change content hierarchy and reusable markup helpers in `app.js`.
 - Keep public benchmark values in the versioned JSON dataset. The website must
   not calculate new benchmark truth.
+- Keep `/database/` as the release overview, `/database/technical-report/` as
+  the complete research artifact, and `/methodology/` as the reusable method.
+- A diagnostic release may visualize separate outcome and efficiency dimensions
+  and may publish an official rank using the release's transparent lexicographic
+  rule: J01 success, then lower mean cost, then lower median duration. It must
+  never introduce an opaque weighted composite score.
 - Preserve Draft behavior, keyboard focus, text labels, table scrolling, and
   print styles.
 - Run `npm test` and `node --check app.js site-data.js` after every design edit.
